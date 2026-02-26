@@ -2,7 +2,7 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 
 const description =
-  "Infrastructure intelligence for modern compute with measurable outcomes across capacity, cost, energy, carbon, and water.";
+  "Plain Theory Labs builds infrastructure engines that turn scheduler exports and telemetry into traceable, policy-ready recommendations — with explicit assumptions and measurable outcomes.";
 
 const observations = [
   ["jobs_analyzed", "73,367"],
@@ -28,43 +28,60 @@ impact_model: electricity, carbon, water`;
 <BaseLayout title="Plain Theory Labs" description={description}>
   <section class="section prose">
     <h1>Plain Theory Labs</h1>
-    <p class="thesis">Infrastructure intelligence for modern compute.</p>
-
-    <p>Plain Theory Labs is a research and engineering lab building infrastructure engines for sustainable compute.</p>
+    <p class="thesis">Infrastructure engines for intelligent, sustainable compute.</p>
 
     <p>
-      We&rsquo;re researchers, engineers, and scientists who see a growing problem: AI is increasing demand for energy,
-      hardware, and data centers. We build tools that help organizations understand real workload behavior and make
-      practical improvements, reducing excess capacity and clarifying cost and environmental impact.
+      We are researchers, engineers, and scientists building engines that turn raw scheduler exports and telemetry
+      into traceable, policy-ready guidance — recommendations you can simulate, verify, and defend with explicit
+      assumptions and measurable outcomes.
     </p>
 
     <p>
-      We develop methods and engines that turn workload and telemetry data into transparent recommendations with
-      measurable outcomes across capacity, cost, energy, carbon, and water.
+      AI workloads are accelerating demand across every layer of the stack: power draw, cooling capacity, water
+      consumption, GPU supply, and operational cost. Most organizations can already see dashboards and logs. What
+      they cannot do is connect that telemetry to decisions — what to change, what to enforce, and what tradeoffs
+      are actually acceptable given their constraints.
+    </p>
+
+    <p>
+      We build the decision layer: engines that score workload behavior, surface review candidates, model operational
+      impact across energy and carbon, and produce outputs that operators, researchers, and institutional
+      stakeholders can read, challenge, and adopt as standards.
     </p>
 
     <p class="inline-links">
-      <a href="/ace">ACE Engine</a>
-      <span>ACE is our first-generation engine.</span>
+      <a href="/ace">ACE Engine &rarr;</a>
+      <span class="muted">Our first-generation allocation and cost engine.</span>
     </p>
 
     <hr class="rule" />
 
-    <h2>The gap</h2>
+    <h2>The problem is auditability</h2>
+
     <p>
-      Teams can usually access utilization charts, but still struggle to answer operational questions with confidence:
-      what changed, where is waste concentrated, and what is safe to change first under explicit assumptions.
+      Utilization charts are everywhere. Actionable decisions are not. The gap between raw telemetry and a
+      defensible recommendation is wider than it looks — especially when the recommendation needs to hold up
+      across operators, procurement, sustainability reporting, and institutional review.
     </p>
+
     <p>
-      The core issue is auditability. Without clear links between recommendations and trace evidence, it is difficult
-      to compare runs, verify impact, or explain decisions across operators, researchers, and institutional
-      stakeholders.
+      Common failure modes: recommendations that cannot be traced back to specific jobs or measurement windows,
+      impact estimates built on undisclosed assumptions, and no mechanism to compare results across runs or
+      configurations. You cannot improve what you cannot explain.
+    </p>
+
+    <p>
+      Our engines make assumptions explicit, link every recommendation to source records, and produce structured
+      outputs designed for review — not just consumption.
     </p>
 
     <hr class="rule" />
 
-    <h2>A small slice of output</h2>
-    <p class="muted">Representative excerpt from a single institutional trace analysis.</p>
+    <h2>What the data actually shows</h2>
+    <p class="muted">
+      Single institutional trace. MIT Supercloud HPCA22 dataset, converted to ACE canonical schema.
+      Numbers are real. Interpretation depends on telemetry quality, workload mix, and how utilization is measured.
+    </p>
 
     <div class="panel">
       <pre class="report-excerpt"><code>{excerpt}</code></pre>
@@ -88,37 +105,47 @@ impact_model: electricity, carbon, water`;
     </div>
 
     <p>
-      These numbers are from a single system and one dataset. They are not a universal claim, just a concrete example
-      of what shows up when you look closely at real workloads.
-    </p>
-    <p>
-      Many jobs are short, and that matters operationally. Short jobs can vanish in broad averages while still
-      dominating scheduling pressure and overhead decisions.
-    </p>
-    <p>
-      Low or near-zero utilization signals, together with risk flags and a low median utilization, indicate review
-      candidates. Common causes include over-requesting, idle allocation, missing telemetry, or workload mismatch.
+      40.95% of jobs ran under one minute. Short jobs dominate scheduling overhead and disappear in broad
+      utilization averages — the average looks better than the workload actually is.
     </p>
 
-    <p class="muted">Interpretation depends on telemetry quality, workload mix, and how utilization is measured.</p>
-
-    <hr class="rule" />
-
-    <h2>Science is better when shared</h2>
     <p>
-      Scientific and engineering progress is collective. We publish methods, schemas, and write-ups when it is safe
-      to share, with a focus on reproducibility and clear assumptions so others can inspect and improve the work.
+      33.27% of jobs show near-zero GPU utilization. Together with a median utilization average of 16%, this
+      points to a mix of over-requesting, idle allocation, missing telemetry, and workload mismatch. Each
+      category has different operational causes and different appropriate responses.
+    </p>
+
+    <p>
+      65,614 jobs were flagged for review across three queues: near-zero utilization, over-requested resources,
+      and runtime variance. Review queues are not enforcement — they are structured inputs for human decisions.
     </p>
 
     <hr class="rule" />
 
-    <h2>Solid foundations matter</h2>
+    <h2>How we work</h2>
+
     <p>
-      Infrastructure quality sets the ceiling for research productivity. We prioritize reliability, auditability, and
-      long-horizon maintainability, so operators can trust what changed, why it changed, and what evidence supports
-      it.
+      We start from exported records — <code>sacct</code> output, scheduler logs, DCGM telemetry, CSV traces —
+      and convert them into a canonical schema with explicit provenance. From there, ACE scores each job,
+      applies safety controls that block unsafe downsizing recommendations, models impact across electricity,
+      carbon, and water, and writes structured JSON and human-readable HTML that you can version, diff, and share.
     </p>
 
-    <p class="inline-links"><a href="/contact">Contact</a></p>
+    <p>
+      No agent access to production schedulers. No enforcement. No changes to running systems. Every output is
+      traceable to source records and every assumption is documented so you can replace them with your own.
+    </p>
+
+    <hr class="rule" />
+
+    <h2>Open by default</h2>
+
+    <p>
+      Scientific progress is collective. We publish methods, schemas, and write-ups when it is safe to share,
+      with a focus on reproducibility and clear assumptions so others can inspect, challenge, and improve the work.
+      Validation against public datasets is a first principle, not an afterthought.
+    </p>
+
+    <p class="inline-links"><a href="/contact">Work with us &rarr;</a></p>
   </section>
 </BaseLayout>
