@@ -1,0 +1,94 @@
+---
+import "../styles/tokens.css";
+import "../styles/global.css";
+
+interface NavItem {
+  href: string;
+  label: string;
+}
+
+interface Props {
+  title: string;
+  description: string;
+  pathname?: string;
+  ogImage?: string;
+}
+
+const {
+  title,
+  description,
+  pathname = Astro.url.pathname,
+  ogImage = "/assets/report-preview.png"
+} = Astro.props;
+
+const navItems: NavItem[] = [
+  { href: "/", label: "Home" },
+  { href: "/ace", label: "ACE Engine" },
+  { href: "/contact", label: "Contact" }
+];
+
+const site = Astro.site?.toString().replace(/\/$/, "") ?? "https://plaintheorylabs.org";
+const canonical = `${site}${pathname}`;
+const resolvedOgImage = ogImage.startsWith("http") ? ogImage : `${site}${ogImage}`;
+
+const isActive = (href: string): boolean => {
+  if (href === "/") return pathname === "/";
+  return pathname.startsWith(href);
+};
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Plain Theory Labs" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={resolvedOgImage} />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={resolvedOgImage} />
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <header class="site-header">
+      <div class="page-shell header-shell">
+        <a class="brand" href="/" aria-label="Plain Theory Labs home">Plain Theory Labs</a>
+        <nav aria-label="Primary">
+          <ul class="nav-list">
+            {navItems.map((item) => (
+              <li>
+                <a href={item.href} class={isActive(item.href) ? "active" : undefined}>{item.label}</a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main-content" class="page-shell">
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <div class="page-shell footer-row">
+        <nav class="footer-nav" aria-label="Footer">
+          {navItems.map((item) => (
+            <a href={item.href}>{item.label}</a>
+          ))}
+        </nav>
+        <p class="disclaimer">Early work in progress.</p>
+      </div>
+    </footer>
+  </body>
+</html>

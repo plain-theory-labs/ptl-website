@@ -1,0 +1,57 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import AceArt from "../components/AceArt.astro";
+
+const description =
+  "ACE Engine: an early PTL research tool for auditable allocation analysis from scheduler and telemetry traces.";
+---
+
+<BaseLayout title="ACE Engine | Plain Theory Labs" description={description}>
+  <section class="section prose">
+    <h1>ACE Engine</h1>
+
+    <div class="visual-center" aria-hidden="true">
+      <AceArt />
+    </div>
+    <p class="figure-caption muted">ACE is an early engine for turning traces into readable structure.</p>
+
+    <p>
+      ACE is an early research tool that reads scheduler and telemetry traces, then produces a report with review
+      queues so teams can inspect what changed and compare runs over time.
+    </p>
+
+    <hr class="rule" />
+
+    <h2>A quick example</h2>
+    <pre class="report-excerpt"><code>$ ace analyze --input jobs.csv --mode msa --safety-mode basic --json-out out.json
+jobs_analyzed: 12840
+allocation_changes: 918
+risk_flag_jobs: 4861
+review_queue_near_zero: 2132
+review_queue_over_requested: 671
+capacity_savings_usd: 18374.42
+report_written: out.json</code></pre>
+
+    <hr class="rule" />
+
+    <h2>The math</h2>
+    <h3>1) Utilization summary (per job)</h3>
+    <pre class="formula-block"><code>util_avg = mean(utilization_samples)
+util_p95 = percentile(utilization_samples, 95)</code></pre>
+
+    <h3>2) Over-request heuristic (conceptual)</h3>
+    <pre class="formula-block"><code>over_request_ratio = requested / max(observed, epsilon)</code></pre>
+
+    <h3>3) Review score (weighted heuristic)</h3>
+    <pre class="formula-block"><code>score = w1*(1 - util_avg) + w2*log1p(requested) + w3*variance(runtime)</code></pre>
+
+    <p>
+      These formulas are heuristics under active research. They prioritize human review and are not automatic control
+      logic.
+    </p>
+
+    <p class="inline-links">
+      <a href="/contact">Contact</a>
+    </p>
+  </section>
+</BaseLayout>

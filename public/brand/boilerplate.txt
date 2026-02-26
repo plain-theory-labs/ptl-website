@@ -1,0 +1,1 @@
+Plain Theory Labs is a research-oriented infrastructure studio focused on AI efficiency. Its first engine, PTL-ACE (Allocation & Cost Engine), helps teams quantify wasted accelerator capacity and translate potential improvements into cost, electricity, carbon, and water impacts using transparent, user-configurable assumptions and explicit safety guardrails.

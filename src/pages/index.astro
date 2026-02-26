@@ -1,0 +1,124 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const description =
+  "Infrastructure intelligence for modern compute with measurable outcomes across capacity, cost, energy, carbon, and water.";
+
+const observations = [
+  ["jobs_analyzed", "73,367"],
+  ["average_efficiency_score", "25.74%"],
+  ["risk_flag_jobs", "65,614"],
+  ["pct_short_jobs_lt_1m", "40.95%"],
+  ["pct_util_zero", "33.27%"],
+  ["median_util_avg", "16.00%"]
+] as const;
+
+const excerpt = `engine: ACE v0.1
+mode: msa
+jobs_analyzed: 73,367
+average_efficiency_score: 25.74%
+risk_flag_jobs: 65,614
+review_queue_a: near_zero_util
+review_queue_b: over_requested
+review_queue_c: runtime_variance
+capacity_savings_usd: computed per run
+impact_model: electricity, carbon, water`;
+---
+
+<BaseLayout title="Plain Theory Labs" description={description}>
+  <section class="section prose">
+    <h1>Plain Theory Labs</h1>
+    <p class="thesis">Infrastructure intelligence for modern compute.</p>
+
+    <p>Plain Theory Labs is a research and engineering lab building infrastructure engines for sustainable compute.</p>
+
+    <p>
+      We&rsquo;re researchers, engineers, and scientists who see a growing problem: AI is increasing demand for energy,
+      hardware, and data centers. We build tools that help organizations understand real workload behavior and make
+      practical improvements, reducing excess capacity and clarifying cost and environmental impact.
+    </p>
+
+    <p>
+      We develop methods and engines that turn workload and telemetry data into transparent recommendations with
+      measurable outcomes across capacity, cost, energy, carbon, and water.
+    </p>
+
+    <p class="inline-links">
+      <a href="/ace">ACE Engine</a>
+      <span>ACE is our first-generation engine.</span>
+    </p>
+
+    <hr class="rule" />
+
+    <h2>The gap</h2>
+    <p>
+      Teams can usually access utilization charts, but still struggle to answer operational questions with confidence:
+      what changed, where is waste concentrated, and what is safe to change first under explicit assumptions.
+    </p>
+    <p>
+      The core issue is auditability. Without clear links between recommendations and trace evidence, it is difficult
+      to compare runs, verify impact, or explain decisions across operators, researchers, and institutional
+      stakeholders.
+    </p>
+
+    <hr class="rule" />
+
+    <h2>A small slice of output</h2>
+    <p class="muted">Representative excerpt from a single institutional trace analysis.</p>
+
+    <div class="panel">
+      <pre class="report-excerpt"><code>{excerpt}</code></pre>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Metric</th>
+            <th>Value</th>
+          </tr>
+        </thead>
+        <tbody>
+          {observations.map(([metric, value]) => (
+            <tr>
+              <td><code>{metric}</code></td>
+              <td>{value}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      These numbers are from a single system and one dataset. They are not a universal claim, just a concrete example
+      of what shows up when you look closely at real workloads.
+    </p>
+    <p>
+      Many jobs are short, and that matters operationally. Short jobs can vanish in broad averages while still
+      dominating scheduling pressure and overhead decisions.
+    </p>
+    <p>
+      Low or near-zero utilization signals, together with risk flags and a low median utilization, indicate review
+      candidates. Common causes include over-requesting, idle allocation, missing telemetry, or workload mismatch.
+    </p>
+
+    <p class="muted">Interpretation depends on telemetry quality, workload mix, and how utilization is measured.</p>
+
+    <hr class="rule" />
+
+    <h2>Science is better when shared</h2>
+    <p>
+      Scientific and engineering progress is collective. We publish methods, schemas, and write-ups when it is safe
+      to share, with a focus on reproducibility and clear assumptions so others can inspect and improve the work.
+    </p>
+
+    <hr class="rule" />
+
+    <h2>Solid foundations matter</h2>
+    <p>
+      Infrastructure quality sets the ceiling for research productivity. We prioritize reliability, auditability, and
+      long-horizon maintainability, so operators can trust what changed, why it changed, and what evidence supports
+      it.
+    </p>
+
+    <p class="inline-links"><a href="/contact">Contact</a></p>
+  </section>
+</BaseLayout>
