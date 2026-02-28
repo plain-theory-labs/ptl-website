@@ -3,80 +3,46 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import AceArt from "../components/AceArt.astro";
 
 const description =
-  "ACE Engine: PTL's first-generation allocation and cost engine. Reads scheduler exports and telemetry traces, scores workload behavior, applies safety guardrails, and produces structured JSON and HTML outputs with explicit assumptions.";
+  "ACE Engine: PTL's first-generation allocation and cost engine. Produces traceable, evidence-based efficiency scores institutions can use for policy decisions and public reporting — built on exported scheduler records, deterministic scoring, and explicit assumptions.";
 ---
 
 <BaseLayout title="ACE Engine | Plain Theory Labs" description={description}>
   <section class="section prose">
     <h1>ACE Engine</h1>
-    <p class="thesis">Allocation and Cost Engine — read-only, deterministic, auditable.</p>
+    <p class="thesis">The first instrument in PTL's policy certification framework.</p>
 
     <p>
-      ACE reads exported scheduler records and telemetry traces, scores workload behavior against configurable
-      utilization thresholds, applies safety controls that block unsafe downsizing recommendations, models
-      operational impact across electricity, carbon, and water, and writes structured JSON and human-readable
-      HTML you can version, diff, and share.
+      ACE produces a traceable, evidence-based efficiency score for GPU compute workloads — the
+      kind of output institutions can use for policy decisions, sustainability reporting, and
+      regulatory compliance. The score is not a summary statistic. It is a structured finding:
+      linked to source job records, sensitive to workload distribution, and designed to hold up
+      under institutional review.
     </p>
 
     <p>
-      No agent access to production schedulers. No enforcement. No changes to running systems. Every recommendation
-      is traceable to a source job record. Every assumption is explicit and replaceable.
+      ACE reads exported scheduler records and telemetry traces, scores workload behavior against
+      configurable utilization thresholds, applies safety controls that block unsafe downsizing
+      recommendations, models operational impact across electricity, carbon, and water, and writes
+      structured JSON and human-readable HTML you can version, diff, and share.
     </p>
 
-    <div class="visual-center" aria-hidden="true">
-      <AceArt />
-    </div>
-    <p class="figure-caption muted">Signal to structure: noisy scheduler traces become scored, reviewable outputs.</p>
-
-    <hr class="rule" />
-
-    <h2>Pipeline</h2>
-
     <p>
-      ACE runs a deterministic, five-stage pipeline. Each stage is independently testable and produces
-      intermediate outputs you can inspect before proceeding.
-    </p>
-
-    <h3>1 — Ingest</h3>
-    <p>
-      Reads <code>sacct</code> exports, CSV traces, or JSONL records. Applies a trace adapter layer that
-      normalizes scheduler-specific field names, handles missing telemetry gracefully, and flags CPU-proxy
-      records where GPU telemetry is unavailable. Validated against the MIT Supercloud HPCA22 dataset.
-    </p>
-
-    <h3>2 — Canonical schema</h3>
-    <p>
-      Converts raw records into ACE's canonical job schema with explicit provenance fields: source file,
-      adapter version, normalization decisions, and confidence scores where measurements are inferred rather
-      than directly observed. JobID normalization handles scheduler-specific ID formats across Slurm and
-      other HPC schedulers.
-    </p>
-
-    <h3>3 — MSA core (score)</h3>
-    <p>
-      Scores each job across three dimensions: utilization summary, over-request heuristic, and review score.
-      All weights are configurable. Segmentation by short jobs, utilization percentiles, duration percentiles,
-      and savings buckets surfaces the distribution structure that broad averages hide.
-    </p>
-
-    <h3>4 — Safety overlay</h3>
-    <p>
-      Before generating recommendations, ACE applies configurable safety controls. Jobs below minimum runtime
-      thresholds, jobs with incomplete telemetry, and jobs flagged by the near-zero utilization queue are
-      blocked from automatic downsizing recommendations. Safety mode is explicit and logged — you can see
-      exactly which jobs were filtered and why.
-    </p>
-
-    <h3>5 — Report</h3>
-    <p>
-      Writes structured JSON for downstream processing and a human-readable HTML report with summary cards,
-      tables, and histograms. The HTML report is generated from the JSON output, so the two are always
-      consistent. Both are versioned and diffable.
+      No agent access to production schedulers. No enforcement. No changes to running systems.
+      Every recommendation is traceable to a source job record. Every assumption is explicit and
+      replaceable.
     </p>
 
     <hr class="rule" />
 
-    <h2>Running ACE</h2>
+    <h2>What ACE produces</h2>
+
+    <p>
+      A single ACE run produces: a per-job efficiency score linked to source records; review queues
+      for near-zero utilization, over-requested resources, and runtime variance; a capacity savings
+      estimate with explicit modeling assumptions; structured JSON for downstream processing; and a
+      human-readable HTML report suitable for sharing with operators and institutional stakeholders.
+    </p>
+
     <pre class="report-excerpt"><code>$ ace analyze --input jobs.csv --mode msa --safety-mode basic --json-out out.json
 jobs_analyzed: 12840
 allocation_changes: 918
@@ -86,12 +52,71 @@ review_queue_over_requested: 671
 capacity_savings_usd: 18374.42
 report_written: out.json</code></pre>
 
+    <p>
+      The JSON output is versioned and diffable — run the same input twice with different
+      configurations, diff the outputs, and the delta is the effect of the configuration change.
+      The HTML report is generated from the JSON, so the two are always consistent.
+    </p>
+
+    <div class="visual-center" aria-hidden="true">
+      <AceArt />
+    </div>
+    <p class="figure-caption muted">Signal to structure: noisy scheduler traces become scored, reviewable outputs.</p>
+
+    <hr class="rule" />
+
+    <h2>How the pipeline works</h2>
+
+    <p>
+      ACE runs a deterministic, five-stage pipeline. Each stage is independently testable and
+      produces intermediate outputs you can inspect before proceeding.
+    </p>
+
+    <h3>1 — Ingest</h3>
+    <p>
+      Reads <code>sacct</code> exports, CSV traces, or JSONL records. Applies a trace adapter layer
+      that normalizes scheduler-specific field names, handles missing telemetry gracefully, and
+      flags CPU-proxy records where GPU telemetry is unavailable. Validated against the MIT
+      Supercloud HPCA22 dataset.
+    </p>
+
+    <h3>2 — Canonical schema</h3>
+    <p>
+      Converts raw records into ACE's canonical job schema with explicit provenance fields: source
+      file, adapter version, normalization decisions, and confidence scores where measurements are
+      inferred rather than directly observed. JobID normalization handles scheduler-specific ID
+      formats across Slurm and other HPC schedulers.
+    </p>
+
+    <h3>3 — MSA core (score)</h3>
+    <p>
+      Scores each job across three dimensions: utilization summary, over-request heuristic, and
+      review score. All weights are configurable. Segmentation by short jobs, utilization
+      percentiles, duration percentiles, and savings buckets surfaces the distribution structure
+      that broad averages hide.
+    </p>
+
+    <h3>4 — Safety overlay</h3>
+    <p>
+      Before generating recommendations, ACE applies configurable safety controls. Jobs below
+      minimum runtime thresholds, jobs with incomplete telemetry, and jobs flagged by the
+      near-zero utilization queue are blocked from automatic downsizing recommendations. Safety
+      mode is explicit and logged — you can see exactly which jobs were filtered and why.
+    </p>
+
+    <h3>5 — Report</h3>
+    <p>
+      Writes structured JSON for downstream processing and a human-readable HTML report with
+      summary cards, tables, and histograms. The HTML report is generated from the JSON output,
+      so the two are always consistent. Both are versioned and diffable.
+    </p>
+
     <hr class="rule" />
 
     <h2>Scoring math</h2>
     <p>
-      These are heuristics under active research, not ground truth. They are documented here so you can
-      inspect them, challenge them, and replace them with your own weights.
+      These are heuristics under active research, not ground truth. They are documented here so
+      you can inspect them, challenge them, and replace them with your own weights.
     </p>
 
     <h3>Utilization summary (per job)</h3>
@@ -110,9 +135,9 @@ util_p95 = percentile(utilization_samples, 95)</code></pre>
     <pre class="formula-block"><code>score = w1*(1 - util_avg) + w2*log1p(requested) + w3*variance(runtime)</code></pre>
 
     <p>
-      All three weights are configurable at runtime. Higher scores surface jobs with low utilization,
-      large resource requests, and high runtime variance — the intersection most likely to contain
-      actionable over-allocation.
+      All three weights are configurable at runtime. Higher scores surface jobs with low
+      utilization, large resource requests, and high runtime variance — the intersection most
+      likely to contain actionable over-allocation.
     </p>
 
     <hr class="rule" />
@@ -120,20 +145,22 @@ util_p95 = percentile(utilization_samples, 95)</code></pre>
     <h2>Current status</h2>
 
     <p>
-      ACE is in a pilot-ready read-only analytics phase. It can ingest exported scheduler data including
-      Slurm <code>sacct</code> output, analyze deterministically with optional safety mode, and generate
-      JSON and HTML outputs suitable for sharing with operators and institutional stakeholders.
+      ACE is in a pilot-ready read-only analytics phase. It can ingest exported scheduler data
+      including Slurm <code>sacct</code> output, analyze deterministically with optional safety
+      mode, and generate JSON and HTML outputs suitable for sharing with operators and institutional
+      stakeholders.
     </p>
 
     <p>
-      Phase 2B1 focuses on real cluster readiness: joining scheduler exports to telemetry (GPU and CPU
-      utilization), robust JobID normalization across scheduler variants, and confidence and provenance
-      scoring so every recommendation is traceable to a measurement rather than an assumption.
+      Phase 2B1 focuses on real cluster readiness: joining scheduler exports to telemetry (GPU and
+      CPU utilization), robust JobID normalization across scheduler variants, and confidence and
+      provenance scoring so every recommendation is traceable to a measurement rather than an
+      assumption.
     </p>
 
     <p>
-      No enforcement. No changes to production schedulers. That boundary is intentional and will not
-      change without explicit, staged validation.
+      No enforcement. No changes to production schedulers. That boundary is intentional and will
+      not change without explicit, staged validation.
     </p>
 
     <p class="inline-links">

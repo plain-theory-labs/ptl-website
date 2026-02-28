@@ -2,7 +2,7 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 
 const description =
-  "Plain Theory Labs builds infrastructure engines that turn scheduler exports and telemetry into traceable, policy-ready recommendations — with explicit assumptions and measurable outcomes.";
+  "Plain Theory Labs builds the policy certification framework for sustainable AI compute infrastructure — auditable engines that measure what clusters actually run against what they allocate, producing evidence institutions can use for policy decisions and public reporting.";
 
 const observations = [
   ["jobs_analyzed", "73,367"],
@@ -28,30 +28,106 @@ impact_model: electricity, carbon, water`;
 <BaseLayout title="Plain Theory Labs" description={description}>
   <section class="section prose">
     <h1>Plain Theory Labs</h1>
-    <p class="thesis">Infrastructure engines for intelligent, sustainable compute.</p>
+    <p class="thesis">Policy certification infrastructure for sustainable AI compute.</p>
 
     <p>
-      We are researchers, engineers, and scientists building engines that turn raw scheduler exports and telemetry
-      into traceable, policy-ready guidance — recommendations you can simulate, verify, and defend with explicit
-      assumptions and measurable outcomes.
+      AI compute infrastructure is scaling faster than any institution's ability to measure its
+      impact. Power draw, water consumption, and grid stress are documented community impacts and
+      active regulatory questions. Organizations operating large GPU clusters face increasing scrutiny
+      with no independent standard to point to.
     </p>
 
     <p>
-      AI workloads are accelerating demand across every layer of the stack: power draw, cooling capacity, water
-      consumption, GPU supply, and operational cost. Most organizations can already see dashboards and logs. What
-      they cannot do is connect that telemetry to decisions — what to change, what to enforce, and what tradeoffs
-      are actually acceptable given their constraints.
+      We are building that standard. Plain Theory Labs develops the certification framework and the
+      engines that generate the evidence institutions need: auditable workload efficiency scores,
+      traceable impact estimates, and structured outputs designed to hold up under regulatory review
+      and public reporting requirements.
     </p>
 
     <p>
-      We build the decision layer: engines that score workload behavior, surface review candidates, model operational
-      impact across energy and carbon, and produce outputs that operators, researchers, and institutional
-      stakeholders can read, challenge, and adopt as standards.
+      ACE is the first engine. It measures what schedulers actually run against what resources they
+      allocate — deterministically, from exported records, with every assumption documented.
     </p>
 
     <p class="inline-links">
       <a href="/ace">ACE Engine &rarr;</a>
-      <span class="muted">Our first-generation allocation and cost engine.</span>
+      <span class="muted">Allocation and Cost Engine — workload efficiency scoring for GPU clusters.</span>
+    </p>
+
+    <hr class="rule" />
+
+    <h2>The measurement gap is a policy problem</h2>
+
+    <p>
+      Most large compute facilities already generate telemetry. Scheduler logs, DCGM traces, power
+      draw records — the raw data exists. What does not exist is a defensible methodology for
+      translating that data into findings: utilization rates that account for workload distribution,
+      impact estimates that document their assumptions, recommendations traceable to specific jobs
+      and time windows.
+    </p>
+
+    <p>
+      The gap is not data collection. The gap is auditability. When a regulator asks what a
+      cluster's actual GPU utilization rate is — not the dashboard average, but a measured,
+      documented figure — most operators have no answer that would survive independent review.
+    </p>
+
+    <p>
+      Communities near major data center campuses have been documenting water drawdown agreements,
+      grid stress events, and cooling discharge impacts for years. Legislative and regulatory
+      responses are accumulating. The accountability mechanisms are arriving before the measurement
+      infrastructure to support them.
+    </p>
+
+    <hr class="rule" />
+
+    <h2>A policy framework, built engine by engine</h2>
+
+    <p>
+      PTL builds modular infrastructure engines. Each engine addresses one layer of the measurement
+      problem and produces structured outputs — JSON, HTML reports, versioned schemas — designed
+      for institutional use and compatible with the others.
+    </p>
+
+    <p>
+      ACE handles the workload layer: allocation efficiency, utilization scoring, resource
+      over-request detection, and review queue generation. Subsequent engines will address carbon
+      accounting (grid-source emissions per workload), water consumption modeling, and
+      cross-institutional comparative benchmarking. The framework is the combination — a
+      certification methodology that covers the operational footprint of a GPU cluster and produces
+      evidence suitable for policy decisions and public reporting.
+    </p>
+
+    <p>
+      No single metric captures the full picture. The framework is designed to be run
+      incrementally: start with allocation efficiency where data is available, add carbon and water
+      as telemetry improves. Every engine produces auditable outputs from the start.
+    </p>
+
+    <hr class="rule" />
+
+    <h2>The regulatory window is open</h2>
+
+    <p>
+      The EU AI Act — in force since August 2024 — establishes energy efficiency documentation
+      requirements for large-scale AI deployments. The first compliance reporting cycles will
+      determine what counts as adequate methodology. State legislatures in Virginia, Texas, and
+      Nevada have introduced and in some cases enacted data center disclosure requirements tied to
+      water consumption, grid impact, and demonstrated efficiency. Federal AI infrastructure
+      buildout plans are accelerating the scale of the problem while grid interconnection backlogs
+      grow.
+    </p>
+
+    <p>
+      The pattern is consistent across jurisdictions: accountability requirements arrive before
+      measurement standards. The organizations that establish auditable methodology before
+      compliance mandates finalize will define what the standard is — not scramble to meet someone
+      else's definition of it.
+    </p>
+
+    <p>
+      The window between current regulatory uncertainty and fixed compliance requirements is narrow
+      and closing. That is the context in which we are building.
     </p>
 
     <hr class="rule" />
@@ -59,20 +135,21 @@ impact_model: electricity, carbon, water`;
     <h2>The problem is auditability</h2>
 
     <p>
-      Utilization charts are everywhere. Actionable decisions are not. The gap between raw telemetry and a
-      defensible recommendation is wider than it looks — especially when the recommendation needs to hold up
-      across operators, procurement, sustainability reporting, and institutional review.
+      Utilization charts are everywhere. Actionable decisions are not. The gap between raw
+      telemetry and a defensible recommendation is wider than it looks — especially when the
+      recommendation needs to hold up across operators, procurement, sustainability reporting, and
+      institutional review.
     </p>
 
     <p>
-      Common failure modes: recommendations that cannot be traced back to specific jobs or measurement windows,
-      impact estimates built on undisclosed assumptions, and no mechanism to compare results across runs or
-      configurations. You cannot improve what you cannot explain.
+      Common failure modes: recommendations that cannot be traced back to specific jobs or
+      measurement windows, impact estimates built on undisclosed assumptions, and no mechanism to
+      compare results across runs or configurations. You cannot improve what you cannot explain.
     </p>
 
     <p>
-      Our engines make assumptions explicit, link every recommendation to source records, and produce structured
-      outputs designed for review — not just consumption.
+      Our engines make assumptions explicit, link every recommendation to source records, and
+      produce structured outputs designed for review — not just consumption.
     </p>
 
     <hr class="rule" />
@@ -80,7 +157,8 @@ impact_model: electricity, carbon, water`;
     <h2>What the data actually shows</h2>
     <p class="muted">
       Single institutional trace. MIT Supercloud HPCA22 dataset, converted to ACE canonical schema.
-      Numbers are real. Interpretation depends on telemetry quality, workload mix, and how utilization is measured.
+      Numbers are real. Interpretation depends on telemetry quality, workload mix, and how
+      utilization is measured.
     </p>
 
     <div class="panel">
@@ -105,19 +183,20 @@ impact_model: electricity, carbon, water`;
     </div>
 
     <p>
-      40.95% of jobs ran under one minute. Short jobs dominate scheduling overhead and disappear in broad
-      utilization averages — the average looks better than the workload actually is.
+      40.95% of jobs ran under one minute. Short jobs dominate scheduling overhead and disappear
+      in broad utilization averages — the average looks better than the workload actually is.
     </p>
 
     <p>
-      33.27% of jobs show near-zero GPU utilization. Together with a median utilization average of 16%, this
-      points to a mix of over-requesting, idle allocation, missing telemetry, and workload mismatch. Each
-      category has different operational causes and different appropriate responses.
+      33.27% of jobs show near-zero GPU utilization. Together with a median utilization average of
+      16%, this points to a mix of over-requesting, idle allocation, missing telemetry, and workload
+      mismatch. Each category has different operational causes and different appropriate responses.
     </p>
 
     <p>
-      65,614 jobs were flagged for review across three queues: near-zero utilization, over-requested resources,
-      and runtime variance. Review queues are not enforcement — they are structured inputs for human decisions.
+      65,614 jobs were flagged for review across three queues: near-zero utilization,
+      over-requested resources, and runtime variance. Review queues are not enforcement — they are
+      structured inputs for human decisions.
     </p>
 
     <hr class="rule" />
@@ -125,15 +204,17 @@ impact_model: electricity, carbon, water`;
     <h2>How we work</h2>
 
     <p>
-      We start from exported records — <code>sacct</code> output, scheduler logs, DCGM telemetry, CSV traces —
-      and convert them into a canonical schema with explicit provenance. From there, ACE scores each job,
-      applies safety controls that block unsafe downsizing recommendations, models impact across electricity,
-      carbon, and water, and writes structured JSON and human-readable HTML that you can version, diff, and share.
+      We start from exported records — <code>sacct</code> output, scheduler logs, DCGM telemetry,
+      CSV traces — and convert them into a canonical schema with explicit provenance. From there,
+      ACE scores each job, applies safety controls that block unsafe downsizing recommendations,
+      models impact across electricity, carbon, and water, and writes structured JSON and
+      human-readable HTML that you can version, diff, and share.
     </p>
 
     <p>
-      No agent access to production schedulers. No enforcement. No changes to running systems. Every output is
-      traceable to source records and every assumption is documented so you can replace them with your own.
+      No agent access to production schedulers. No enforcement. No changes to running systems.
+      Every output is traceable to source records and every assumption is documented so you can
+      replace them with your own.
     </p>
 
     <hr class="rule" />
@@ -141,9 +222,10 @@ impact_model: electricity, carbon, water`;
     <h2>Open by default</h2>
 
     <p>
-      Scientific progress is collective. We publish methods, schemas, and write-ups when it is safe to share,
-      with a focus on reproducibility and clear assumptions so others can inspect, challenge, and improve the work.
-      Validation against public datasets is a first principle, not an afterthought.
+      Scientific progress is collective. We publish methods, schemas, and write-ups when it is
+      safe to share, with a focus on reproducibility and clear assumptions so others can inspect,
+      challenge, and improve the work. Validation against public datasets is a first principle,
+      not an afterthought.
     </p>
 
     <p class="inline-links"><a href="/contact">Work with us &rarr;</a></p>
