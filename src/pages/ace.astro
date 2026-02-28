@@ -13,12 +13,15 @@ const description =
       ACE is a read-only analytics engine for GPU job right-sizing. It ingests Slurm accounting
       exports, scores per-job efficiency against measured or estimated telemetry, applies a
       conservative safety overlay, and produces a structured report with traceable recommendations
-      and explicit assumptions.
+      and explicit assumptions. It does not touch your scheduler, modify job parameters, or change
+      queue configurations. It reads, scores, and reports. Policy decisions remain with the
+      operator.
     </p>
 
     <p>
-      Current phase: 2B0. No enforcement, no scheduler changes. ACE reads, scores, and reports.
-      Policy decisions remain with the operator.
+      The current phase is 2B0. Phase 2B1 will add windowed telemetry joins from DCGM and
+      Prometheus, JobID normalization improvements, and per-window provenance scoring so every
+      recommendation is traceable to a measurement rather than an assumption.
     </p>
 
     <hr class="rule" />
@@ -26,16 +29,18 @@ const description =
     <h2>What ACE produces</h2>
 
     <p>
-      A per-job efficiency score. A right-sizing recommendation with a confidence label. An
-      environmental impact estimate covering energy, carbon, and water, with every coefficient
-      disclosed. A zero-dependency HTML report any operator can open on any machine and hand to
-      any stakeholder.
+      ACE produces a per-job efficiency score, a right-sizing recommendation with a confidence
+      label, and an environmental impact estimate covering energy, carbon, and water with every
+      coefficient disclosed and configurable. The output is a JSON payload and a zero-dependency
+      single-file HTML report with interactive tables, inline SVG charts, and summary cards that
+      any operator can open on any machine and hand to any stakeholder.
     </p>
 
     <p>
-      The MIT Supercloud run: 35,745 jobs analyzed. Average GPU utilization 25.7%. Median
-      utilization 16%. Jobs under one minute 41%. Near-zero GPU activity 33%. These numbers come
-      from real scheduler logs and DCGM telemetry from a published dataset.
+      The MIT Supercloud run found 35,745 jobs with average GPU utilization of 25.7%, median of
+      16%, 41% of jobs running under one minute, and 33% showing near-zero GPU activity.
+      Environmental impact numbers are coefficient-based estimates, not metered totals. If your
+      site has measured PUE or grid carbon intensity data, the engine uses it.
     </p>
 
     <div class="visual-center" aria-hidden="true">
@@ -47,36 +52,14 @@ const description =
 
     <h2>Pipeline</h2>
 
-    <p>Five deterministic stages.</p>
-
-    <h3>Ingest</h3>
     <p>
-      Slurm <code>sacct</code> export or canonical CSV enters the engine. JobID normalization
-      runs. Telemetry joined where available.
-    </p>
-
-    <h3>Score</h3>
-    <p>
-      Per-job utilization computed. Over-request heuristic applied. Weighted review score
-      assigned.
-    </p>
-
-    <h3>Safety overlay</h3>
-    <p>
-      Conservative guardrails block low-confidence downsizing recommendations. Nothing gets
-      recommended that cannot be defended.
-    </p>
-
-    <h3>Impact estimation</h3>
-    <p>
-      Energy, carbon, water, and cost projections computed from physical coefficients. Every
-      assumption is user-configurable and disclosed in the output.
-    </p>
-
-    <h3>Report</h3>
-    <p>
-      JSON payload and single-file HTML. Interactive tables, inline SVG charts, summary cards.
-      No dependencies, no server, opens anywhere.
+      ACE runs five deterministic stages. Ingest takes a Slurm <code>sacct</code> export or
+      canonical CSV, runs JobID normalization, and joins telemetry where available. Score computes
+      per-job utilization, applies the over-request heuristic, and assigns a weighted review
+      score. The safety overlay blocks low-confidence downsizing recommendations — nothing gets
+      recommended that cannot be defended. Impact estimation projects energy, carbon, water, and
+      cost from physical coefficients, all user-configurable and disclosed in the output. Report
+      generates the JSON payload and single-file HTML with no external dependencies.
     </p>
 
     <hr class="rule" />
@@ -84,20 +67,11 @@ const description =
     <h2>Assumptions and limits</h2>
 
     <p>
-      Environmental impact numbers are coefficient-based estimates, not metered totals. The
-      default coefficients are documented and configurable. If your site has measured PUE or
-      grid carbon intensity data, use it.
-    </p>
-
-    <p>
-      Phase 2B0 has no live telemetry join. GPU utilization is derived from sidecar files or
-      proxy estimates where direct measurement is not available. Confidence labels reflect this.
-      Phase 2B1 adds windowed telemetry joins from DCGM and Prometheus.
-    </p>
-
-    <p>
-      ACE does not touch your scheduler. It does not modify job parameters, queue configurations,
-      or resource limits. It reads, scores, and reports.
+      Environmental impact numbers are coefficient-based estimates, not metered totals. Default
+      coefficients are documented and configurable. If your site has measured PUE or grid carbon
+      intensity data, use it. Phase 2B0 has no live telemetry join — utilization is derived from
+      sidecar files or proxy estimates where direct measurement is not available. Confidence
+      labels reflect this.
     </p>
 
     <hr class="rule" />
@@ -105,13 +79,8 @@ const description =
     <h2>Status</h2>
 
     <p>
-      Phase 2B0 complete. 118 tests passing. Validated on MIT Supercloud HPCA22 and Google Borg
-      CPU proxy datasets.
-    </p>
-
-    <p>
-      Phase 2B1 in progress: windowed telemetry joins, JobID normalization, per-window provenance
-      scoring.
+      Phase 2B0 is complete with 118 tests passing. ACE has been validated on the MIT Supercloud
+      HPCA22 dataset and the Google Borg CPU proxy dataset. Phase 2B1 is in active development.
     </p>
 
     <p class="inline-links">

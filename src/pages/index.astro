@@ -2,77 +2,34 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 
 const description =
-  "Plain Theory Labs builds engines that measure and grade AI compute infrastructure. ACE ingests scheduler exports and telemetry and produces traceable efficiency scores for policy decisions, procurement, and public reporting.";
+  "Plain Theory Labs is a research and engineering lab building the certification framework for sustainable AI compute infrastructure — traceable, assumption-explicit efficiency grades for policy decisions, procurement, and public reporting.";
 ---
 
 <BaseLayout title="Plain Theory Labs" description={description}>
   <section class="section prose">
     <h1>Plain Theory Labs</h1>
-    <p class="thesis">Plain Theory Labs builds engines that measure and grade AI compute infrastructure.</p>
-
-    <p>
-      ACE, our first engine, ingests scheduler exports and telemetry and produces traceable
-      efficiency scores that institutions can use for policy decisions, procurement requirements,
-      and public reporting.
-    </p>
-
-    <p>The standard for sustainable compute does not exist yet. We are building it.</p>
-
-    <hr class="rule" />
-
-    <h2>The problem</h2>
-
-    <p>
-      AI compute is scaling faster than anyone can measure its impact. Data centers draw more
-      power, consume more water, and strain more grids every year. The tools to monitor this
-      exist. The tools to improve it do not.
+    <p class="thesis">
+      Plain Theory Labs is a research and engineering lab building the certification framework for
+      sustainable AI compute infrastructure. We build engines that take real operational data from
+      GPU clusters and data centers and produce traceable, assumption-explicit efficiency grades
+      that institutions can use for policy decisions, procurement requirements, and public
+      reporting.
     </p>
 
     <p>
-      HPC administrators can see utilization. They cannot produce a defensible,
-      assumption-explicit efficiency grade that a sustainability office, a procurement committee,
-      or a government agency can act on. There is no independent standard for what sustainable
-      compute looks like.
-    </p>
-
-    <p>That is what Plain Theory Labs builds.</p>
-
-    <hr class="rule" />
-
-    <h2>How we work</h2>
-
-    <p>
-      We build engines. Each engine takes real operational data — scheduler logs, telemetry,
-      facility metrics — and produces a structured, traceable output with explicit assumptions
-      and measurable outcomes. No black boxes. No undisclosed methodology. Every number has a
-      source.
+      The problem is structural. AI compute is scaling faster than anyone can measure its impact,
+      and the tools that exist today tell operators what is happening but not what to do about it.
+      There is no independent methodology for grading compute sustainability, no standard that an
+      HPC director, a sustainability office, or a government agency can reference when making
+      decisions about infrastructure. We are building that standard.
     </p>
 
     <p>
-      ACE is engine one. Future engines will address workload scheduling, cooling efficiency,
-      carbon intensity, and hardware procurement. Together they form a certification framework
-      for AI compute infrastructure.
-    </p>
-
-    <hr class="rule" />
-
-    <h2>ACE</h2>
-
-    <p>
-      ACE ingests Slurm <code>sacct</code> exports and GPU telemetry, scores per-job efficiency,
-      applies safety guardrails, and produces a zero-dependency HTML report with traceable
-      recommendations.
-    </p>
-
-    <p>
-      Validated on the MIT Supercloud HPCA22 dataset. 35,745 jobs. Real scheduler logs and DCGM
-      telemetry. Average GPU utilization: 25.7%. Jobs under one minute: 41%. Near-zero GPU
-      activity: 33%. The recommendations are specific, the assumptions are disclosed, and the
-      safety mode blocks anything we cannot defend.
-    </p>
-
-    <p class="inline-links">
-      <a href="/ace">ACE Engine &rarr;</a>
+      Our first engine is ACE. Future engines will address workload scheduling, cooling
+      efficiency, real-time carbon intensity, and hardware procurement. Together they form a
+      certification framework for AI compute infrastructure that is grounded in telemetry,
+      explicit in its assumptions, and designed to produce grades an institution can stand behind
+      publicly.
     </p>
 
     <hr class="rule" />
@@ -82,11 +39,32 @@ const description =
     <p>
       Communities near data centers are pushing back on water usage, power draw, and grid strain.
       The EU AI Act includes environmental impact provisions. Federal AI infrastructure spending
-      is under scrutiny. Institutions that want to get ahead of this need a methodology and a
-      grade. Right now neither exists.
+      is under growing scrutiny. Institutions that want to get ahead of this need a methodology
+      and an independent grade. Neither exists yet.
     </p>
 
-    <p>Plain Theory Labs is building both.</p>
+    <hr class="rule" />
+
+    <h2>ACE</h2>
+
+    <p>
+      ACE is our first engine. It ingests Slurm scheduler exports and GPU telemetry, scores
+      per-job efficiency, applies a conservative safety overlay that blocks anything it cannot
+      defend, and produces a single-file HTML report with traceable recommendations and fully
+      disclosed assumptions.
+    </p>
+
+    <p>
+      We validated ACE on the MIT Supercloud HPCA22 dataset: 35,745 real jobs, scheduler logs,
+      and DCGM telemetry. Average GPU utilization was 25.7%, median utilization 16%, 41% of jobs
+      ran under one minute, and 33% showed near-zero GPU activity. These are not projections.
+      They are what the engine found in a published, peer-reviewed dataset from a production HPC
+      system.
+    </p>
+
+    <p class="inline-links">
+      <a href="/ace">ACE Engine &rarr;</a>
+    </p>
 
     <hr class="rule" />
 
