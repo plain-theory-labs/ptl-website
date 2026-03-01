@@ -3,75 +3,142 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import AceArt from "../components/AceArt.astro";
 
 const description =
-  "ACE Engine: read-only analytics for GPU job right-sizing. Ingests Slurm accounting exports, scores per-job efficiency, applies a conservative safety overlay, and produces a structured report with traceable recommendations and explicit assumptions.";
+  "ACE Engine — Plain Theory Labs";
 ---
 
 <BaseLayout title="ACE Engine — Plain Theory Labs" description={description}>
   <section class="section prose">
     <h1>ACE Engine</h1>
-    <p class="thesis">
-      ACE is a read-only analytics engine for GPU job right-sizing. It ingests Slurm accounting
-      exports, scores per-job efficiency against measured or estimated telemetry, applies a
-      conservative safety overlay, and produces a structured report with traceable recommendations
-      and explicit assumptions. It does not touch your scheduler, modify job parameters, or change
-      queue configurations. It reads, scores, and reports. Policy decisions remain with the
-      operator.
-    </p>
 
-    <p>
-      The current phase is 2B0. Phase 2B1 will add windowed telemetry joins from DCGM and
-      Prometheus, JobID normalization improvements, and per-window provenance scoring so every
-      recommendation is traceable to a measurement rather than an assumption.
+    <p class="thesis">
+      The Adaptive Compute Efficiency Engine (ACE) is the first engine in the
+      Plain Theory Labs certification framework. It takes the raw output of an
+      HPC scheduler — job accounting records, GPU telemetry, runtime data — and
+      produces a graded efficiency analysis with traceable findings, disclosed
+      assumptions, and concrete recommendations. It is the first tool built to
+      turn HPC operational data into a defensible grade, not a dashboard.
     </p>
 
     <hr class="rule" />
 
-    <h2>What ACE produces</h2>
+    <h2>What ACE does that nothing else does</h2>
 
     <p>
-      ACE produces a per-job efficiency score, a right-sizing recommendation with a confidence
-      label, and an environmental impact estimate covering energy, carbon, and water with every
-      coefficient disclosed and configurable. The output is a JSON payload and a zero-dependency
-      single-file HTML report with interactive tables, inline SVG charts, and summary cards that
-      any operator can open on any machine and hand to any stakeholder.
+      The distinction matters. Monitoring tools show utilization. Reporting tools
+      show trends. ACE grades. It applies a scoring methodology to each job in a
+      scheduler export, evaluates whether the GPU resources requested were
+      proportionate to the GPU resources used, applies a safety overlay that blocks
+      recommendations it cannot defend with the available data, and produces a
+      structured output that explains every finding in terms an operator can act on
+      and a stakeholder can understand.
     </p>
 
     <p>
-      The MIT Supercloud run found 35,745 jobs with average GPU utilization of 25.7%, median of
-      16%, 41% of jobs running under one minute, and 33% showing near-zero GPU activity.
-      Environmental impact numbers are coefficient-based estimates, not metered totals. If your
-      site has measured PUE or grid carbon intensity data, the engine uses it.
+      No tool like this existed. Researchers and engineers working in HPC
+      sustainability have had access to telemetry data for years with no systematic
+      way to convert it into efficiency grades that carry policy weight. ACE is the
+      first implementation of that conversion — built on a methodology that is open,
+      assumption-explicit, and designed from the start to be extended, audited,
+      and improved.
     </p>
+
+    <hr class="rule" />
+
+    <h2>What the engine produces</h2>
+
+    <p>
+      For each job in the input dataset, ACE produces an efficiency score, a
+      right-sizing recommendation with a confidence label reflecting the quality of
+      the underlying data, and an environmental impact estimate covering energy,
+      carbon, and water. Every coefficient used in the environmental calculation is
+      documented in the output and configurable — if your site has measured power
+      usage effectiveness or grid carbon intensity, the engine uses it. If not,
+      it uses documented defaults and says so.
+    </p>
+
+    <p>
+      The output is a JSON payload and a zero-dependency single-file HTML report —
+      interactive tables, inline SVG charts, summary findings, and full methodology
+      disclosure. Any operator can open it on any machine. Any stakeholder can read
+      it without specialized tooling. A finding that requires infrastructure to view
+      is a finding that will not travel.
+    </p>
+
+    <div class="findings">
+      <p>MIT Supercloud HPCA22 dataset — 35,745 production jobs</p>
+      <p><strong>25.7%</strong> average GPU utilization</p>
+      <p><strong>16%</strong> median GPU utilization</p>
+      <p><strong>41%</strong> of jobs ran under one minute</p>
+      <p><strong>33%</strong> of jobs showed near-zero GPU activity</p>
+      <p>These are not projections. This is what the engine found.</p>
+    </div>
 
     <div class="visual-center" aria-hidden="true">
       <AceArt />
     </div>
-    <p class="figure-caption muted">Signal to structure: noisy scheduler traces become scored, reviewable outputs.</p>
+    <p class="figure-caption">Signal to structure: noisy scheduler traces become scored, reviewable outputs.</p>
 
     <hr class="rule" />
 
-    <h2>Pipeline</h2>
+    <h2>How the pipeline works</h2>
 
     <p>
-      ACE runs five deterministic stages. Ingest takes a Slurm <code>sacct</code> export or
-      canonical CSV, runs JobID normalization, and joins telemetry where available. Score computes
-      per-job utilization, applies the over-request heuristic, and assigns a weighted review
-      score. The safety overlay blocks low-confidence downsizing recommendations — nothing gets
-      recommended that cannot be defended. Impact estimation projects energy, carbon, water, and
-      cost from physical coefficients, all user-configurable and disclosed in the output. Report
-      generates the JSON payload and single-file HTML with no external dependencies.
+      ACE runs five deterministic stages. Ingest takes a Slurm <code>sacct</code>
+      export or canonical CSV, normalizes job identifiers, and joins GPU telemetry
+      where available. Score computes per-job utilization against requested
+      allocation, applies the over-request heuristic, and assigns a weighted
+      efficiency score. The safety overlay evaluates each recommendation against
+      the confidence of the underlying data — if the data cannot support a
+      downsizing recommendation, the recommendation is withheld, not softened.
+      Impact estimation projects energy, carbon, water, and cost from physical
+      coefficients, all documented and configurable. Report generates the JSON
+      payload and the single-file HTML output.
+    </p>
+
+    <p>
+      Every stage is deterministic. Run the same input twice and you get the same
+      output. This is a design requirement, not an implementation detail — a
+      certification framework that produces different findings on the same data
+      is not a certification framework.
     </p>
 
     <hr class="rule" />
 
-    <h2>Assumptions and limits</h2>
+    <h2>The start of something larger</h2>
 
     <p>
-      Environmental impact numbers are coefficient-based estimates, not metered totals. Default
-      coefficients are documented and configurable. If your site has measured PUE or grid carbon
-      intensity data, use it. Phase 2B0 has no live telemetry join — utilization is derived from
-      sidecar files or proxy estimates where direct measurement is not available. Confidence
-      labels reflect this.
+      ACE is Phase 1 of a five-engine certification framework. Future engines will
+      address workload scheduling efficiency, cooling system performance, real-time
+      carbon intensity, and hardware procurement decisions. Each engine follows the
+      same design principles: ingest real operational data, apply a transparent
+      methodology, produce graded findings with disclosed assumptions.
+    </p>
+
+    <p>
+      The goal is a certification standard that institutions can use before external
+      regulation defines one for them — built by engineers who have operated these
+      systems, validated on real datasets, open to scrutiny. ACE is the proof that
+      the approach works.
+    </p>
+
+    <hr class="rule" />
+
+    <h2>Assumptions and current limits</h2>
+
+    <p>
+      Phase 2B0 has no live telemetry join. GPU utilization is derived from sidecar
+      files or proxy estimates where direct measurement is not available. Confidence
+      labels in the output reflect this — a recommendation derived from a proxy
+      estimate carries a different label than one derived from DCGM telemetry.
+      The methodology is explicit about the difference.
+    </p>
+
+    <p>
+      Environmental impact numbers are coefficient-based estimates, not metered
+      totals. Default coefficients are documented. If your site has measured data,
+      use it. Phase 2B1 will add windowed telemetry joins from DCGM and Prometheus,
+      JobID normalization improvements, and per-window provenance scoring so every
+      recommendation is traceable to its source.
     </p>
 
     <hr class="rule" />
@@ -79,12 +146,11 @@ const description =
     <h2>Status</h2>
 
     <p>
-      Phase 2B0 is complete with 118 tests passing. ACE has been validated on the MIT Supercloud
-      HPCA22 dataset and the Google Borg CPU proxy dataset. Phase 2B1 is in active development.
+      Phase 2B0 is complete. 118 tests passing. Validated on the MIT Supercloud
+      HPCA22 dataset and the Google Borg CPU proxy dataset. Phase 2B1 is in
+      active development.
     </p>
 
-    <p class="inline-links">
-      <a href="/contact">Discuss a pilot &rarr;</a>
-    </p>
+    <a href="/contact" class="cta-link">Talk to us about your cluster</a>
   </section>
 </BaseLayout>
