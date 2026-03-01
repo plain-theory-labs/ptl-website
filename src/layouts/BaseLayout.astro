@@ -62,33 +62,24 @@ const isActive = (href: string): boolean => {
   <body>
     <a class="skip-link" href="#main-content">Skip to content</a>
     <header class="site-header">
-      <div class="page-shell header-shell">
-        <a class="brand" href="/" aria-label="Plain Theory Labs home">Plain Theory Labs</a>
-        <nav aria-label="Primary">
-          <ul class="nav-list">
-            {navItems.map((item) => (
-              <li>
-                <a href={item.href} class={isActive(item.href) ? "active" : undefined}>{item.label}</a>
-              </li>
-            ))}
-          </ul>
-        </nav>
-      </div>
+      <a class="brand" href="/" aria-label="Plain Theory Labs home">Plain Theory Labs</a>
+      <nav aria-label="Primary">
+        <ul class="nav-list">
+          {navItems.map((item) => (
+            <li>
+              <a href={item.href} class={isActive(item.href) ? "active" : undefined}>{item.label}</a>
+            </li>
+          ))}
+        </ul>
+      </nav>
     </header>
 
-    <main id="main-content" class="page-shell">
+    <main id="main-content">
       <slot />
     </main>
 
     <footer class="site-footer">
-      <div class="page-shell footer-row">
-        <nav class="footer-nav" aria-label="Footer">
-          {navItems.map((item) => (
-            <a href={item.href}>{item.label}</a>
-          ))}
-        </nav>
-        <p class="disclaimer">Early work in progress.</p>
-      </div>
+      Plain Theory Labs
     </footer>
   </body>
 </html>

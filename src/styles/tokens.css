@@ -1,25 +1,25 @@
 @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&display=swap');
 
 :root {
-  /* Color */
-  --bg:     #ffffff;
-  --text:   #1c1c1c;
-  --muted:  #666666;
-  --border: #dedede;
-  --accent: #1a3a4a;
-  --panel:  #f8f8f6;
+  --bg:       #ffffff;
+  --text:     #1a1a1a;
+  --muted:    #6a6a6a;
+  --faint:    #999999;
+  --border:   #e2e2e2;
+  --rule:     #d4d4d4;
+  --panel:    #f7f7f5;
+  --data-bg:  #f2f2f0;
 
-  /* Typography */
-  --font-display: "EB Garamond", Georgia, "Times New Roman", serif;
   --font-body:    "EB Garamond", Georgia, "Times New Roman", serif;
+  --font-display: "EB Garamond", Georgia, "Times New Roman", serif;
   --font-mono:    ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 
-  --text-body: clamp(1.1rem,  1rem + 0.25vw, 1.25rem);
-  --text-lead: clamp(1.2rem,  1.05rem + 0.5vw, 1.5rem);
-  --text-h2:   clamp(1.25rem, 1.1rem + 0.6vw, 1.65rem);
-  --text-h1:   clamp(3rem,    2rem + 4vw, 6rem);
+  --text-xs:   0.8rem;
+  --text-sm:   0.88rem;
+  --text-body: clamp(1.08rem, 1rem + 0.2vw, 1.2rem);
+  --text-h2:   clamp(1.2rem, 1.1rem + 0.5vw, 1.55rem);
+  --text-h1:   clamp(1.5rem, 1.2rem + 1.2vw, 2.1rem);
 
-  /* Spacing */
   --space-1:  0.25rem;
   --space-2:  0.5rem;
   --space-3:  0.75rem;
@@ -31,10 +31,13 @@
   --space-12: 3rem;
   --space-16: 4rem;
   --space-20: 5rem;
+  --space-24: 6rem;
 
-  /* Layout */
-  --radius-1: 3px;
-  --radius-2: 5px;
-  --prose:    66ch;
-  --wide:     960px;
+  --prose:       68ch;
+  --wide:        960px;
+  --left-rule:   2px;
+  --left-offset: 2.5rem;
+
+  --radius-1: 2px;
+  --radius-2: 4px;
 }
