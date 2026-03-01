@@ -13,18 +13,19 @@ body {
   color: var(--text);
   font-family: var(--font-body);
   font-size: var(--text-body);
-  line-height: 1.68;
-  text-rendering: optimizeLegibility;
+  line-height: 1.85;
+  -webkit-font-smoothing: antialiased;
 }
 
 a {
-  color: var(--accent);
-  text-decoration-thickness: 0.08em;
-  text-underline-offset: 0.16em;
+  color: var(--text);
+  text-decoration-color: var(--border);
+  text-underline-offset: 3px;
+  transition: text-decoration-color 0.15s;
 }
 
 a:hover {
-  color: var(--text);
+  text-decoration-color: var(--text);
 }
 
 img {
@@ -38,28 +39,49 @@ h2,
 h3 {
   color: var(--text);
   margin: 0 0 var(--space-4);
-  line-height: 1.22;
-  letter-spacing: -0.015em;
 }
 
 h1 {
+  font-family: var(--font-display);
   font-size: var(--text-h1);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  line-height: 1.05;
+  text-align: center;
+  margin-bottom: var(--space-10);
 }
 
 h2 {
+  font-family: var(--font-display);
   font-size: var(--text-h2);
+  font-weight: 400;
+  line-height: 1.3;
+  margin-top: var(--space-12);
+  margin-bottom: var(--space-4);
 }
 
 h3 {
   font-size: clamp(1.06rem, 1.02rem + 0.2vw, 1.2rem);
 }
 
-p,
+p {
+  margin-bottom: var(--space-6);
+  max-width: var(--prose);
+}
+
 ul,
 ol,
 pre,
 table {
   margin: 0 0 var(--space-4);
+}
+
+code {
+  font-family: var(--font-mono);
+  font-size: 0.88em;
+  background: var(--panel);
+  padding: 0.1em 0.35em;
+  border-radius: var(--radius-1);
 }
 
 .skip-link {
@@ -68,7 +90,7 @@ table {
   top: -9999px;
   background: var(--panel);
   border: 1px solid var(--border);
-  border-radius: 6px;
+  border-radius: var(--radius-1);
   padding: var(--space-2) var(--space-3);
 }
 
@@ -87,24 +109,31 @@ table {
   position: sticky;
   top: 0;
   z-index: 10;
-  background: color-mix(in srgb, var(--bg) 95%, #ffffff 5%);
+  background: var(--bg);
   border-bottom: 1px solid var(--border);
 }
 
 .header-shell {
-  min-height: 3.4rem;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-  gap: var(--space-6);
+  padding: var(--space-10) var(--space-8) var(--space-6);
 }
 
 .brand {
+  font-family: var(--font-display);
+  font-size: clamp(1rem, 0.85rem + 0.8vw, 1.35rem);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 400;
+  color: var(--muted);
+  text-decoration: none;
+  margin-bottom: var(--space-3);
+}
+
+.brand:hover {
   color: var(--text);
   text-decoration: none;
-  font-size: 0.9rem;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
 }
 
 .nav-list {
@@ -112,25 +141,23 @@ table {
   margin: 0;
   padding: 0;
   display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-4);
+  gap: var(--space-8);
 }
 
 .nav-list a {
+  font-size: 0.9rem;
+  letter-spacing: 0.04em;
   color: var(--muted);
   text-decoration: none;
-  border-bottom: 1px solid transparent;
-  padding-bottom: 2px;
 }
 
 .nav-list a.active,
 .nav-list a:hover {
   color: var(--text);
-  border-bottom-color: var(--text);
 }
 
 main {
-  padding: var(--space-10) 0 var(--space-12);
+  padding: var(--space-16) var(--space-8) var(--space-20);
 }
 
 .prose {
@@ -161,9 +188,9 @@ main {
 }
 
 .rule {
-  border: 0;
+  border: none;
   border-top: 1px solid var(--border);
-  margin: var(--space-8) 0;
+  margin: var(--space-12) 0;
 }
 
 .inline-links {
@@ -176,7 +203,7 @@ main {
 .panel {
   background: var(--panel);
   border: 1px solid var(--border);
-  border-radius: 8px;
+  border-radius: var(--radius-2);
   padding: var(--space-4) var(--space-4) var(--space-3);
 }
 
@@ -191,9 +218,9 @@ main {
 }
 
 .report-excerpt {
-  background: #f0f2f1;
+  background: var(--panel);
   border: 1px solid var(--border);
-  border-radius: 6px;
+  border-radius: var(--radius-1);
   padding: var(--space-3);
   font-family: var(--font-mono);
   font-size: 0.84rem;
@@ -250,9 +277,9 @@ tbody tr:last-child td {
 }
 
 .formula-block {
-  background: #f5f6f6;
+  background: var(--panel);
   border: 1px solid var(--border);
-  border-radius: 6px;
+  border-radius: var(--radius-1);
   padding: var(--space-3);
   font-family: var(--font-mono);
   font-size: 0.86rem;
@@ -280,7 +307,7 @@ textarea {
   color: var(--text);
   background: #fff;
   border: 1px solid var(--border);
-  border-radius: 6px;
+  border-radius: var(--radius-1);
   padding: var(--space-3);
   margin-bottom: var(--space-4);
 }
@@ -295,7 +322,7 @@ button {
   color: var(--text);
   background: transparent;
   border: 1px solid var(--border);
-  border-radius: 6px;
+  border-radius: var(--radius-1);
   padding: var(--space-2) var(--space-4);
   cursor: pointer;
 }
@@ -332,14 +359,10 @@ button:hover {
 
 @media (max-width: 720px) {
   .header-shell {
-    min-height: auto;
-    padding: var(--space-3) 0;
-    align-items: flex-start;
-    flex-direction: column;
-    gap: var(--space-2);
+    padding: var(--space-6) var(--space-4) var(--space-4);
   }
 
   main {
-    padding: var(--space-8) 0 var(--space-10);
+    padding: var(--space-10) var(--space-4) var(--space-12);
   }
 }

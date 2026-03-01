@@ -1,33 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&display=swap');
+
 :root {
-  --bg: #f4f5f3;
-  --text: #192125;
-  --muted: #5a646c;
-  --border: #cfd5d9;
-  --accent: #1f4b62;
-  --panel: #fafaf8;
+  /* Color */
+  --bg:     #ffffff;
+  --text:   #1c1c1c;
+  --muted:  #666666;
+  --border: #dedede;
+  --accent: #1a3a4a;
+  --panel:  #f8f8f6;
 
-  --font-body: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  /* Typography */
+  --font-display: "EB Garamond", Georgia, "Times New Roman", serif;
+  --font-body:    "EB Garamond", Georgia, "Times New Roman", serif;
+  --font-mono:    ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 
-  --text-body: clamp(1rem, 0.98rem + 0.1vw, 1.08rem);
-  --text-lead: clamp(1.08rem, 1rem + 0.35vw, 1.34rem);
-  --text-h2: clamp(1.34rem, 1.18rem + 0.8vw, 1.84rem);
-  --text-h1: clamp(2rem, 1.7rem + 1.6vw, 3.1rem);
+  --text-body: clamp(1.1rem,  1rem + 0.25vw, 1.25rem);
+  --text-lead: clamp(1.2rem,  1.05rem + 0.5vw, 1.5rem);
+  --text-h2:   clamp(1.25rem, 1.1rem + 0.6vw, 1.65rem);
+  --text-h1:   clamp(3rem,    2rem + 4vw, 6rem);
 
-  --space-1: 0.25rem;
-  --space-2: 0.5rem;
-  --space-3: 0.75rem;
-  --space-4: 1rem;
-  --space-5: 1.25rem;
-  --space-6: 1.5rem;
-  --space-8: 2rem;
+  /* Spacing */
+  --space-1:  0.25rem;
+  --space-2:  0.5rem;
+  --space-3:  0.75rem;
+  --space-4:  1rem;
+  --space-5:  1.25rem;
+  --space-6:  1.5rem;
+  --space-8:  2rem;
   --space-10: 2.5rem;
   --space-12: 3rem;
   --space-16: 4rem;
+  --space-20: 5rem;
 
-  --radius-1: 6px;
-  --radius-2: 8px;
-
-  --prose: 68ch;
-  --wide: 1100px;
+  /* Layout */
+  --radius-1: 3px;
+  --radius-2: 5px;
+  --prose:    66ch;
+  --wide:     960px;
 }
