@@ -5,76 +5,185 @@ const description =
   "Plain Theory Labs — certification framework for sustainable AI compute infrastructure";
 ---
 
-<BaseLayout title="Plain Theory Labs" description={description}>
+<BaseLayout title="Plain Theory Labs — certification framework for sustainable AI compute infrastructure" description={description}>
   <section class="section prose">
-    <h1>Plain Theory Labs</h1>
+    <h1>The infrastructure behind AI is mostly invisible. We are making it legible.</h1>
+
     <p class="thesis">
-      Plain Theory Labs is a research and engineering lab building the certification framework for
-      sustainable AI compute infrastructure. We build engines that take real operational data from
-      GPU clusters and data centers and produce traceable, assumption-explicit efficiency grades
-      that institutions can use for policy decisions, procurement requirements, and public
-      reporting.
+      Plain Theory Labs is a research and engineering lab building the first
+      independent certification framework for sustainable AI compute infrastructure.
+      We measure what institutions are actually operating, grade it against a
+      defensible methodology, and produce findings that hold up to scrutiny.
     </p>
 
     <p>
-      We are researchers, engineers, and systems scientists with careers inside HPC. We have
-      worked at research universities, national labs, and academic medical centers. We have
-      watched monitoring data accumulate without any framework to act on it. We are building
-      that framework.
-    </p>
-
-    <p>
-      The problem is structural. AI compute is scaling faster than anyone can measure its impact,
-      and the tools that exist today tell operators what is happening but not what to do about it.
-      There is no independent methodology for grading compute sustainability, no standard that an
-      HPC director, a sustainability office, or a government agency can reference when making
-      decisions about infrastructure. We are building that standard.
-    </p>
-
-    <p>
-      Our first engine is ACE. Future engines will address workload scheduling, cooling
-      efficiency, real-time carbon intensity, and hardware procurement. Together they form a
-      certification framework for AI compute infrastructure — grounded in telemetry, explicit in
-      its assumptions, designed to produce grades an institution can stand behind publicly, before
-      government regulation imposes a standard that no one helped design.
+      We are AI and HPC infrastructure engineers with careers inside these systems —
+      at research universities, national laboratories, and academic medical centers.
+      We have configured the schedulers, tuned the GPU allocations, read the
+      telemetry. We know what efficient looks like and what it doesn't. We care about
+      infrastructure that works well now and remains defensible as the scale and
+      scrutiny of AI compute increases.
     </p>
 
     <hr class="rule" />
 
-    <h2>Why now</h2>
+    <h2>What actually happens when you use AI</h2>
 
     <p>
-      Communities near data centers are pushing back on water usage, power draw, and grid strain.
-      The EU AI Act includes environmental impact provisions. Federal AI infrastructure spending
-      is under growing scrutiny. Institutions that want to get ahead of this need a methodology
-      and an independent grade. Neither exists yet.
+      Every query sent to a large language model, every image generated, every
+      inference run on a research cluster triggers a cascade of physical events most
+      people never consider. Somewhere, a GPU wakes up and draws between 300 and 700
+      watts. A cooling system — chilled water loops, computer room air handlers, or
+      direct liquid cooling — compensates for the heat. A power delivery
+      infrastructure converts and conditions electricity from the grid. A data center
+      manages space, redundancy, and thermal load, consuming water at rates that vary
+      enormously by design and climate.
+    </p>
+
+    <p>
+      A single A100 GPU running continuously for a year consumes roughly
+      <span class="datum">3,500 kWh</span> of electricity. A modest research cluster
+      of 100 GPUs draws more power than a small neighborhood. The largest AI training
+      runs now require data centers with power capacity measured in hundreds of
+      megawatts. This infrastructure exists, it is operating today, and its footprint
+      is growing faster than anyone is measuring it rigorously.
+    </p>
+
+    <p>
+      The people who use AI daily are not wrong to do so. The engineers who build
+      these systems are not acting irresponsibly. The problem is that no one has built
+      the instrumentation to know, with precision and accountability, how efficiently
+      any of this is running — or what the gap between current operations and what is
+      achievable actually looks like.
     </p>
 
     <hr class="rule" />
 
-    <h2>ACE</h2>
+    <h2>The measurement problem</h2>
 
     <p>
-      ACE is our first engine. It ingests Slurm scheduler exports and GPU telemetry, scores
-      per-job efficiency, applies a conservative safety overlay that blocks anything it cannot
-      defend, and produces a single-file HTML report with traceable recommendations and fully
-      disclosed assumptions.
+      Monitoring tools exist in abundance. HPC centers run Prometheus, Grafana, DCGM,
+      and Slurm accounting. They collect utilization rates, job runtimes, power draw,
+      and queue statistics continuously. The data is there. What does not exist is a
+      methodology that turns that data into a grade — a defensible, assumption-explicit
+      score that tells an institution not just what is happening, but how it compares
+      to what is achievable, and what a specific operational change would produce.
     </p>
 
     <p>
-      We validated ACE on the MIT Supercloud HPCA22 dataset: 35,745 real jobs, scheduler logs,
-      and DCGM telemetry. Average GPU utilization was 25.7%, median utilization 16%, 41% of jobs
-      ran under one minute, and 33% showed near-zero GPU activity. These are not projections.
-      They are what the engine found in a published, peer-reviewed dataset from a production HPC
-      system.
-    </p>
-
-    <p class="inline-links">
-      <a href="/ace">ACE Engine &rarr;</a>
+      Without that methodology, the monitoring data has no policy value. An HPC
+      director cannot write a procurement requirement around a utilization rate with
+      no reference point. A sustainability office cannot report against a number with
+      no standard. A funding agency cannot evaluate efficiency claims with no
+      independent basis. The tools measure. Nothing grades.
     </p>
 
     <hr class="rule" />
 
-    <p class="inline-links"><a href="/contact">Work with us &rarr;</a></p>
+    <h2>Building the certification framework</h2>
+
+    <p>
+      Plain Theory Labs is building that standard. Our approach is an engine-based
+      certification framework — modular analytical tools that ingest real operational
+      data, apply transparent methodologies with fully disclosed assumptions, and
+      produce graded findings that institutions can use for policy decisions,
+      procurement requirements, and public reporting.
+    </p>
+
+    <p>
+      The framework is designed to be independent, which means its methods must be
+      open to scrutiny. Every coefficient used in an environmental impact estimate is
+      documented and configurable. Every recommendation carries a confidence label
+      that reflects the quality of the underlying data. Nothing is asserted that
+      cannot be traced to a source.
+    </p>
+
+    <hr class="rule" />
+
+    <h2>ACE: our first engine</h2>
+
+    <p>
+      The Adaptive Compute Efficiency Engine (ACE) is the first tool in the
+      certification framework. It ingests Slurm scheduler exports and GPU telemetry
+      from an HPC cluster, scores every job against a documented efficiency
+      methodology, and produces a single-file report with findings, confidence labels,
+      and fully disclosed assumptions. We validated it on a published, peer-reviewed
+      dataset from a production system.
+    </p>
+
+    <div class="findings">
+      <p>MIT Supercloud HPCA22 dataset — 35,745 production jobs</p>
+      <p><strong>25.7%</strong> average GPU utilization</p>
+      <p><strong>16%</strong> median GPU utilization</p>
+      <p><strong>41%</strong> of jobs ran under one minute</p>
+      <p><strong>33%</strong> of jobs showed near-zero GPU activity</p>
+      <p>These are not projections. This is what the engine found.</p>
+    </div>
+
+    <a href="/ace" class="cta-link">Read about the ACE engine</a>
+
+    <hr class="rule" />
+
+    <h2>Advancing science requires sustainable infrastructure</h2>
+
+    <p>
+      AI is not only a consumer of compute — it is increasingly central to how
+      science gets done. Drug discovery, climate modeling, genomics, materials
+      science, and fusion research all depend on GPU clusters operating at scale.
+      The scientific community has a direct interest in infrastructure that is
+      efficient, accountable, and built for the long term.
+    </p>
+
+    <p>
+      Sustainability and scientific productivity are not in tension. A cluster running
+      at <span class="datum">15% average GPU utilization</span> — which is common —
+      is not just wasting energy. It is wasting research capacity. Right-sizing
+      workloads, improving scheduler efficiency, and understanding where compute is
+      going are simultaneously environmental and scientific priorities. The
+      institutions doing the most ambitious science should be operating the most
+      efficiently instrumented infrastructure.
+    </p>
+
+    <p>
+      Collaboration is how this gets built. HPC directors, sustainability officers,
+      research computing teams, and infrastructure engineers at universities and
+      national labs have the operational knowledge and the data. We are building the
+      methodology and the tooling. The findings belong to the institutions that
+      produce them.
+    </p>
+
+    <hr class="rule" />
+
+    <h2>The regulatory context is arriving</h2>
+
+    <p>
+      The EU AI Act includes provisions requiring environmental impact assessment for
+      high-impact AI systems. Federal AI infrastructure spending in the United States
+      is under growing scrutiny from oversight bodies and appropriators. NSF and DOE
+      programs are beginning to ask sustainability questions in infrastructure grant
+      reviews. Several states have introduced or are drafting data center efficiency
+      legislation.
+    </p>
+
+    <p>
+      Institutions that wait for regulation to define the standard will be graded
+      against a methodology they had no role in building. Institutions that engage now
+      will have operational data, a tested methodology, and a track record when
+      external requirements arrive. The certification framework we are building is
+      designed to be that track record.
+    </p>
+
+    <hr class="rule" />
+
+    <h2>Work with us</h2>
+
+    <p>
+      We are looking for research universities, national laboratories, and academic
+      medical centers that want to understand what their GPU infrastructure is actually
+      doing. Not a vendor pitch. Not a monitoring dashboard. A rigorous, independent
+      assessment with traceable methodology.
+    </p>
+
+    <a href="/contact" class="cta-link">Get in touch</a>
   </section>
 </BaseLayout>
