@@ -1,0 +1,22 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+export function getStaticPaths() {
+  return [{ params: { slug: "index" } }];
+}
+
+const { slug } = Astro.params;
+const description = "Certification verification — Plain Theory Labs";
+---
+
+<BaseLayout title="Certification verification — Plain Theory Labs" description={description}>
+  <section class="section prose">
+    <h1>Certification verification</h1>
+
+    <p>
+      This page will show the public certification record for verified
+      organizations. Contact <a href="mailto:jesus@plaintheory.org">jesus@plaintheory.org</a>
+      to verify a certification.
+    </p>
+  </section>
+</BaseLayout>
