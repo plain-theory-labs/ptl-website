@@ -1,0 +1,78 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const description = "Certification badges — Plain Theory Labs";
+
+const tiers = [
+  { name: "PLATINUM", slug: "platinum" },
+  { name: "GOLD",     slug: "gold" },
+  { name: "SILVER",   slug: "silver" },
+  { name: "BRONZE",   slug: "bronze" },
+  { name: "MEASURED", slug: "measured" },
+  { name: "PENDING",  slug: "pending" },
+];
+---
+
+<BaseLayout title="Certification badges — Plain Theory Labs" description={description}>
+  <section class="section prose">
+    <h1>Certification badges</h1>
+
+    <p class="thesis">
+      Certified organizations may display their PTL certification badge on their
+      website. Badges link to plaintheory.org and verify the certification tier
+      and period.
+    </p>
+
+    <hr class="rule" />
+
+    {tiers.map((tier) => (
+      <div class="badge-row">
+        <img
+          src={`/badges/ptl-certified-${tier.slug}.svg`}
+          alt={`PTL ${tier.name} Certified`}
+          width="200"
+          height="80"
+          class="badge-preview"
+        />
+        <p class="badge-label">{tier.name}</p>
+        <pre class="badge-code"><code>{`<a href="https://plaintheory.org">
+  <img src="https://plaintheory.org/badges/ptl-certified-${tier.slug}.svg"
+       alt="PTL ${tier.name} Certified [YEAR]"
+       width="200" height="80">
+</a>`}</code></pre>
+      </div>
+    ))}
+
+  </section>
+</BaseLayout>
+
+<style>
+  .badge-row {
+    margin-bottom: 3rem;
+    max-width: var(--prose);
+  }
+  .badge-preview {
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+  .badge-label {
+    font-size: var(--text-sm);
+    color: var(--muted);
+    margin-bottom: 0.5rem;
+  }
+  .badge-code {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 0.75rem 1rem;
+    font-size: 0.8rem;
+    overflow-x: auto;
+    white-space: pre;
+    margin: 0;
+  }
+  .badge-code code {
+    background: none;
+    padding: 0;
+    font-size: inherit;
+  }
+</style>

@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="80" role="img"
+     aria-label="PTL PLATINUM Certified">
+  <title>PTL PLATINUM Certified</title>
+  <rect width="200" height="80" rx="6" ry="6"
+        fill="#ffffff" stroke="#b8860b" stroke-width="1.5"/>
+  <!-- Top label: PTL CERTIFIED -->
+  <text x="100" y="20"
+        font-family="'IBM Plex Mono', monospace"
+        font-size="9" font-weight="400"
+        fill="#b8860b" fill-opacity="0.7"
+        text-anchor="middle" letter-spacing="2">PTL CERTIFIED</text>
+  <!-- Tier name -->
+  <text x="100" y="42"
+        font-family="'IBM Plex Mono', monospace"
+        font-size="18" font-weight="700"
+        fill="#b8860b"
+        text-anchor="middle" letter-spacing="1">PLATINUM</text>
+  <!-- Year / org-year -->
+  <text x="100" y="57"
+        font-family="'IBM Plex Mono', monospace"
+        font-size="10" font-weight="400"
+        fill="#666666"
+        text-anchor="middle">—</text>
+  <!-- Divider -->
+  <line x1="20" y1="63" x2="180" y2="63"
+        stroke="#b8860b" stroke-opacity="0.2" stroke-width="1"/>
+  <!-- URL -->
+  <text x="100" y="74"
+        font-family="'IBM Plex Mono', monospace"
+        font-size="8" font-weight="400"
+        fill="#999999"
+        text-anchor="middle">plaintheory.org</text>
+</svg>
