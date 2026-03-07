@@ -1,0 +1,106 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const description =
+  "Certification — Plain Theory Labs";
+---
+
+<BaseLayout title="Certification — Plain Theory Labs" description={description}>
+  <section class="section prose">
+    <h1>Certification</h1>
+
+    <p class="thesis">
+      PTL certification grades AI compute infrastructure against a documented
+      methodology. Organizations receive a tier — BRONZE through PLATINUM —
+      reflecting both what they measured and how well they scored. The
+      certification is a longitudinal record, not a one-time audit. Year one
+      is a baseline. Year three is a dataset.
+    </p>
+
+    <hr class="rule" />
+
+    <h2>How certification works</h2>
+
+    <p>
+      <em>Data collection.</em> You provide a Slurm scheduler export and basic
+      facility information — cooling type, location, carbon accounting method.
+      Additional engines require additional data. Every data requirement is
+      documented before the engagement begins.
+    </p>
+
+    <p>
+      <em>Engine analysis.</em> Each engine runs independently against your data.
+      ACE grades GPU efficiency. COOL grades cooling performance. FLUX grades
+      carbon accounting methodology. PACE grades scheduler policy. CORE grades
+      hardware-workload fit. Every finding includes a confidence label and
+      disclosed assumptions.
+    </p>
+
+    <p>
+      <em>GRADE certification.</em> Engine scores are weighted and aggregated into
+      a composite. The composite determines your certification tier. Engines you
+      have not yet provided data for are excluded from the composite — partial
+      certification is meaningful certification.
+    </p>
+
+    <p>
+      <em>ATLAS recommendations.</em> ATLAS ranks the actions most likely to
+      improve your certification in the next assessment. Priority is determined
+      by gap size, engine weight, and operational impact. You receive a ranked
+      action plan alongside your certification.
+    </p>
+
+    <hr class="rule" />
+
+    <h2>Certification tiers</h2>
+
+    <p>
+      Organizations are certified against the full engine stack. Each tier reflects
+      both what was measured and how well it scored — coverage and performance are
+      graded separately.
+    </p>
+
+    <div class="findings">
+      <p><strong>PLATINUM</strong>All five engines · composite ≥ 0.85</p>
+      <p><strong>GOLD</strong>Four or more engines · composite ≥ 0.70</p>
+      <p><strong>SILVER</strong>Three or more engines · composite ≥ 0.60</p>
+      <p><strong>BRONZE</strong>Two or more engines · composite ≥ 0.45</p>
+      <p><strong>MEASURED</strong>ACE only — graded, not yet certified</p>
+      <p><strong>PENDING</strong>No engines complete</p>
+    </div>
+
+    <p>
+      MIT Supercloud received MEASURED certification on its first assessment.
+      73,367 jobs analyzed. ACE score 0.257. ATLAS identified GPU utilization
+      monitoring as the highest-priority action.
+    </p>
+
+    <hr class="rule" />
+
+    <h2>The longitudinal record</h2>
+
+    <p>
+      Certification is most valuable over time. An organization that improves from
+      MEASURED to BRONZE to SILVER across three annual assessments has something
+      regulators, funders, and procurement offices can evaluate. PTL maintains the
+      certification record. You own the findings.
+    </p>
+
+    <hr class="rule" />
+
+    <h2>Start a certification</h2>
+
+    <p>
+      We are taking three pilot organizations this quarter. A pilot begins with your
+      Slurm scheduler export and basic facility information. We run the analysis,
+      deliver private findings to your team, and work through what the results mean
+      together. You decide what to do with it.
+    </p>
+
+    <p>
+      The findings belong to your organization. We keep the methodology.
+    </p>
+
+    <a href="mailto:jesus@plaintheory.org" class="cta-link">Start a pilot</a>
+  </section>
+</BaseLayout>

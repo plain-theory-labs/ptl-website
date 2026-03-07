@@ -12,7 +12,7 @@ const description =
     <p class="thesis">
       Plain Theory Labs is a research and engineering lab building the first
       independent certification framework for sustainable AI compute infrastructure.
-      We measure what institutions are actually operating, grade it against a
+      We measure what organizations are actually operating, grade it against a
       defensible methodology, and produce findings that hold up to scrutiny.
     </p>
 
@@ -66,7 +66,7 @@ const description =
       and Slurm accounting. They collect utilization rates, job runtimes, power draw,
       and queue statistics continuously. The data is there. What does not exist is a
       methodology that turns that data into a grade — a defensible, assumption-explicit
-      score that tells an institution not just what is happening, but how it compares
+      score that tells an organization not just what is happening, but how it compares
       to what is achievable, and what a specific operational change would produce.
     </p>
 
@@ -80,22 +80,47 @@ const description =
 
     <hr class="rule" />
 
-    <h2>Building the certification framework</h2>
+    <h2>The certification framework</h2>
 
     <p>
-      Plain Theory Labs is building that standard. Our approach is an engine-based
-      certification framework — modular analytical tools that ingest real operational
-      data, apply transparent methodologies with fully disclosed assumptions, and
-      produce graded findings that institutions can use for policy decisions,
-      procurement requirements, and public reporting.
+      The framework consists of seven components. Five analytical engines grade what
+      organizations are operating. GRADE aggregates engine findings into a
+      certification tier. ATLAS translates the certification into a ranked action plan.
     </p>
 
+    <div class="findings">
+      <p><strong>ACE</strong>Adaptive Compute Efficiency Engine<br>GPU utilization, job efficiency, right-sizing</p>
+      <p><strong>COOL</strong>Cooling Operations Optimization Layer<br>PUE efficiency, cooling system performance</p>
+      <p><strong>FLUX</strong>Facility Load and Utilization Index<br>Carbon accounting methodology, greenwashing detection</p>
+      <p><strong>PACE</strong>Predictive Allocation and Cluster Efficiency<br>Scheduler policy, over-requesting patterns</p>
+      <p><strong>CORE</strong>Capital and Operations Resource Evaluator<br>Hardware-workload fit, fleet age, embodied carbon</p>
+      <p><strong>GRADE</strong>Granular Rating for AI Data center Efficiency<br>Certification tier: BRONZE through PLATINUM</p>
+      <p><strong>ATLAS</strong>Actionable Trajectory and Longitudinal Analysis<br>Ranked recommendations, trajectory projection</p>
+    </div>
+
+    <hr class="rule" />
+
+    <h2>Certification tiers</h2>
+
     <p>
-      The framework is designed to be independent, which means its methods must be
-      open to scrutiny. Every coefficient used in an environmental impact estimate is
-      documented and configurable. Every recommendation carries a confidence label
-      that reflects the quality of the underlying data. Nothing is asserted that
-      cannot be traced to a source.
+      Organizations are certified against the full engine stack. Each tier reflects
+      both what was measured and how well it scored — coverage and performance are
+      graded separately.
+    </p>
+
+    <div class="findings">
+      <p><strong>PLATINUM</strong>All five engines · composite ≥ 0.85</p>
+      <p><strong>GOLD</strong>Four or more engines · composite ≥ 0.70</p>
+      <p><strong>SILVER</strong>Three or more engines · composite ≥ 0.60</p>
+      <p><strong>BRONZE</strong>Two or more engines · composite ≥ 0.45</p>
+      <p><strong>MEASURED</strong>ACE only — graded, not yet certified</p>
+      <p><strong>PENDING</strong>No engines complete</p>
+    </div>
+
+    <p>
+      MIT Supercloud received MEASURED certification on its first assessment.
+      73,367 jobs analyzed. ACE score 0.257. ATLAS identified GPU utilization
+      monitoring as the highest-priority action.
     </p>
 
     <hr class="rule" />
@@ -103,7 +128,7 @@ const description =
     <h2>ACE: our first engine</h2>
 
     <p>
-      The Adaptive Compute Efficiency Engine (ACE) is the first tool in the
+      The Adaptive Compute Efficiency Engine (ACE) is the first engine in the
       certification framework. It ingests Slurm scheduler exports and GPU telemetry
       from an HPC cluster, scores every job against a documented efficiency
       methodology, and produces a single-file report with findings, confidence labels,
@@ -112,12 +137,10 @@ const description =
     </p>
 
     <div class="findings">
-      <p>MIT Supercloud HPCA22 dataset — 35,745 production jobs</p>
-      <p><strong>25.7%</strong> average GPU utilization</p>
-      <p><strong>16%</strong> median GPU utilization</p>
-      <p><strong>41%</strong> of jobs ran under one minute</p>
-      <p><strong>33%</strong> of jobs showed near-zero GPU activity</p>
-      <p>These are not projections. This is what the engine found.</p>
+      <p>MIT Supercloud HPCA22 dataset — 73,367 production jobs</p>
+      <p><strong>25.7%</strong>average GPU utilization</p>
+      <p><strong>$255,271</strong>in recoverable savings identified</p>
+      <p>MEASURED certification — first honest baseline</p>
     </div>
 
     <a href="/ace" class="cta-link">Read about the ACE engine</a>
@@ -140,7 +163,7 @@ const description =
       is not just wasting energy. It is wasting research capacity. Right-sizing
       workloads, improving scheduler efficiency, and understanding where compute is
       going are simultaneously environmental and scientific priorities. The
-      institutions doing the most ambitious science should be operating the most
+      organizations doing the most ambitious science should be operating the most
       efficiently instrumented infrastructure.
     </p>
 
@@ -148,7 +171,7 @@ const description =
       Collaboration is how this gets built. HPC directors, sustainability officers,
       research computing teams, and infrastructure engineers at universities and
       national labs have the operational knowledge and the data. We are building the
-      methodology and the tooling. The findings belong to the institutions that
+      methodology and the tooling. The findings belong to the organizations that
       produce them.
     </p>
 
@@ -166,8 +189,8 @@ const description =
     </p>
 
     <p>
-      Institutions that wait for regulation to define the standard will be graded
-      against a methodology they had no role in building. Institutions that engage now
+      Organizations that wait for regulation to define the standard will be graded
+      against a methodology they had no role in building. Organizations that engage now
       will have operational data, a tested methodology, and a track record when
       external requirements arrive. The certification framework we are building is
       designed to be that track record.
@@ -178,12 +201,16 @@ const description =
     <h2>Work with us</h2>
 
     <p>
-      We are looking for research universities, national laboratories, and academic
-      medical centers that want to understand what their GPU infrastructure is actually
-      doing. Not a vendor pitch. Not a monitoring dashboard. A rigorous, independent
-      assessment with traceable methodology.
+      We are taking three pilot organizations this quarter. A pilot begins with your
+      Slurm scheduler export and basic facility information. We run the analysis,
+      deliver private findings to your team, and work through what the results mean
+      together. You decide what to do with it.
     </p>
 
-    <a href="/contact" class="cta-link">Get in touch</a>
+    <p>
+      The findings belong to your organization. We keep the methodology.
+    </p>
+
+    <a href="mailto:jesus@plaintheory.org" class="cta-link">Start a pilot</a>
   </section>
 </BaseLayout>
