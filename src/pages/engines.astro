@@ -1,0 +1,210 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const description =
+  "Engines — Plain Theory Labs";
+---
+
+<BaseLayout title="Engines — Plain Theory Labs" description={description}>
+  <section class="section prose">
+    <h1>Engines</h1>
+
+    <p class="thesis">
+      The PTL certification framework is built from seven analytical engines.
+      Five engines grade specific dimensions of infrastructure operations. GRADE
+      aggregates their findings into a certification tier. ATLAS converts the
+      certification into a ranked action plan.
+    </p>
+
+    <hr class="rule" />
+
+    <h2>ACE — Adaptive Compute Efficiency Engine</h2>
+
+    <p>
+      ACE is the foundation of the certification framework. It ingests Slurm
+      scheduler exports and GPU telemetry from an HPC cluster, scores every job
+      against a documented efficiency methodology, and produces graded findings
+      with traceable assumptions. The question ACE answers is concrete: of the
+      GPU resources your jobs requested, how much was actually used, and where
+      is the gap recoverable through right-sizing or scheduler policy?
+    </p>
+
+    <p>
+      Every recommendation ACE produces carries a confidence label that reflects
+      the quality of the underlying data. A recommendation derived from a proxy
+      estimate is labeled differently than one derived from direct DCGM telemetry.
+      The engine withholds recommendations it cannot defend — the safety overlay
+      is a design constraint, not a heuristic.
+    </p>
+
+    <p>
+      ACE is validated on the MIT Supercloud HPCA22 dataset, a published
+      peer-reviewed dataset from a production HPC system. 73,367 jobs analyzed.
+      Average GPU utilization: 25.7%.
+    </p>
+
+    <div class="findings">
+      <p><strong>gpu_efficiency_score</strong>primary metric — weighted utilization vs. requested allocation</p>
+    </div>
+
+    <hr class="rule" />
+
+    <h2>COOL — Cooling Operations Optimization Layer</h2>
+
+    <p>
+      COOL grades the thermal efficiency of the facility housing your compute.
+      At Level 1, it works from self-reported power usage effectiveness (PUE)
+      and facility metadata — cooling type, location, facility age. At Level 2,
+      it ingests building management system timeseries data and correlates cooling
+      load directly with ACE job records, enabling per-job thermal attribution.
+    </p>
+
+    <p>
+      PUE is the standard metric for data center energy efficiency, but a raw PUE
+      number has no policy value without a benchmark. COOL grades PUE against
+      climate-adjusted benchmarks drawn from ASHRAE standards, accounting for the
+      fact that a facility in Minnesota has a different achievable PUE than one
+      in Texas. The grade reflects performance against what is achievable, not
+      against an absolute threshold that ignores geography.
+    </p>
+
+    <div class="findings">
+      <p><strong>cool_efficiency_score</strong>PUE delta vs. climate-adjusted ASHRAE benchmark</p>
+    </div>
+
+    <hr class="rule" />
+
+    <h2>FLUX — Facility Load and Utilization Index</h2>
+
+    <p>
+      FLUX grades the carbon accounting methodology an organization uses to report
+      its energy footprint. The quality of carbon accounting varies enormously —
+      from simple grid-average emission factors to location-matched hourly marginal
+      emissions with verified renewable energy certificates. FLUX grades the method
+      itself, not just the number it produces.
+    </p>
+
+    <p>
+      FLUX also detects greenwashing: cases where an organization claims renewable
+      energy coverage that is not supported by the accounting method used. An
+      organization claiming significant renewable coverage while using unbundled
+      RECs with grid-average accounting is flagged. The finding is included in the
+      certification record with the supporting methodology disclosed.
+    </p>
+
+    <div class="findings">
+      <p><strong>flux_methodology_score</strong>carbon accounting quality grade — method rigor and renewable claim validity</p>
+    </div>
+
+    <hr class="rule" />
+
+    <h2>PACE — Predictive Allocation and Cluster Efficiency</h2>
+
+    <p>
+      PACE grades scheduler policy — the operational decisions that determine how
+      jobs are queued, prioritized, and allocated across the cluster. Backfill
+      scheduling, preemption, fairshare, and priority decay all affect utilization
+      in ways that ACE can measure at the job level but cannot fully explain without
+      knowing the policy context. PACE provides that context.
+    </p>
+
+    <p>
+      PACE cross-correlates with ACE findings to distinguish systemic inefficiency
+      from workload-driven inefficiency. If a cluster's low GPU utilization is
+      concentrated in specific queues with particular scheduler configurations, that
+      is a different finding than utilization that is uniformly low across all
+      workloads. The distinction matters for the ATLAS action plan.
+    </p>
+
+    <div class="findings">
+      <p><strong>pace_composite_score</strong>scheduler efficiency — accuracy, queue incentives, fragmentation</p>
+    </div>
+
+    <hr class="rule" />
+
+    <h2>CORE — Capital and Operations Resource Evaluator</h2>
+
+    <p>
+      CORE grades the hardware fit of your GPU fleet against your actual workloads.
+      A cluster optimized for large-batch training that is running primarily inference
+      workloads is operating inefficient hardware regardless of its utilization rate.
+      CORE evaluates whether the GPUs deployed are the right GPUs for the work
+      being done.
+    </p>
+
+    <p>
+      CORE also grades fleet age and embodied carbon. Hardware that is past its
+      optimal operational window carries increasing embodied carbon per unit of
+      useful work. The CORE score combines hardware-workload fit, fleet age, and
+      embodied carbon into a single efficiency grade, weighted to reflect that fit
+      is the dominant factor in near-term optimization decisions.
+    </p>
+
+    <div class="findings">
+      <p><strong>core_efficiency_score</strong>hardware-workload fit (40%) · fleet age (35%) · embodied carbon (25%)</p>
+    </div>
+
+    <hr class="rule" />
+
+    <h2>GRADE — Granular Rating for AI Data center Efficiency</h2>
+
+    <p>
+      GRADE is the aggregation layer. It ingests the output of every engine that
+      has run against an organization's data, weights the scores according to the
+      published methodology, and computes a composite that determines the
+      certification tier. Engines with no data are excluded from the composite —
+      the weights of present engines are rescaled to sum to 1.0, so partial
+      certification is a meaningful result rather than a penalized one.
+    </p>
+
+    <p>
+      GRADE produces a JSON findings file and a zero-dependency HTML certification
+      report. The report includes engine findings, the path to the next tier, an
+      ATLAS recommendations section, and full methodology disclosure. The report
+      is designed to travel — any stakeholder can open it on any machine without
+      specialized tooling.
+    </p>
+
+    <div class="findings">
+      <p><strong>certification tier</strong>PENDING · MEASURED · BRONZE · SILVER · GOLD · PLATINUM</p>
+    </div>
+
+    <hr class="rule" />
+
+    <h2>ATLAS — Actionable Trajectory and Longitudinal Analysis</h2>
+
+    <p>
+      ATLAS converts the certification findings into a prioritized action plan.
+      For each engine gap — the distance between an organization's current score
+      and the next tier threshold — ATLAS computes a priority score based on gap
+      size, engine weight in GRADE, and an operational impact factor that reflects
+      how tractable the improvement is. The result is a ranked list of actions
+      ordered by expected certification impact.
+    </p>
+
+    <p>
+      ATLAS also produces peer benchmark percentiles, placing an organization's
+      scores in context against the distribution of other certified organizations.
+      Where prior period data exists, ATLAS projects a linear trajectory and
+      estimates how many assessment cycles the current improvement rate implies
+      before reaching the next tier.
+    </p>
+
+    <div class="findings">
+      <p><strong>ranked recommendations</strong>priority = gap × engine weight × operational impact factor</p>
+    </div>
+
+    <hr class="rule" />
+
+    <h2>Start a certification</h2>
+
+    <p>
+      We are taking three pilot organizations this quarter. A pilot begins with your
+      Slurm scheduler export and basic facility information. We run the analysis,
+      deliver private findings to your team, and work through what the results mean
+      together.
+    </p>
+
+    <a href="mailto:jesus@plaintheory.org" class="cta-link">Start a pilot</a>
+  </section>
+</BaseLayout>

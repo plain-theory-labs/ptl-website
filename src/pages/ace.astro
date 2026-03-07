@@ -65,11 +65,11 @@ const description =
     </p>
 
     <div class="findings">
-      <p>MIT Supercloud HPCA22 dataset — 35,745 production jobs</p>
-      <p><strong>25.7%</strong> average GPU utilization</p>
-      <p><strong>16%</strong> median GPU utilization</p>
-      <p><strong>41%</strong> of jobs ran under one minute</p>
-      <p><strong>33%</strong> of jobs showed near-zero GPU activity</p>
+      <p>MIT Supercloud HPCA22 dataset — 73,367 production jobs</p>
+      <p><strong>25.7%</strong>average GPU utilization</p>
+      <p><strong>16%</strong>median GPU utilization</p>
+      <p><strong>41%</strong>of jobs ran under one minute</p>
+      <p><strong>33%</strong>of jobs showed near-zero GPU activity</p>
       <p>These are not projections. This is what the engine found.</p>
     </div>
 
@@ -107,15 +107,15 @@ const description =
     <h2>The start of something larger</h2>
 
     <p>
-      ACE is Phase 1 of a five-engine certification framework. Future engines will
-      address workload scheduling efficiency, cooling system performance, real-time
-      carbon intensity, and hardware procurement decisions. Each engine follows the
-      same design principles: ingest real operational data, apply a transparent
-      methodology, produce graded findings with disclosed assumptions.
+      ACE is the first of five analytical engines in the PTL certification framework.
+      COOL grades cooling efficiency. FLUX grades carbon accounting methodology.
+      PACE grades scheduler policy. CORE grades hardware fit and fleet age. GRADE
+      aggregates all five into a certification tier. ATLAS translates the
+      certification into a ranked action plan.
     </p>
 
     <p>
-      The goal is a certification standard that institutions can use before external
+      The goal is a certification standard that organizations can use before external
       regulation defines one for them — built by engineers who have operated these
       systems, validated on real datasets, open to scrutiny. ACE is the proof that
       the approach works.
@@ -126,7 +126,7 @@ const description =
     <h2>Assumptions and current limits</h2>
 
     <p>
-      Phase 2B0 has no live telemetry join. GPU utilization is derived from sidecar
+      ACE v0.3.0 has no live telemetry join. GPU utilization is derived from sidecar
       files or proxy estimates where direct measurement is not available. Confidence
       labels in the output reflect this — a recommendation derived from a proxy
       estimate carries a different label than one derived from DCGM telemetry.
@@ -136,9 +136,9 @@ const description =
     <p>
       Environmental impact numbers are coefficient-based estimates, not metered
       totals. Default coefficients are documented. If your site has measured data,
-      use it. Phase 2B1 will add windowed telemetry joins from DCGM and Prometheus,
-      JobID normalization improvements, and per-window provenance scoring so every
-      recommendation is traceable to its source.
+      use it. ACE v0.4.0 is in planning. Additions will include windowed telemetry
+      joins from DCGM and Prometheus, JobID normalization improvements, and
+      per-window provenance scoring.
     </p>
 
     <hr class="rule" />
@@ -146,11 +146,10 @@ const description =
     <h2>Status</h2>
 
     <p>
-      Phase 2B0 is complete. 118 tests passing. Validated on the MIT Supercloud
-      HPCA22 dataset and the Google Borg CPU proxy dataset. Phase 2B1 is in
-      active development.
+      ACE v0.3.0 is complete. 118 tests passing. Validated on the MIT Supercloud
+      HPCA22 dataset — 73,367 production jobs.
     </p>
 
-    <a href="/contact" class="cta-link">Talk to us about your cluster</a>
+    <a href="mailto:jesus@plaintheory.org" class="cta-link">Start a pilot</a>
   </section>
 </BaseLayout>
