@@ -102,24 +102,50 @@ const description =
       <p><strong>ATLAS</strong>Actionable Trajectory and Longitudinal Analysis<br>Ranked recommendations, trajectory projection</p>
     </div>
 
+    <figure class="pipeline-diagram" aria-label="Pipeline diagram: five engines feed into GRADE, which produces a certification tier">
+      <svg viewBox="0 0 640 160" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:640px;display:block;margin:2rem auto 0.5rem;">
+        <!-- Engine labels -->
+        <text x="10" y="36" font-family="EB Garamond, Georgia, serif" font-size="13" fill="#111">ACE</text>
+        <text x="10" y="66" font-family="EB Garamond, Georgia, serif" font-size="13" fill="#111">COOL</text>
+        <text x="10" y="96" font-family="EB Garamond, Georgia, serif" font-size="13" fill="#111">FLUX</text>
+        <text x="10" y="126" font-family="EB Garamond, Georgia, serif" font-size="13" fill="#111">PACE</text>
+        <text x="10" y="156" font-family="EB Garamond, Georgia, serif" font-size="13" fill="#111">CORE</text>
+        <!-- Lines from engines to GRADE box -->
+        <line x1="52" y1="32" x2="240" y2="80" stroke="#111" stroke-width="1"/>
+        <line x1="58" y1="62" x2="240" y2="84" stroke="#111" stroke-width="1"/>
+        <line x1="52" y1="92" x2="240" y2="88" stroke="#111" stroke-width="1"/>
+        <line x1="58" y1="122" x2="240" y2="92" stroke="#111" stroke-width="1"/>
+        <line x1="52" y1="152" x2="240" y2="96" stroke="#111" stroke-width="1"/>
+        <!-- GRADE box -->
+        <rect x="240" y="66" width="100" height="48" fill="none" stroke="#111" stroke-width="1"/>
+        <text x="290" y="87" font-family="EB Garamond, Georgia, serif" font-size="13" fill="#111" text-anchor="middle">GRADE</text>
+        <text x="290" y="104" font-family="EB Garamond, Georgia, serif" font-size="11" fill="#555" text-anchor="middle">composite</text>
+        <!-- Line from GRADE to tiers -->
+        <line x1="340" y1="90" x2="420" y2="90" stroke="#111" stroke-width="1"/>
+        <!-- Tier labels -->
+        <text x="428" y="42" font-family="EB Garamond, Georgia, serif" font-size="12" fill="#111">PLATINUM</text>
+        <text x="428" y="62" font-family="EB Garamond, Georgia, serif" font-size="12" fill="#111">GOLD</text>
+        <text x="428" y="82" font-family="EB Garamond, Georgia, serif" font-size="12" fill="#111">SILVER</text>
+        <text x="428" y="102" font-family="EB Garamond, Georgia, serif" font-size="12" fill="#111">BRONZE</text>
+        <text x="428" y="122" font-family="EB Garamond, Georgia, serif" font-size="12" fill="#555">MEASURED</text>
+        <!-- Lines from GRADE to tiers -->
+        <line x1="420" y1="90" x2="424" y2="38" stroke="#111" stroke-width="1"/>
+        <line x1="420" y1="90" x2="424" y2="58" stroke="#111" stroke-width="1"/>
+        <line x1="420" y1="90" x2="424" y2="78" stroke="#111" stroke-width="1"/>
+        <line x1="420" y1="90" x2="424" y2="98" stroke="#111" stroke-width="1"/>
+        <line x1="420" y1="90" x2="424" y2="118" stroke="#111" stroke-width="1"/>
+      </svg>
+      <figcaption style="text-align:center;font-family:'EB Garamond',Georgia,serif;font-size:13px;color:#555;margin-bottom:1.5rem;">Five engines. One composite. One tier.</figcaption>
+    </figure>
+
     <hr class="rule" />
 
-    <h2>Certification tiers</h2>
-
     <p>
-      Organizations are certified against the full engine stack. Each tier reflects
-      both what was measured and how well it scored — coverage and performance are
-      graded separately.
+      Certifications run from MEASURED — a first honest baseline —
+      through BRONZE, SILVER, GOLD, and PLATINUM, reflecting both
+      what was measured and how well it scored.
+      <a href="/certification" class="cta-link">How certification works →</a>
     </p>
-
-    <div class="findings">
-      <p><strong>PLATINUM</strong>All five engines · composite ≥ 0.85</p>
-      <p><strong>GOLD</strong>Four or more engines · composite ≥ 0.70</p>
-      <p><strong>SILVER</strong>Three or more engines · composite ≥ 0.60</p>
-      <p><strong>BRONZE</strong>Two or more engines · composite ≥ 0.45</p>
-      <p><strong>MEASURED</strong>ACE only — graded, not yet certified</p>
-      <p><strong>PENDING</strong>No engines complete</p>
-    </div>
 
     <p>
       The first system we assessed was MIT Supercloud, on a
@@ -153,8 +179,6 @@ const description =
       <p><strong>$255,271</strong>in recoverable savings identified</p>
       <p>MEASURED certification — first honest baseline</p>
     </div>
-
-    <a href="/ace" class="cta-link">Read about the ACE engine</a>
 
     <hr class="rule" />
 
