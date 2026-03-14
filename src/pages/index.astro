@@ -10,19 +10,21 @@ const description =
     <h1>The infrastructure behind AI is mostly invisible. We are making it legible.</h1>
 
     <p class="thesis">
-      Plain Theory Labs is a research and engineering lab building the first
-      independent certification framework for sustainable AI compute infrastructure.
-      We measure what organizations are actually operating, grade it against a
-      defensible methodology, and produce findings that hold up to scrutiny.
+      Plain Theory Labs builds certification infrastructure
+      for AI compute. We measure what GPU clusters are actually
+      doing, score it against a documented methodology, and
+      deliver findings that research computing directors can act
+      on and sustainability offices can report against.
     </p>
 
     <p>
-      We are AI and HPC infrastructure engineers with careers inside these systems —
-      at research universities, national laboratories, and academic medical centers.
-      We have configured the schedulers, tuned the GPU allocations, read the
-      telemetry. We know what efficient looks like and what it doesn't. We care about
-      infrastructure that works well now and remains defensible as the scale and
-      scrutiny of AI compute increases.
+      We are AI and HPC systems engineers. We have spent our careers
+      inside these systems — configuring schedulers at research
+      universities, tuning GPU allocations at academic medical
+      centers, reading the telemetry that most organizations
+      collect and never fully use. We know what efficient
+      infrastructure looks like. We built PTL because no
+      independent standard existed to say so.
     </p>
 
     <hr class="rule" />
@@ -30,52 +32,53 @@ const description =
     <h2>What actually happens when you use AI</h2>
 
     <p>
-      Every query sent to a large language model, every image generated, every
-      inference run on a research cluster triggers a cascade of physical events most
-      people never consider. Somewhere, a GPU wakes up and draws between 300 and 700
-      watts. A cooling system — chilled water loops, computer room air handlers, or
-      direct liquid cooling — compensates for the heat. A power delivery
-      infrastructure converts and conditions electricity from the grid. A data center
-      manages space, redundancy, and thermal load, consuming water at rates that vary
-      enormously by design and climate.
+      Every query sent to a large language model triggers a
+      cascade of physical events most people never consider.
+      A GPU wakes up and draws between 300 and 700 watts.
+      A cooling system compensates for the heat. A power
+      infrastructure conditions electricity from the grid.
     </p>
 
     <p>
-      A single A100 GPU running continuously for a year consumes roughly
-      <span class="datum">3,500 kWh</span> of electricity. A modest research cluster
-      of 100 GPUs draws more power than a small neighborhood. The largest AI training
-      runs now require data centers with power capacity measured in hundreds of
-      megawatts. This infrastructure exists, it is operating today, and its footprint
-      is growing faster than anyone is measuring it rigorously.
+      A single A100 running continuously for a year consumes
+      roughly <span class="datum">3,500 kWh</span>. A modest research cluster of 100
+      GPUs draws more power than a small neighborhood. The
+      largest training runs now require facilities measured
+      in hundreds of megawatts.
     </p>
 
     <p>
-      The people who use AI daily are not wrong to do so. The engineers who build
-      these systems are not acting irresponsibly. The problem is that no one has built
-      the instrumentation to know, with precision and accountability, how efficiently
-      any of this is running — or what the gap between current operations and what is
-      achievable actually looks like.
+      This infrastructure exists. It is operating today.
+      Its footprint is growing faster than anyone is
+      measuring it rigorously.
     </p>
 
     <hr class="rule" />
 
-    <h2>The measurement problem</h2>
+    <h2>The data exists. The grades don't.</h2>
 
     <p>
-      Monitoring tools exist in abundance. HPC centers run Prometheus, Grafana, DCGM,
-      and Slurm accounting. They collect utilization rates, job runtimes, power draw,
-      and queue statistics continuously. The data is there. What does not exist is a
-      methodology that turns that data into a grade — a defensible, assumption-explicit
-      score that tells an organization not just what is happening, but how it compares
-      to what is achievable, and what a specific operational change would produce.
+      HPC centers run Prometheus, Grafana, DCGM, and Slurm
+      accounting. They collect utilization rates, job
+      runtimes, power draw, and queue statistics around
+      the clock. The data has always been there.
     </p>
 
     <p>
-      Without that methodology, the monitoring data has no policy value. An HPC
-      director cannot write a procurement requirement around a utilization rate with
-      no reference point. A sustainability office cannot report against a number with
-      no standard. A funding agency cannot evaluate efficiency claims with no
-      independent basis. The tools measure. Nothing grades.
+      What does not exist is a methodology that turns that
+      data into a grade. A score that tells an organization
+      not just what is happening, but how it compares to
+      what is achievable — and what a specific change
+      would produce.
+    </p>
+
+    <p>
+      Without that, monitoring data has no policy weight.
+      An HPC director cannot write a procurement requirement
+      around a utilization rate with no reference point.
+      A sustainability office cannot report against a number
+      with no standard. A funding agency cannot evaluate
+      an efficiency claim with no independent basis.
     </p>
 
     <hr class="rule" />
@@ -83,9 +86,10 @@ const description =
     <h2>The certification framework</h2>
 
     <p>
-      The framework consists of seven components. Five analytical engines grade what
-      organizations are operating. GRADE aggregates engine findings into a
-      certification tier. ATLAS translates the certification into a ranked action plan.
+      Seven components. Five analytical engines measure what
+      organizations are operating. GRADE scores the findings
+      into a certification tier. ATLAS turns the certification
+      into a specific action plan.
     </p>
 
     <div class="findings">
@@ -118,22 +122,29 @@ const description =
     </div>
 
     <p>
-      MIT Supercloud received MEASURED certification on its first assessment.
-      73,367 jobs analyzed. ACE score 0.257. ATLAS identified GPU utilization
-      monitoring as the highest-priority action.
+      The first system we assessed was MIT Supercloud, on a
+      peer-reviewed public dataset of 73,367 production jobs.
+      Average GPU utilization: 25.7%. Certification: MEASURED.
+      The top recommendation was specific enough to act on
+      the same week.
     </p>
 
     <hr class="rule" />
 
-    <h2>ACE: our first engine</h2>
+    <h2>Built on real data</h2>
 
     <p>
-      The Adaptive Compute Efficiency Engine (ACE) is the first engine in the
-      certification framework. It ingests Slurm scheduler exports and GPU telemetry
-      from an HPC cluster, scores every job against a documented efficiency
-      methodology, and produces a single-file report with findings, confidence labels,
-      and fully disclosed assumptions. We validated it on a published, peer-reviewed
-      dataset from a production system.
+      The Adaptive Compute Efficiency Engine is the first of
+      five analytical engines in the stack. It ingests Slurm
+      scheduler exports, scores every job against a documented
+      efficiency methodology, and produces findings with
+      confidence labels and fully disclosed assumptions.
+    </p>
+
+    <p>
+      We validated it on a published, peer-reviewed dataset
+      from a production system. The numbers below are not
+      projections.
     </p>
 
     <div class="findings">
@@ -147,68 +158,65 @@ const description =
 
     <hr class="rule" />
 
-    <h2>Advancing science requires sustainable infrastructure</h2>
+    <h2>Efficiency is a scientific priority</h2>
 
     <p>
-      AI is not only a consumer of compute — it is increasingly central to how
-      science gets done. Drug discovery, climate modeling, genomics, materials
-      science, and fusion research all depend on GPU clusters operating at scale.
-      The scientific community has a direct interest in infrastructure that is
-      efficient, accountable, and built for the long term.
+      AI is central to how science gets done today. Drug
+      discovery, climate modeling, genomics, and fusion
+      research all depend on GPU clusters operating at scale.
     </p>
 
     <p>
-      Sustainability and scientific productivity are not in tension. A cluster running
-      at <span class="datum">15% average GPU utilization</span> — which is common —
-      is not just wasting energy. It is wasting research capacity. Right-sizing
-      workloads, improving scheduler efficiency, and understanding where compute is
-      going are simultaneously environmental and scientific priorities. The
-      organizations doing the most ambitious science should be operating the most
-      efficiently instrumented infrastructure.
+      A cluster running at <span class="datum">15% average GPU utilization</span> is not
+      just wasting energy. It is wasting research capacity.
+      The most ambitious science should run on the most
+      efficiently operated infrastructure. Those two things
+      are not in tension.
     </p>
 
     <p>
-      Collaboration is how this gets built. HPC directors, sustainability officers,
-      research computing teams, and infrastructure engineers at universities and
-      national labs have the operational knowledge and the data. We are building the
-      methodology and the tooling. The findings belong to the organizations that
-      produce them.
+      The data to understand this already exists inside
+      every HPC center. We provide the methodology to
+      make it legible.
     </p>
 
     <hr class="rule" />
 
-    <h2>The regulatory context is arriving</h2>
+    <h2>The standard is being written now</h2>
 
     <p>
-      The EU AI Act includes provisions requiring environmental impact assessment for
-      high-impact AI systems. Federal AI infrastructure spending in the United States
-      is under growing scrutiny from oversight bodies and appropriators. NSF and DOE
-      programs are beginning to ask sustainability questions in infrastructure grant
-      reviews. Several states have introduced or are drafting data center efficiency
-      legislation.
+      The EU AI Act requires environmental impact assessment
+      for high-impact AI systems. Federal AI infrastructure
+      spending is under growing scrutiny from appropriators.
+      NSF and DOE grant programs are beginning to ask
+      sustainability questions they did not ask two years ago.
     </p>
 
     <p>
-      Organizations that wait for regulation to define the standard will be graded
-      against a methodology they had no role in building. Organizations that engage now
-      will have operational data, a tested methodology, and a track record when
-      external requirements arrive. The certification framework we are building is
-      designed to be that track record.
+      Organizations that engage now will have a tested
+      methodology and a documented track record when external
+      requirements arrive. The ones that wait will be graded
+      against a standard they had no role in building.
     </p>
 
     <hr class="rule" />
 
-    <h2>Work with us</h2>
+    <h2>Start a pilot</h2>
 
     <p>
-      We are taking three pilot organizations this quarter. A pilot begins with your
-      Slurm scheduler export and basic facility information. We run the analysis,
-      deliver private findings to your team, and work through what the results mean
-      together. You decide what to do with it.
+      We are taking three pilot organizations this quarter.
     </p>
 
     <p>
-      The findings belong to your organization. We keep the methodology.
+      You provide a Slurm scheduler export and answer four
+      questions about your facility. We run the analysis and
+      deliver a private certification report to your team.
+      The data collection takes under two hours.
+    </p>
+
+    <p>
+      The findings belong to your organization.
+      We keep the methodology.
     </p>
 
     <a href="mailto:jesus@plaintheory.org" class="cta-link">Start a pilot</a>
