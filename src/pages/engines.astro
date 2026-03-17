@@ -10,10 +10,12 @@ const description =
     <h1>Engines</h1>
 
     <p class="thesis">
-      The PTL certification framework is built from seven analytical engines.
-      Five engines grade specific dimensions of infrastructure operations. GRADE
-      aggregates their findings into a certification tier. ATLAS converts the
-      certification into a ranked action plan.
+      The PTL certification framework is built from nine analytical engines.
+      PROFILE characterizes the cluster before analysis begins. Five engines grade
+      specific dimensions of infrastructure operations. GRADE aggregates their
+      findings into a PTL Score and certification tier. ATLAS converts the
+      certification into a ranked action plan. CLAW automates continuous data
+      collection from inside the cluster environment.
     </p>
 
     <hr class="rule" />
@@ -166,7 +168,7 @@ const description =
     </p>
 
     <div class="findings">
-      <p><strong>certification tier</strong>PENDING · MEASURED · BRONZE · SILVER · GOLD · PLATINUM</p>
+      <p><strong>certification tier</strong>PENDING · BASELINE · DEVELOPING · CAPABLE · OPTIMIZED · FRONTIER</p>
     </div>
 
     <hr class="rule" />
@@ -192,6 +194,56 @@ const description =
 
     <div class="findings">
       <p><strong>ranked recommendations</strong>priority = gap × engine weight × operational impact factor</p>
+    </div>
+
+    <hr class="rule" />
+
+    <h2>PROFILE — Cluster Profile Engine</h2>
+
+    <p>
+      PROFILE runs before any other engine. It characterizes the cluster — scheduler
+      type, GPU fleet composition, telemetry availability — and produces a routing
+      manifest that determines which input paths the downstream engines will use.
+      The result is that each engine receives data matched to how the cluster actually
+      operates, not a forced fit to a single collection method.
+    </p>
+
+    <p>
+      PROFILE detects the scheduler in use (Slurm, Kubernetes, Ray) and the telemetry
+      sources available (sacct exports, DCGM metrics, k8s resource data, CLAW
+      continuous streams). It outputs an <code>ace_input_path</code> and a
+      <code>pace_input_path</code> used by every downstream engine. Organizations
+      with multiple schedulers or mixed telemetry sources are handled correctly rather
+      than defaulted.
+    </p>
+
+    <div class="findings">
+      <p><strong>ace_input_path</strong>claw · dcgm · k8s_metrics · sacct — in priority order</p>
+      <p><strong>pace_input_path</strong>kubernetes · ray · slurm</p>
+    </div>
+
+    <hr class="rule" />
+
+    <h2>CLAW — NemoClaw Intake Agent</h2>
+
+    <p>
+      CLAW is the automated data collection layer. It runs as an agent inside an
+      organization's OpenShell environment, pulls cluster telemetry on a continuous
+      schedule, and delivers structured JSON to the PTL engine stack without requiring
+      manual export steps. A one-time setup replaces the recurring operational burden
+      of preparing data for each assessment cycle.
+    </p>
+
+    <p>
+      CLAW v0.1 supports manual JSON delivery with a documented schema. CLAW v1.0
+      adds a privacy router: raw telemetry stays inside the organization's environment;
+      only the computed metrics transit to PTL. Organizations that require strict data
+      residency can run CLAW in local mode and deliver only aggregated findings.
+    </p>
+
+    <div class="findings">
+      <p><strong>collection mode</strong>continuous automated · manual export · local-only privacy mode</p>
+      <p><strong>scheduler support</strong>Slurm · Kubernetes · Ray</p>
     </div>
 
     <hr class="rule" />
