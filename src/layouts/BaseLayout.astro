@@ -62,16 +62,12 @@ const isActive = (href: string): boolean => {
   </head>
   <body>
     <a class="skip-link" href="#main-content">Skip to content</a>
-    <header class="site-header">
-      <a class="brand" href="/" aria-label="Plain Theory Labs home">Plain Theory Labs</a>
+    <header>
+      <a class="wordmark" href="/" aria-label="Plain Theory Labs home">Plain Theory Labs</a>
       <nav aria-label="Primary">
-        <ul class="nav-list">
-          {navItems.map((item) => (
-            <li>
-              <a href={item.href} class={isActive(item.href) ? "active" : undefined}>{item.label}</a>
-            </li>
-          ))}
-        </ul>
+        {navItems.map((item) => (
+          <a href={item.href} class={isActive(item.href) ? "active" : undefined}>{item.label}</a>
+        ))}
       </nav>
     </header>
 
@@ -79,8 +75,8 @@ const isActive = (href: string): boolean => {
       <slot />
     </main>
 
-    <footer class="site-footer">
-      Plain Theory Labs
+    <footer>
+      <p>Plain Theory Labs</p>
     </footer>
   </body>
 </html>
