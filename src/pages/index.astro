@@ -7,285 +7,63 @@ const description =
 
 <BaseLayout title="Plain Theory Labs — certification framework for sustainable AI compute infrastructure" description={description}>
 
-  <!-- Section 1 — Hero (dark) -->
   <section class="hero">
     <div class="hero-inner">
-      <span class="hero-tag">AI Compute Certification</span>
-      <h1>The infrastructure behind AI is mostly invisible. We are making it legible.</h1>
+
+      <span class="hero-tag">Plain Theory Labs</span>
+
+      <h1>An independent certification framework
+for AI compute infrastructure.</h1>
+
       <p class="hero-sub">
-        Plain Theory Labs measures what GPU clusters are actually
-        doing, scores it against a documented methodology, and
-        delivers findings that research computing directors can
-        act on and sustainability offices can report against.
+        We measure what GPU clusters are actually doing,
+        score it against a documented methodology, and
+        deliver findings against a published standard.
+        Nine analytical engines. One score. One tier.
       </p>
-      <p class="hero-sub">
-        We are AI and HPC systems engineers. We have spent our careers
-        inside these systems — configuring schedulers at research
-        universities, tuning GPU allocations at academic medical
-        centers, reading the telemetry that most organizations
-        collect and never fully use. We know what efficient
-        infrastructure looks like. We built PTL because no
-        independent standard existed to say so.
-      </p>
-      <a href="mailto:jesus@plaintheory.org" class="cta-link-light">Start a pilot</a>
-    </div>
 
-    <!-- Score strip immediately below hero text -->
-    <div class="score-strip">
-      <div class="score-strip-inner">
-        <div class="score-item">
-          <span class="score-value frontier">0.873</span>
-          <span class="score-meta">FRONTIER<br/>NERSC Perlmutter</span>
-        </div>
-        <div class="score-item">
-          <span class="score-value optimized">0.814</span>
-          <span class="score-meta">OPTIMIZED<br/>Meridian AI</span>
-        </div>
-        <div class="score-item">
-          <span class="score-value optimized">0.736</span>
-          <span class="score-meta">OPTIMIZED<br/>OLCF Frontier</span>
-        </div>
-        <div class="score-item">
-          <span class="score-value developing">0.450</span>
-          <span class="score-meta">DEVELOPING<br/>MIT Supercloud</span>
+      <div class="score-strip" style="margin: 56px 0 0; padding: 32px 0 0; border-top: 0.5px solid #1e1e1e;">
+        <div class="score-strip-inner" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; padding: 0;">
+          <div class="score-item">
+            <span class="score-value frontier">0.873</span>
+            <span class="score-meta">FRONTIER<br/>NERSC Perlmutter</span>
+          </div>
+          <div class="score-item">
+            <span class="score-value optimized">0.814</span>
+            <span class="score-meta">OPTIMIZED<br/>Meridian AI</span>
+          </div>
+          <div class="score-item">
+            <span class="score-value optimized">0.736</span>
+            <span class="score-meta">OPTIMIZED<br/>OLCF Frontier</span>
+          </div>
+          <div class="score-item">
+            <span class="score-value developing">0.450</span>
+            <span class="score-meta">DEVELOPING<br/>MIT Supercloud</span>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
 
-  <!-- Section 2 — What actually happens (warm prose) -->
-  <section class="prose-section">
-    <div class="section-inner">
-      <span class="section-label">What actually happens when you use AI</span>
-      <p>
-        Every query sent to a large language model triggers a
-        cascade of physical events most people never consider.
-        A GPU wakes up and draws between 300 and 700 watts.
-        A cooling system compensates for the heat. A power
-        infrastructure conditions electricity from the grid.
-      </p>
-      <p>
-        A single A100 running continuously for a year consumes
-        roughly <span class="datum">3,500 kWh</span>. A modest research cluster of 100
-        GPUs draws more power than a small neighborhood. The
-        largest training runs now require facilities measured
-        in hundreds of megawatts.
-      </p>
-      <p>
-        This infrastructure exists. It is operating today.
-        Its footprint is growing faster than anyone is
-        measuring it rigorously.
-      </p>
-    </div>
-  </section>
-
-  <!-- Section 3 — The measurement problem (warm prose) -->
-  <section class="prose-section">
-    <div class="section-inner">
-      <span class="section-label">The data exists. The grades don't.</span>
-      <p>
-        HPC centers run Prometheus, Grafana, DCGM, and Slurm
-        accounting. They collect utilization rates, job
-        runtimes, power draw, and queue statistics around
-        the clock. The data has always been there.
-      </p>
-      <p>
-        What does not exist is a methodology that turns that
-        data into a grade. A score that tells an organization
-        not just what is happening, but how it compares to
-        what is achievable — and what a specific change
-        would produce.
-      </p>
-      <p>
-        Without that, monitoring data has no policy weight.
-        An HPC director cannot write a procurement requirement
-        around a utilization rate with no reference point.
-        A sustainability office cannot report against a number
-        with no standard. A funding agency cannot evaluate
-        an efficiency claim with no independent basis.
-      </p>
-    </div>
-  </section>
-
-  <!-- Section 4 — Engine table (dark) -->
-  <section class="dark-section">
-    <div class="section-inner">
-      <span class="section-label-dark">The certification framework</span>
-      <p style="font-family: var(--serif); font-size: 1rem; color: var(--on-dark-4); line-height: 1.65; max-width: 560px; margin-bottom: 32px;">
-        Nine components. PROFILE characterizes the cluster before
-        analysis begins. Five engines grade specific dimensions of
-        infrastructure operations. GRADE scores the findings into
-        a PTL Score and certification tier. ATLAS converts the
-        certification into a ranked action plan. CLAW automates
-        continuous data collection from inside the cluster environment.
-      </p>
-      <div class="engine-table">
-        <div class="engine-row">
-          <span class="engine-name">PROFILE</span>
-          <span class="engine-desc">Cluster characterization · scheduler detection · engine routing</span>
-        </div>
-        <div class="engine-row">
-          <span class="engine-name">ACE</span>
-          <span class="engine-desc">GPU utilization · job efficiency · right-sizing</span>
-        </div>
-        <div class="engine-row">
-          <span class="engine-name">COOL</span>
-          <span class="engine-desc">PUE efficiency · cooling system performance</span>
-        </div>
-        <div class="engine-row">
-          <span class="engine-name">FLUX</span>
-          <span class="engine-desc">Carbon accounting methodology · greenwashing detection</span>
-        </div>
-        <div class="engine-row">
-          <span class="engine-name">PACE</span>
-          <span class="engine-desc">Scheduler policy · over-requesting patterns</span>
-        </div>
-        <div class="engine-row">
-          <span class="engine-name">CORE</span>
-          <span class="engine-desc">Hardware-workload fit · fleet age · embodied carbon</span>
-        </div>
-        <div class="engine-row">
-          <span class="engine-name">GRADE</span>
-          <span class="engine-desc">PTL Score 0.0–1.0 · tier: DEVELOPING through FRONTIER</span>
-        </div>
-        <div class="engine-row">
-          <span class="engine-name">ATLAS</span>
-          <span class="engine-desc">Ranked recommendations · trajectory projection</span>
-        </div>
-        <div class="engine-row">
-          <span class="engine-name claw">CLAW</span>
-          <span class="engine-desc">NemoClaw intake agent · continuous telemetry · self-describing clusters</span>
-        </div>
+      <div style="margin-top: 52px; display: flex;
+                  gap: 32px; align-items: center;
+                  border-top: 0.5px solid #1e1e1e;
+                  padding-top: 28px;">
+        <a href="mailto:jesus@plaintheory.org"
+           class="cta-link-light">Start a pilot</a>
+        <a href="/docs"
+           class="cta-link-light"
+           style="color: #7ab8a8;
+                  border-bottom-color: #2a4a44;">
+          Documentation →
+        </a>
+        <span style="font-family: var(--mono);
+                     font-size: 10px;
+                     color: #555;
+                     letter-spacing: 1px;
+                     margin-left: auto;">
+          jesus@plaintheory.org
+        </span>
       </div>
-    </div>
-  </section>
 
-  <!-- Section 5 — Certification tiers (warm) -->
-  <section class="prose-section">
-    <div class="section-inner">
-      <span class="section-label">Certification tiers</span>
-      <p style="max-width: 560px; margin-bottom: 28px;">
-        PTL scores clusters on a 0.0 to 1.0 scale.
-        The performance tier is shorthand for where the score lands.
-        The number is the truth — the tier is the label.
-      </p>
-      <div class="tier-table">
-        <div class="tier-row">
-          <span class="tier-name">FRONTIER</span>
-          <span class="tier-desc">All five engines · composite ≥ 0.85</span>
-        </div>
-        <div class="tier-row">
-          <span class="tier-name">OPTIMIZED</span>
-          <span class="tier-desc">Four or more engines · composite ≥ 0.70</span>
-        </div>
-        <div class="tier-row">
-          <span class="tier-name">CAPABLE</span>
-          <span class="tier-desc">Three or more engines · composite ≥ 0.60</span>
-        </div>
-        <div class="tier-row">
-          <span class="tier-name">DEVELOPING</span>
-          <span class="tier-desc">Two or more engines · composite ≥ 0.45</span>
-        </div>
-        <div class="tier-row">
-          <span class="tier-name">BASELINE</span>
-          <span class="tier-desc">ACE only — first measurement, starting point</span>
-        </div>
-      </div>
-      <p style="margin-top: 28px; max-width: 560px; font-size: 1rem; color: #666;">
-        The first system we assessed was MIT Supercloud, on a
-        peer-reviewed public dataset of 73,367 production jobs.
-        PTL Score 0.450. Tier: DEVELOPING. The top recommendation
-        from ATLAS was specific enough to act on the same week.
-      </p>
-      <a href="/certification" class="cta-link" style="margin-top: 24px;">
-        How certification works →
-      </a>
-    </div>
-  </section>
-
-  <!-- Section 6 — Built on real data (warm) -->
-  <section class="prose-section">
-    <div class="section-inner">
-      <span class="section-label">Built on real data</span>
-      <p>
-        The Adaptive Compute Efficiency Engine is the first of
-        five analytical engines in the stack. It ingests Slurm
-        scheduler exports, scores every job against a documented
-        efficiency methodology, and produces findings with
-        confidence labels and fully disclosed assumptions.
-      </p>
-      <p>
-        We validated it on a published, peer-reviewed dataset
-        from a production system. The numbers below are not
-        projections.
-      </p>
-      <div class="findings">
-        <p>MIT Supercloud HPCA22 dataset — 73,367 production jobs</p>
-        <p><strong>25.7%</strong> average GPU utilization</p>
-        <p><strong>$255,271</strong> in recoverable savings identified</p>
-        <p>DEVELOPING tier — PTL Score 0.450</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Section 7 — AI infrastructure is a performance problem (warm) -->
-  <section class="prose-section">
-    <div class="section-inner">
-      <span class="section-label">AI infrastructure is a performance problem</span>
-      <p>
-        GPU clusters operate at a fraction of their theoretical capacity.
-        Scheduler configuration, resource allocation, cooling setpoints,
-        and hardware-workload fit all determine how much useful work a
-        cluster actually produces per watt of power consumed.
-      </p>
-      <p>
-        PTL measures that gap. The score reflects how close a cluster is
-        to the frontier of what its hardware can do — not against an
-        abstract ideal, but against documented benchmarks for the specific
-        equipment and workload type in use.
-      </p>
-    </div>
-  </section>
-
-  <!-- Section 8 — Efficiency is a scientific priority (warm) -->
-  <section class="prose-section">
-    <div class="section-inner">
-      <span class="section-label">Efficiency is a scientific priority</span>
-      <p>
-        AI is central to how science gets done today. Drug
-        discovery, climate modeling, genomics, and fusion
-        research all depend on GPU clusters operating at scale.
-      </p>
-      <p>
-        A cluster running at <span class="datum">15% average GPU utilization</span> is not
-        just wasting energy. It is wasting research capacity.
-        The most ambitious science should run on the most
-        efficiently operated infrastructure. Those two things
-        are not in tension.
-      </p>
-      <p>
-        The data to understand this already exists inside
-        every HPC center. We provide the methodology to
-        make it legible.
-      </p>
-    </div>
-  </section>
-
-  <!-- Section 9 — Pilot (dark, closing) -->
-  <section class="pilot-section">
-    <div class="section-inner">
-      <span class="section-label-dark">Start a pilot</span>
-      <p>
-        We are taking three pilot organizations this quarter.
-        You provide cluster access or a data export. CLAW can
-        collect everything automatically from inside your
-        OpenShell environment, or we walk through a manual
-        export together. Either way, under two hours of your time.
-      </p>
-      <p>The findings are yours. We keep the methodology.</p>
-      <a href="mailto:jesus@plaintheory.org" class="cta-link-light" style="margin-top: 32px;">
-        jesus@plaintheory.org
-      </a>
     </div>
   </section>
 

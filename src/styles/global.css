@@ -8,7 +8,7 @@ img { display: block; max-width: 100%; }
   --dark:         #0a0a0a;
   --dark-2:       #111111;
   --dark-3:       #161616;
-  --dark-border:  #222222;
+  --dark-border:  #2a2a2a;   /* was #222222 */
   --dark-border2: #2a2a2a;
 
   --warm:         #f5f4f0;
@@ -21,9 +21,9 @@ img { display: block; max-width: 100%; }
   --text-4:       #444444;
 
   --on-dark:      #efefef;
-  --on-dark-2:    #888888;
-  --on-dark-3:    #555555;
-  --on-dark-4:    #333333;
+  --on-dark-2:    #aaaaaa;   /* was #888888 */
+  --on-dark-3:    #999999;   /* was #555555 */
+  --on-dark-4:    #666666;   /* was #333333 */
 
   --mono: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
   --serif: 'EB Garamond', Georgia, serif;
@@ -83,12 +83,11 @@ header nav a {
 
 header nav a:hover { color: var(--on-dark-2); }
 header nav a.active { color: var(--on-dark-2); }
+header nav a[href="/docs"] { color: #7ab8a8; }
 
 /* ─── Page Layout ────────────────────────────────── */
 main {
   display: block;
-  /* No max-width here — sections handle their own width */
-  /* No padding here — sections handle their own padding */
 }
 
 .section-inner {
@@ -97,16 +96,21 @@ main {
   padding: 0 52px;
 }
 
-/* ─── Hero — dark, full width ────────────────────── */
+/* ─── Hero — single screen, viewport height ──────── */
 .hero {
   background: var(--dark);
-  padding: 80px 0 0;
+  min-height: calc(100vh - 54px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0;
 }
 
 .hero-inner {
-  max-width: 840px;
+  max-width: 760px;
   margin: 0 auto;
-  padding: 0 52px 72px;
+  padding: 0 52px;
+  width: 100%;
 }
 
 .hero-tag {
@@ -121,18 +125,18 @@ main {
 
 .hero h1 {
   font-family: var(--serif);
-  font-size: clamp(36px, 5vw, 58px);
+  font-size: clamp(32px, 4.5vw, 52px);
   font-weight: 400;
   color: var(--on-dark);
-  line-height: 1.08;
+  line-height: 1.1;
   letter-spacing: -0.5px;
-  margin-bottom: 32px;
+  margin: 0 0 28px;
   max-width: 640px;
 }
 
 .hero-sub {
   font-family: var(--serif);
-  font-size: 1rem;
+  font-size: 1.15rem;   /* was 1rem */
   color: var(--on-dark-3);
   line-height: 1.65;
   max-width: 480px;
@@ -143,7 +147,7 @@ main {
   margin-bottom: 48px;
 }
 
-/* ─── Score Strip — dark secondary ───────────────── */
+/* ─── Score Strip ────────────────────────────────── */
 .score-strip {
   background: var(--dark-2);
   border-top: 0.5px solid var(--dark-border);
@@ -160,16 +164,14 @@ main {
 }
 
 .score-item {
-  padding: 24px 0;
-  border-right: 0.5px solid var(--dark-border);
-  padding-right: 28px;
-  margin-right: 28px;
+  padding: 0 32px 0 0;
+  border-right: 0.5px solid #1e1e1e;
+  margin-right: 0;
 }
 
 .score-item:last-child {
   border-right: none;
   padding-right: 0;
-  margin-right: 0;
 }
 
 .score-value {
@@ -188,7 +190,7 @@ main {
   font-family: var(--mono);
   font-size: 9px;
   letter-spacing: 1.5px;
-  color: var(--on-dark-4);
+  color: #777777;   /* was var(--on-dark-4) — too dim */
   text-transform: uppercase;
   display: block;
   line-height: 1.5;
@@ -237,7 +239,7 @@ main {
   margin-bottom: 20px;
 }
 
-/* ─── Dark sections (engine table, etc) ──────────── */
+/* ─── Dark sections ──────────────────────────────── */
 .dark-section {
   background: var(--dark-3);
   border-top: 0.5px solid var(--dark-border);
@@ -274,12 +276,12 @@ main {
 }
 
 .engine-name.claw {
-  color: #7ab8a8; /* subtle teal — CLAW is special */
+  color: #7ab8a8;
 }
 
 .engine-desc {
   font-family: var(--serif);
-  font-size: 0.95rem;
+  font-size: 1.05rem;   /* was 0.95rem */
   color: var(--on-dark-4);
   line-height: 1.5;
 }
@@ -410,7 +412,7 @@ code, .mono, .datum, [class*="datum"] {
   border-radius: 2px;
 }
 
-/* ─── Contact / pilot section — dark ─────────────── */
+/* ─── Pilot / contact section — dark ─────────────── */
 .pilot-section {
   background: var(--dark);
   border-top: 0.5px solid var(--dark-border);
@@ -419,7 +421,7 @@ code, .mono, .datum, [class*="datum"] {
 
 .pilot-section p {
   font-family: var(--serif);
-  font-size: 1.1rem;
+  font-size: 1.15rem;   /* was 1.1rem */
   color: var(--on-dark-3);
   line-height: 1.7;
   max-width: 480px;
@@ -467,15 +469,16 @@ footer p {
 /* ─── Responsive ─────────────────────────────────── */
 @media (max-width: 768px) {
   header { padding: 0 24px; }
-  .hero-inner, .section-inner { padding: 0 24px; }
-  .hero { padding: 56px 0 0; }
-  .hero-inner { padding-bottom: 52px; }
-  .hero h1 { font-size: 36px; }
+  .hero { min-height: auto; padding: 64px 0; }
+  .hero-inner { padding: 0 24px; }
+  .hero h1 { font-size: 32px; }
+  .section-inner { padding: 0 24px; }
   .score-strip-inner {
     padding: 0 24px;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 24px;
   }
-  .score-item { padding: 20px 16px 20px 0; }
+  .score-item { border-right: none !important; padding-right: 0 !important; }
   .prose-section { padding: 48px 0; }
   .dark-section { padding: 48px 0; }
   .pilot-section { padding: 52px 0; }
