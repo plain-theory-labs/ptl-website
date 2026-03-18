@@ -103,3 +103,9 @@ cool analyze --pue 1.35 --cooling-type dlc --climate-zone mild
 # Output to JSON
 cool analyze --pue 1.35 --output cool_result.json
 ```
+
+## Source
+
+- [View COOL source on GitHub](https://github.com/plain-theory-labs/ptl-engines/tree/main/cool)
+- [COOL methodology document](https://github.com/plain-theory-labs/ptl-methodology/blob/main/engines/cool_methodology.md)
+- [Report an issue](https://github.com/plain-theory-labs/ptl-engines/issues)

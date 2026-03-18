@@ -108,3 +108,9 @@ CLAW produces a structured JSON package:
 | pod_metrics | object | Kubernetes pod GPU metrics (if available) |
 | inference_servers | array | Detected inference endpoints and status |
 | data_sources_used | array | Which of the five sources were active |
+
+## Source
+
+- [View CLAW source on GitHub](https://github.com/plain-theory-labs/ptl-engines/tree/main/claw)
+- [NemoClaw documentation](https://docs.nvidia.com/nemoclaw)
+- [Report an issue](https://github.com/plain-theory-labs/ptl-engines/issues)
