@@ -48,21 +48,14 @@ const resolvedOgImage = ogImage.startsWith("http") ? ogImage : `${site}${ogImage
   </head>
   <body>
     <header>
-      <a class="logo" href="/">Plain Theory Labs</a>
+      <a class="wordmark" href="/">Plain Theory Labs</a>
       <nav>
         <a href="/#engines">Engines</a>
         <a href="/#pilot">Work with us</a>
-        <a href="/docs" class="nav-docs">Docs →</a>
+        <a href="/docs" class="nav-docs">Docs</a>
       </nav>
     </header>
 
-    <main id="main-content">
-      <slot />
-    </main>
-
-    <footer>
-      <span>Plain Theory Labs</span>
-      <span>© 2026</span>
-    </footer>
+    <slot />
   </body>
 </html>

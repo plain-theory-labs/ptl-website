@@ -1,24 +1,24 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 
-const description = "Contact Plain Theory Labs.";
+const description = "Work with us — Plain Theory Labs";
 ---
 
-<BaseLayout title="Contact | Plain Theory Labs" description={description}>
-
-  <section class="pilot-section">
-    <div class="section-inner">
-      <span class="section-label-dark">Get in touch</span>
-      <p>
-        We are taking three pilot organizations this quarter. A pilot begins with
-        a Slurm scheduler export and four questions about your facility. We run
-        the analysis and deliver a private certification report to your team.
-        The data collection takes under two hours.
-      </p>
-      <p>
-        Write to us at <a href="mailto:jesus@plaintheory.org" class="cta-link-light">jesus@plaintheory.org</a>.
-      </p>
+<BaseLayout title="Work with us — Plain Theory Labs" description={description}>
+  <div class="wrap">
+    <div class="section" id="pilot">
+      <span class="section-label">Work with us</span>
+      <div class="contact-body">
+        <p>We are taking three pilots this quarter.
+The findings belong to your organization.
+We keep the methodology.</p>
+        <a href="mailto:research@plaintheory.org"
+           class="contact-email">research@plaintheory.org</a>
+      </div>
     </div>
-  </section>
-
+    <footer>
+      <span>Plain Theory Labs</span>
+      <span>2026</span>
+    </footer>
+  </div>
 </BaseLayout>
