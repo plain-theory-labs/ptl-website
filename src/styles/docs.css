@@ -1,168 +1,83 @@
-/* PTL Docs — Starlight overrides */
+/* PTL Documentation — theme overrides for Starlight */
 
+/* Shared — both modes */
 :root {
-  --sl-color-accent: #7ab8a8;
-  --sl-font-system: 'EB Garamond', Georgia, serif;
+  --sl-color-accent:      #7ab8a8;
+  --sl-color-accent-high: #9ecfc2;
+  --sl-font-system:       'EB Garamond', Georgia, serif;
 }
 
-[data-theme="dark"] {
-  --sl-color-bg:          #0f0f0f;
-  --sl-color-bg-nav:      #0a0a0a;
-  --sl-color-bg-sidebar:  #0a0a0a;
-  --sl-color-hairline:    #1e1e1e;
-  --sl-color-text:        #cccccc;
-  --sl-color-text-accent: #7ab8a8;
+/* Dark mode — default for docs */
+[data-theme='dark'] {
+  --sl-color-bg:            #0f0f0f;
+  --sl-color-bg-nav:        #0a0a0a;
+  --sl-color-bg-sidebar:    #0a0a0a;
+  --sl-color-bg-inline-code:#1a1a1a;
+  --sl-color-hairline:      #1e1e1e;
+  --sl-color-hairline-light:#161616;
+  --sl-color-text:          #cccccc;
+  --sl-color-text-accent:   #7ab8a8;
+  --sl-color-white:         #efefef;
+  --sl-color-gray-1:        #cccccc;
+  --sl-color-gray-2:        #aaaaaa;
+  --sl-color-gray-3:        #666666;
+  --sl-color-gray-4:        #333333;
+  --sl-color-gray-5:        #1e1e1e;
+  --sl-color-gray-6:        #111111;
+  --sl-color-black:         #0a0a0a;
 }
 
-[data-theme="light"] {
-  --sl-color-bg:          #f0ede6;
-  --sl-color-bg-nav:      #ebe8e1;
-  --sl-color-bg-sidebar:  #eae7e0;
-  --sl-color-hairline:    #d5d1c8;
-  --sl-color-text:        #28251e;
-  --sl-color-text-accent: #0e7490;
+/* Light mode — warm white */
+[data-theme='light'] {
+  --sl-color-bg:            #f0ede6;
+  --sl-color-bg-nav:        #ebe8e1;
+  --sl-color-bg-sidebar:    #eae7e0;
+  --sl-color-bg-inline-code:#e0ddd6;
+  --sl-color-hairline:      #d5d1c8;
+  --sl-color-hairline-light:#dedad2;
+  --sl-color-text:          #28251e;
+  --sl-color-text-accent:   #0e7490;
+  --sl-color-white:         #141210;
+  --sl-color-gray-1:        #28251e;
+  --sl-color-gray-2:        #46433b;
+  --sl-color-gray-3:        #807c74;
+  --sl-color-gray-4:        #c8c4bc;
+  --sl-color-gray-5:        #dedad2;
+  --sl-color-gray-6:        #eae7e0;
+  --sl-color-black:         #f0ede6;
 }
 
-/* Site title */
-.site-title {
-  font-family: var(--sl-font-mono);
-  font-size: 10px;
-  letter-spacing: 2.5px;
-  text-transform: uppercase;
-  color: #666666;
+/* Code blocks — both modes */
+.sl-markdown-content pre {
+  border-radius: 0;
+  border: 1px solid var(--sl-color-hairline);
 }
 
-/* Nav */
-header.header {
-  border-bottom: 0.5px solid #2a2a2a;
-  background: #0a0a0a;
-}
-
-/* Sidebar */
-.sidebar-pane {
-  background: #111111;
-  border-right: 0.5px solid #1e1e1e;
-}
-
-nav.sidebar a {
-  font-family: var(--sl-font-mono);
-  font-size: 11px;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  color: #666666;
-}
-
-nav.sidebar a:hover,
-nav.sidebar a[aria-current="page"] {
-  color: #7ab8a8;
-}
-
-/* Group labels */
-.group-label span {
-  font-family: var(--sl-font-mono);
-  font-size: 9px;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: #444444;
-}
-
-/* Content */
-.content-panel {
-  background: #0a0a0a;
-}
-
+/* Headings use serif font */
 .sl-markdown-content h1,
 .sl-markdown-content h2,
-.sl-markdown-content h3 {
+.sl-markdown-content h3,
+.sl-markdown-content h4 {
   font-family: 'EB Garamond', Georgia, serif;
   font-weight: 400;
-  color: #efefef;
 }
 
-.sl-markdown-content h1 {
-  font-size: clamp(28px, 3.5vw, 40px);
-  letter-spacing: -0.3px;
-}
-
-.sl-markdown-content h2 {
-  font-size: 1.5rem;
-  border-bottom: 0.5px solid #2a2a2a;
-  padding-bottom: 0.5rem;
-  margin-top: 2.5rem;
-}
-
-.sl-markdown-content p {
-  font-family: 'EB Garamond', Georgia, serif;
-  font-size: 1.1rem;
-  line-height: 1.72;
-  color: #999999;
-}
-
-.sl-markdown-content strong {
-  color: #efefef;
-  font-weight: 400;
-}
-
-.sl-markdown-content em {
-  color: #aaaaaa;
-  font-style: italic;
-}
-
-.sl-markdown-content code {
-  font-family: var(--sl-font-mono);
-  font-size: 0.85em;
-  background: #161616;
-  border: 0.5px solid #2a2a2a;
-  padding: 2px 6px;
-  border-radius: 2px;
-  color: #7ab8a8;
-}
-
-.sl-markdown-content pre {
-  background: #111111;
-  border: 0.5px solid #2a2a2a;
-  border-radius: 2px;
-}
-
+/* Tables */
 .sl-markdown-content table {
-  font-family: var(--sl-font-mono);
-  font-size: 11px;
-  letter-spacing: 0.5px;
   border-collapse: collapse;
   width: 100%;
 }
 
-.sl-markdown-content th {
-  color: #666666;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  border-bottom: 0.5px solid #2a2a2a;
-  padding: 8px 12px;
-  text-align: left;
-  font-weight: 400;
-}
-
+.sl-markdown-content th,
 .sl-markdown-content td {
-  color: #999999;
-  border-bottom: 0.5px solid #1e1e1e;
+  border: 1px solid var(--sl-color-hairline);
   padding: 8px 12px;
+  font-size: 0.9rem;
 }
 
-.sl-markdown-content tr:last-child td {
-  border-bottom: none;
-}
-
-/* Pagination */
-.pagination-links a {
-  font-family: var(--sl-font-mono);
-  font-size: 10px;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  color: #666666;
-  border: 0.5px solid #2a2a2a;
-}
-
-.pagination-links a:hover {
-  border-color: #7ab8a8;
-  color: #7ab8a8;
+.sl-markdown-content th {
+  background: var(--sl-color-bg-sidebar);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
 }
