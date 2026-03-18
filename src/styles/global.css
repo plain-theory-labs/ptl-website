@@ -152,6 +152,8 @@ h1 {
   letter-spacing: -8px;
   line-height: 1;
   display: block;
+  font-variant-numeric: tabular-nums;
+  min-width: 5ch;
 }
 
 .primary-labels {
@@ -218,6 +220,7 @@ h1 {
   font-weight: 300;
   letter-spacing: -1.5px;
   line-height: 1;
+  font-variant-numeric: tabular-nums;
 }
 .sec-num.opt { color: var(--teal); }
 .sec-num.dev { color: var(--amber); }
