@@ -145,4 +145,84 @@ We keep the methodology.</p>
 
 </div>
 
+<script>
+(function() {
+  // Ease out quart — fast approach, slow settle
+  // Feels like a precision instrument reading
+  function easeOutQuart(t) {
+    return 1 - Math.pow(1 - t, 4);
+  }
+
+  function animateCounter(el, target, duration, delay) {
+    // Set to 0.000 immediately so there's no flash of the real number
+    el.textContent = '0.000';
+
+    setTimeout(function() {
+      var start = null;
+
+      function step(timestamp) {
+        if (!start) start = timestamp;
+        var elapsed = timestamp - start;
+        var progress = Math.min(elapsed / duration, 1);
+        var eased = easeOutQuart(progress);
+        el.textContent = (eased * target).toFixed(3);
+
+        if (progress < 1) {
+          requestAnimationFrame(step);
+        } else {
+          el.textContent = target.toFixed(3);
+        }
+      }
+
+      requestAnimationFrame(step);
+    }, delay);
+  }
+
+  function runAnimation() {
+    var primary = document.querySelector('.primary-number');
+    var secs = document.querySelectorAll('.sec-num');
+    var targets = [0.814, 0.736, 0.450];
+
+    if (primary) {
+      animateCounter(primary, 0.873, 1600, 0);
+    }
+
+    secs.forEach(function(el, i) {
+      animateCounter(el, targets[i], 1200, 200 + i * 80);
+    });
+  }
+
+  // Use IntersectionObserver — fires when scores enter viewport
+  var scoreSection = document.querySelector('.primary-score');
+
+  if (!scoreSection) {
+    // Fallback — run on load if no score section found
+    window.addEventListener('load', runAnimation);
+    return;
+  }
+
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        runAnimation();
+        observer.disconnect(); // Fire once only
+      }
+    });
+  }, {
+    threshold: 0.2  // Trigger when 20% of section is visible
+  });
+
+  observer.observe(scoreSection);
+
+  // Also set numbers to 0.000 immediately on DOM ready
+  // so the real number never flashes before animation
+  document.addEventListener('DOMContentLoaded', function() {
+    var primary = document.querySelector('.primary-number');
+    var secs = document.querySelectorAll('.sec-num');
+    if (primary) primary.textContent = '0.000';
+    secs.forEach(function(el) { el.textContent = '0.000'; });
+  });
+})();
+</script>
+
 </BaseLayout>
