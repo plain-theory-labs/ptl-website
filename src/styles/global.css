@@ -126,7 +126,7 @@ h1 {
   font-size: 1.3rem;
   color: var(--ink-3);
   line-height: 1.68;
-  max-width: 620px;
+  max-width: 480px;
 }
 
 .hero-data { padding-bottom: 64px; }
@@ -210,29 +210,29 @@ h1 {
   flex-wrap: wrap;
 }
 
-.secondary { display: flex; flex-direction: column; gap: 6px; }
+.sec { display: flex; flex-direction: column; gap: 6px; }
 
-.secondary-number {
+.sec-num {
   font-family: var(--mono);
   font-size: 36px;
   font-weight: 300;
   letter-spacing: -1.5px;
   line-height: 1;
 }
-.secondary-number.opt { color: var(--teal); }
-.secondary-number.dev { color: var(--amber); }
+.sec-num.opt { color: var(--teal); }
+.sec-num.dev { color: var(--amber); }
 
-.secondary-tier {
+.sec-tier {
   font-family: var(--mono);
   font-size: 11px;
   font-weight: 300;
   letter-spacing: 2px;
   text-transform: uppercase;
 }
-.secondary.opt .secondary-tier { color: var(--teal); }
-.secondary.dev .secondary-tier { color: var(--amber); }
+.sec.opt .sec-tier { color: var(--teal); }
+.sec.dev .sec-tier { color: var(--amber); }
 
-.secondary-org {
+.sec-org {
   font-family: var(--mono);
   font-size: 11px;
   font-weight: 300;
@@ -241,14 +241,15 @@ h1 {
   color: var(--ink-4);
 }
 
-.secondary-context {
+.sec-context {
   font-family: var(--serif);
-  font-size: 0.9rem;
+  font-size: 0.88rem;
   color: var(--ink-5);
   font-style: italic;
   line-height: 1.4;
   max-width: 160px;
   margin-top: 2px;
+  display: block;
 }
 
 .actions {
@@ -382,6 +383,18 @@ footer span {
   text-transform: uppercase;
 }
 
+.footer-github {
+  font-family: var(--mono);
+  font-size: 9px;
+  font-weight: 300;
+  letter-spacing: 1.5px;
+  color: var(--ink-5);
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: color 0.2s;
+}
+.footer-github:hover { color: var(--ink-4); }
+
 @media (max-width: 760px) {
   :root { --pad: 28px; }
   header { padding: 0 var(--pad); }
@@ -395,7 +408,8 @@ footer span {
   .hero-sub { font-size: 1.15rem; }
   .primary-number { font-size: 88px; letter-spacing: -5px; }
   .secondaries { gap: 28px; }
-  .secondary-number { font-size: 28px; }
+  .sec-num { font-size: 28px; }
+  .engine-claw { border-top: 2px solid #93c5d4 !important; margin-top: 32px; padding-top: 24px; }
   .actions { flex-direction: column; align-items: flex-start; gap: 20px; }
   .section { padding: 68px 0; }
   .section-label { font-size: 1rem; margin-bottom: 44px; }
