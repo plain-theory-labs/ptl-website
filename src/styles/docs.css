@@ -2,23 +2,25 @@
 
 :root {
   --sl-color-accent: #7ab8a8;
-  --sl-color-accent-high: #9dcebe;
-  --sl-color-accent-low: #2a4a44;
-  --sl-color-white: #efefef;
-  --sl-color-gray-1: #aaaaaa;
-  --sl-color-gray-2: #888888;
-  --sl-color-gray-3: #555555;
-  --sl-color-gray-4: #333333;
-  --sl-color-gray-5: #1e1e1e;
-  --sl-color-gray-6: #111111;
-  --sl-color-black: #0a0a0a;
-  --sl-color-bg: #0a0a0a;
-  --sl-color-bg-nav: #0a0a0a;
-  --sl-color-bg-sidebar: #111111;
-  --sl-color-hairline-light: #2a2a2a;
-  --sl-color-hairline: #1e1e1e;
-  --sl-font: 'EB Garamond', Georgia, serif;
-  --sl-font-mono: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+  --sl-font-system: 'EB Garamond', Georgia, serif;
+}
+
+[data-theme="dark"] {
+  --sl-color-bg:          #0f0f0f;
+  --sl-color-bg-nav:      #0a0a0a;
+  --sl-color-bg-sidebar:  #0a0a0a;
+  --sl-color-hairline:    #1e1e1e;
+  --sl-color-text:        #cccccc;
+  --sl-color-text-accent: #7ab8a8;
+}
+
+[data-theme="light"] {
+  --sl-color-bg:          #f0ede6;
+  --sl-color-bg-nav:      #ebe8e1;
+  --sl-color-bg-sidebar:  #eae7e0;
+  --sl-color-hairline:    #d5d1c8;
+  --sl-color-text:        #28251e;
+  --sl-color-text-accent: #0e7490;
 }
 
 /* Site title */
