@@ -54,7 +54,7 @@ CLAW supports Slurm, Kubernetes, and Ray schedulers. In Slurm mode, CLAW augment
 
 ## Data schema
 
-CLAW produces output conforming to the PTL v1 output schema (`ptl_output_v1.json`). The schema is the contract between CLAW and the engine stack. Every field has a type, a unit, and a source label. The schema is public at [github.com/plain-theory-labs/ptl-engines](https://github.com/plain-theory-labs/ptl-engines).
+CLAW produces output conforming to the PTL v1 output schema (`ptl_output_v1.json`). The schema is the contract between CLAW and the engine stack. Every field has a type, a unit, and a source label.
 
 ## Current status
 

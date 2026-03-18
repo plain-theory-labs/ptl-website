@@ -6,8 +6,7 @@ description: ACE measures GPU utilization across Slurm, Kubernetes, and DCGM tel
 The Adaptive Compute Efficiency Engine (ACE) measures GPU utilization — the fraction of allocated GPU compute that jobs actually use. ACE is the highest-weighted engine in the PTL composite and the most direct measure of whether a cluster is doing the work it claims to do.
 
 :::note[Version]
-ACE v2.0.0 · Released 2026-03-16 ·
-[Changelog](https://github.com/garci1294/ptl-engines/blob/main/ace/CHANGELOG.md)
+ACE v2.0.0 · Released 2026-03-16
 :::
 
 ## Primary metric
