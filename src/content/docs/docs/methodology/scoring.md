@@ -27,6 +27,37 @@ Each engine's scoring formula is fully documented:
 
 GRADE computes the composite as a weighted average of engine scores using the coefficients published in [Coefficients](/docs/methodology/coefficients/). Engines not included in the assessment are excluded from the composite — they do not count as zero.
 
+### Full worked example
+
+Using NERSC Perlmutter Q1 2026 results:
+
+```
+Engine scores:
+  ACE  = 0.891 × 0.35 = 0.31185
+  PACE = 0.821 × 0.25 = 0.20525
+  COOL = 0.912 × 0.20 = 0.18240
+  CORE = 0.880 × 0.12 = 0.10560
+  FLUX = 0.850 × 0.08 = 0.06800
+  ─────────────────────────────
+  PTL Score = 0.87310 → 0.873
+  Tier: Frontier (≥ 0.85, all five engines)
+```
+
+### Partial assessment example
+
+Using MIT Supercloud with ACE only (first assessment):
+
+```
+Active engines: ACE only
+Active weight sum: 0.35
+
+ACE score: 0.257
+Normalized weight: 0.35 / 0.35 = 1.00
+
+PTL Score = 0.257 × 1.00 = 0.257
+Tier: Baseline (ACE only, first measurement)
+```
+
 ## Confidence labels
 
 Every metric carries a confidence label:

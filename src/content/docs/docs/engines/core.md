@@ -5,6 +5,10 @@ description: CORE evaluates hardware-workload fit, fleet age, and embodied carbo
 
 The Capital and Operations Resource Evaluator (CORE) grades your hardware against your workloads — whether the GPUs you are operating are the right hardware for the jobs you are running, how old the fleet is, and what the embodied carbon cost of that hardware represents.
 
+:::note[Version]
+CORE v2.0.0 · Released 2026-03-11
+:::
+
 ## Primary metric
 
 `core_efficiency_score` — a number from 0.0 to 1.0 composed of three components:
@@ -12,6 +16,73 @@ The Capital and Operations Resource Evaluator (CORE) grades your hardware agains
 - **Hardware fit** (40%) — how well your GPU fleet matches your primary workload category
 - **Fleet age** (35%) — weighted average age of your GPU fleet
 - **Embodied carbon** (25%) — carbon cost of manufacturing your hardware relative to expected useful life
+
+## Formula
+
+```
+core_efficiency_score =
+  hardware_fit_score × 0.40 +
+  fleet_age_score    × 0.35 +
+  embodied_score     × 0.25
+
+where:
+  hardware_fit_score = f(gpu_model, primary_workload)
+    See hardware-workload fit matrix below.
+
+  fleet_age_score = f(gpu_generation, deployment_year)
+    Current gen (Blackwell) → 1.00
+    Previous gen (Hopper)   → 0.90
+    Two gens back (Ampere)  → 0.70
+    Three+ gens back        → 0.40
+
+  embodied_score = f(embodied_co2_kg, utilization)
+    Higher utilization amortizes embodied carbon.
+    Score = min(1.0, utilization_rate / 0.80) × generation_factor
+```
+
+### Hardware-workload fit matrix
+
+| GPU | Training (large) | Inference | Mixed | Embodied CO2 |
+|-----|-----------------|-----------|-------|--------------|
+| B200 | 1.00 | 0.90 | 0.95 | 1,200 kg |
+| H200 | 0.90 | 0.85 | 0.88 | 950 kg |
+| H100 | 0.82 | 0.75 | 0.80 | 700 kg |
+| RTX Pro 6000 | 0.45 | 1.00 | 0.70 | 400 kg |
+| A100 | 0.70 | 0.65 | 0.68 | 700 kg |
+| V100 | 0.40 | 0.45 | 0.42 | 500 kg |
+
+RTX Pro 6000 scores 1.00 for inference workloads — it is the right tool for single-GPU inference at 3x lower cost than H100.
+
+## Worked example
+
+**Input:**
+
+```
+gpu_model        = H100 SXM5
+primary_workload = inference
+deployment_year  = 2024
+gpu_utilization  = 0.86
+```
+
+**Calculation:**
+
+```
+hardware_fit_score = 0.75  (H100 x inference from matrix)
+
+fleet_age_score = 0.90  (Hopper generation, 2024 deployment)
+
+embodied_score = min(1.0, 0.86 / 0.80) × 0.90
+              = min(1.0, 1.075) × 0.90
+              = 1.00 × 0.90
+              = 0.90
+
+core_efficiency_score =
+  (0.75 × 0.40) + (0.90 × 0.35) + (0.90 × 0.25)
+= 0.300 + 0.315 + 0.225
+= 0.840
+```
+
+**Result:** CORE score 0.840. The hardware-workload fit gap (H100 scores 0.75 for inference vs 1.00 for RTX Pro 6000) is the primary finding. For a pure inference cluster, RTX Pro 6000 would score higher and cost significantly less per GPU.
 
 ## Hardware fit scoring
 
@@ -40,6 +111,41 @@ Older hardware scores lower on fleet age not as a depreciation metric but as an 
 
 ## Embodied carbon
 
-Manufacturing large GPU systems produces substantial carbon. CORE tracks estimated embodied carbon in kg CO₂e per GPU and weights it against expected useful life. A B200 (approximately 1,200 kg CO₂e) operated for 5+ years at high utilization has a very different lifecycle profile than the same GPU retired after two years at 25% utilization.
+Manufacturing large GPU systems produces substantial carbon. CORE tracks estimated embodied carbon in kg CO2e per GPU and weights it against expected useful life. A B200 (approximately 1,200 kg CO2e) operated for 5+ years at high utilization has a very different lifecycle profile than the same GPU retired after two years at 25% utilization.
 
 Embodied carbon is disclosed as a finding, not a penalty. It appears in the GRADE report alongside utilization data so procurement decisions can be made with the full picture.
+
+## Input schema
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| gpu_model | string | yes | GPU model identifier (h100, a100, v100, b200, rtx_pro_6000, etc.) |
+| primary_workload | string | yes | training_large, training_small, inference, or mixed |
+| deployment_year | int | yes | Year the GPU fleet was deployed |
+| gpu_utilization | float | yes | Average GPU utilization rate (0.0–1.0) from ACE |
+| gpu_count | int | no | Total number of GPUs in fleet |
+| mig_enabled | boolean | no | Whether MIG partitioning is active |
+| mig_instances_active | int | no | Active MIG instances (if mig_enabled) |
+
+## CLI usage
+
+```bash
+# Score a specific hardware configuration
+core analyze \
+  --gpu-model h100 \
+  --workload inference \
+  --deployment-year 2024 \
+  --utilization 0.86
+
+# Score with MIG configuration
+core analyze \
+  --gpu-model h100 \
+  --workload inference \
+  --deployment-year 2024 \
+  --utilization 0.86 \
+  --mig-enabled true \
+  --mig-instances-active 4
+
+# Output to JSON
+core analyze --input core_config.json --output core_result.json
+```
