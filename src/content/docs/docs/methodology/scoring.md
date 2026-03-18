@@ -77,3 +77,9 @@ Assumptions are not weaknesses. They are disclosed so the score can be interpret
 ## Determinism
 
 PTL scoring is deterministic. The same input produces the same output. This is an architectural requirement. Certification records can be verified against the engine source code and the disclosed methodology. If our methodology changes, we version the change and document what changed and why.
+
+## Source
+
+- [Full methodology repository](https://github.com/plain-theory-labs/ptl-methodology)
+- [Scoring methodology document](https://github.com/plain-theory-labs/ptl-methodology/blob/main/scoring.md)
+- [Suggest a methodology change](https://github.com/plain-theory-labs/ptl-methodology/issues)

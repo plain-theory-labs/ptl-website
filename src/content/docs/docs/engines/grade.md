@@ -148,3 +148,10 @@ grade aggregate \
   --org "NERSC Perlmutter" \
   --output ptl_report.json
 ```
+
+## Source
+
+- [View GRADE source on GitHub](https://github.com/plain-theory-labs/ptl-engines/tree/main/grade)
+- [GRADE methodology document](https://github.com/plain-theory-labs/ptl-methodology/blob/main/engines/grade_methodology.md)
+- [Coefficients changelog](https://github.com/plain-theory-labs/ptl-methodology/blob/main/coefficients.md)
+- [Report an issue](https://github.com/plain-theory-labs/ptl-engines/issues)

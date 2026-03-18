@@ -116,3 +116,9 @@ atlas recommend \
   --pace pace_result.json \
   --top 5
 ```
+
+## Source
+
+- [View ATLAS source on GitHub](https://github.com/plain-theory-labs/ptl-engines/tree/main/atlas)
+- [ATLAS methodology document](https://github.com/plain-theory-labs/ptl-methodology/blob/main/engines/atlas_methodology.md)
+- [Report an issue](https://github.com/plain-theory-labs/ptl-engines/issues)

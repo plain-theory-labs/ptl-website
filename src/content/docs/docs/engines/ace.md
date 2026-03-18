@@ -117,3 +117,9 @@ ace analyze --input claw_package.json --input-path claw
 # Output to JSON
 ace analyze --input jobs.csv --output ace_result.json
 ```
+
+## Source
+
+- [View ACE source on GitHub](https://github.com/plain-theory-labs/ptl-engines/tree/main/ace)
+- [ACE methodology document](https://github.com/plain-theory-labs/ptl-methodology/blob/main/engines/ace_methodology.md)
+- [Report an issue](https://github.com/plain-theory-labs/ptl-engines/issues)

@@ -149,3 +149,9 @@ core analyze \
 # Output to JSON
 core analyze --input core_config.json --output core_result.json
 ```
+
+## Source
+
+- [View CORE source on GitHub](https://github.com/plain-theory-labs/ptl-engines/tree/main/core)
+- [CORE methodology document](https://github.com/plain-theory-labs/ptl-methodology/blob/main/engines/core_methodology.md)
+- [Report an issue](https://github.com/plain-theory-labs/ptl-engines/issues)

@@ -112,3 +112,9 @@ flux analyze \
 # Output to JSON
 flux analyze --method ppa_direct --output flux_result.json
 ```
+
+## Source
+
+- [View FLUX source on GitHub](https://github.com/plain-theory-labs/ptl-engines/tree/main/flux)
+- [FLUX methodology document](https://github.com/plain-theory-labs/ptl-methodology/blob/main/engines/flux_methodology.md)
+- [Report an issue](https://github.com/plain-theory-labs/ptl-engines/issues)

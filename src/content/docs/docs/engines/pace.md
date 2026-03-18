@@ -159,3 +159,9 @@ pace analyze \
 # Output to JSON
 pace analyze --input slurm_data.json --output pace_result.json
 ```
+
+## Source
+
+- [View PACE source on GitHub](https://github.com/plain-theory-labs/ptl-engines/tree/main/pace)
+- [PACE methodology document](https://github.com/plain-theory-labs/ptl-methodology/blob/main/engines/pace_methodology.md)
+- [Report an issue](https://github.com/plain-theory-labs/ptl-engines/issues)

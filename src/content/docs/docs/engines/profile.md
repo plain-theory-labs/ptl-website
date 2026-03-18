@@ -29,3 +29,8 @@ GRADE and ATLAS receive the profile path and use it to include a cluster profile
 ## Data requirements
 
 A standard PROFILE run requires hardware inventory — GPU model and count per node. If running in Slurm mode, `sacct` output provides job history for ACE and PACE. CLAW automates profile collection for organizations where it can be deployed.
+
+## Source
+
+- [View PROFILE source on GitHub](https://github.com/plain-theory-labs/ptl-engines/tree/main/profile)
+- [Report an issue](https://github.com/plain-theory-labs/ptl-engines/issues)

@@ -41,3 +41,9 @@ Two FRONTIER organizations — one scoring 0.851, one scoring 0.973 — are both
 ## Longitudinal record
 
 An organization that improves from BASELINE (0.42) to DEVELOPING (0.58) to CAPABLE (0.67) across three annual assessments has a record that tells a story. The tier sequence communicates the direction. The score sequence communicates the magnitude of improvement. Both matter.
+
+## Source
+
+- [Full methodology repository](https://github.com/plain-theory-labs/ptl-methodology)
+- [Tiers document](https://github.com/plain-theory-labs/ptl-methodology/blob/main/tiers.md)
+- [Suggest a change](https://github.com/plain-theory-labs/ptl-methodology/issues)

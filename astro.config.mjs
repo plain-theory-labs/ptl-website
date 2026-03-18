@@ -11,6 +11,16 @@ export default defineConfig({
       description: 'Documentation for the PTL certification framework.',
       defaultLocale: 'en',
       customCss: ['./src/styles/docs.css'],
+      social: [
+        {
+          icon: 'github',
+          label: 'GitHub',
+          href: 'https://github.com/plain-theory-labs',
+        },
+      ],
+      editLink: {
+        baseUrl: 'https://github.com/plain-theory-labs/ptl-website/edit/main/',
+      },
       sidebar: [
         {
           label: 'Getting Started',
