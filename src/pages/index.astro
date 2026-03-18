@@ -6,53 +6,70 @@ const description = "One honest score for AI compute infrastructure.";
 
 <BaseLayout title="Plain Theory Labs" description={description}>
 
-  <div class="hero">
+<section class="hero">
+
+  <div class="statement">
     <span class="hero-eyebrow">Plain Theory Labs</span>
-
-    <h1 class="hero-headline">One honest score for AI compute infrastructure.</h1>
-
-    <p class="hero-sub">
-      GPU clusters waste more compute than they use.<br>
-      We built the instrument that measures how much.
-    </p>
-
-    <div class="primary-score">
-      <span class="primary-number s-frontier">0.873</span>
-      <span class="primary-tier">Frontier</span>
-      <span class="primary-org">NERSC Perlmutter</span>
-    </div>
-
-    <div class="secondary-scores">
-      <div class="score s-optimized-item">
-        <span class="score-number s-optimized">0.814</span>
-        <span class="score-tier">Optimized</span>
-        <span class="score-name">Meridian AI</span>
-      </div>
-      <div class="score s-optimized-item">
-        <span class="score-number s-optimized">0.736</span>
-        <span class="score-tier">Optimized</span>
-        <span class="score-name">OLCF Frontier</span>
-      </div>
-      <div class="score s-developing-item">
-        <span class="score-number s-developing">0.450</span>
-        <span class="score-tier">Developing</span>
-        <span class="score-name">MIT Supercloud</span>
-      </div>
-    </div>
-
-    <div class="hero-actions">
-      <a href="#pilot" class="action-primary">Start a pilot</a>
-      <a href="/docs" class="action-docs">Read the documentation →</a>
-    </div>
+    <h1>One honest score for AI compute infrastructure.</h1>
+    <p class="hero-sub">The science running on AI infrastructure matters deeply.
+We built the instrument that measures how well it performs.</p>
   </div>
 
+  <div class="hero-data">
+
+    <div class="primary-score">
+      <div class="primary-row">
+        <span class="primary-number">0.873</span>
+        <div class="primary-labels">
+          <span class="primary-tier">Frontier</span>
+          <span class="primary-org">NERSC Perlmutter</span>
+          <span class="primary-context">Operating at the frontier
+of what this hardware
+is capable of.</span>
+        </div>
+      </div>
+    </div>
+
+    <span class="scale-note">PTL Score · 0.0 to 1.0 · higher is better</span>
+
+    <div class="secondaries">
+      <div class="secondary opt">
+        <span class="secondary-number opt">0.814</span>
+        <span class="secondary-tier">Optimized</span>
+        <span class="secondary-org">Meridian AI</span>
+        <span class="secondary-context">High performance.
+Room to grow.</span>
+      </div>
+      <div class="secondary opt">
+        <span class="secondary-number opt">0.736</span>
+        <span class="secondary-tier">Optimized</span>
+        <span class="secondary-org">OLCF Frontier</span>
+        <span class="secondary-context">Strong efficiency.
+Notable gaps identified.</span>
+      </div>
+      <div class="secondary dev">
+        <span class="secondary-number dev">0.450</span>
+        <span class="secondary-tier">Developing</span>
+        <span class="secondary-org">MIT Supercloud</span>
+        <span class="secondary-context">First assessment.
+Clear path forward.</span>
+      </div>
+    </div>
+
+    <div class="actions">
+      <a href="#pilot" class="cta cta-primary">Start a pilot</a>
+      <a href="/docs" class="cta cta-docs">Read the documentation</a>
+    </div>
+
+  </div>
+
+</section>
+
+<div class="wrap">
+
   <div class="section">
-    <p class="about-text">
-      We are engineers who have spent our careers
-      inside these systems. We built PTL because
-      the measurement didn't exist, and we believed
-      it should.
-    </p>
+    <p class="about-text">We built PTL because the measurement
+didn't exist, and we believed it should.</p>
   </div>
 
   <div class="section" id="engines">
@@ -61,82 +78,69 @@ const description = "One honest score for AI compute infrastructure.";
     <div class="engine-list">
 
       <div class="engine">
-        <span class="engine-id">ACE</span>
-        <span class="engine-text">Of the computing capacity
-        allocated to each workload — whether a Slurm job,
-        a Kubernetes pod, or a running agent — how much was
-        actually used? The answer is almost always surprising.</span>
+        <span class="engine-name">ACE</span>
+        <span class="engine-desc">Of the computing capacity allocated to each workload, whether a Slurm job, a Kubernetes pod, or a running agent, how much was actually used? The answer is almost always surprising.</span>
       </div>
 
       <div class="engine">
-        <span class="engine-id">COOL</span>
-        <span class="engine-text">Cooling is the largest source
-        of wasted energy in most facilities. COOL grades thermal
-        efficiency against what is genuinely achievable for this
-        type of facility in this climate.</span>
+        <span class="engine-name">COOL</span>
+        <span class="engine-desc">Cooling is the largest source of wasted energy in most facilities. COOL grades thermal efficiency against what is genuinely achievable for this type of facility in this climate.</span>
       </div>
 
       <div class="engine">
-        <span class="engine-id">FLUX</span>
-        <span class="engine-text">Carbon accounting in AI
-        infrastructure ranges from rigorous to meaningless.
-        FLUX grades the quality of the methodology — and detects
-        when claimed renewable coverage is not supported by
-        how the numbers were calculated.</span>
+        <span class="engine-name">FLUX</span>
+        <span class="engine-desc">Carbon accounting in AI infrastructure ranges from rigorous to meaningless. FLUX grades the quality of the methodology and detects when claimed renewable coverage is not supported by how the numbers were calculated.</span>
       </div>
 
       <div class="engine">
-        <span class="engine-id">PACE</span>
-        <span class="engine-text">Scheduler policy determines
-        how compute gets allocated before a single workload runs.
-        PACE grades those decisions.</span>
+        <span class="engine-name">PACE</span>
+        <span class="engine-desc">Scheduler policy determines how compute gets allocated before a single workload runs. PACE grades those decisions and finds the patterns that leave hardware waiting: over-requesting, poor backfill, and fairshare imbalance.</span>
       </div>
 
       <div class="engine">
-        <span class="engine-id">CORE</span>
-        <span class="engine-text">A cluster optimized for
-        training in 2021 may be the wrong tool for inference
-        in 2026. CORE grades the fit between the hardware
-        deployed and the work being done.</span>
+        <span class="engine-name">CORE</span>
+        <span class="engine-desc">A cluster optimized for training in 2021 may be the wrong tool for inference in 2026. CORE grades the fit between the hardware deployed and the work being done.</span>
       </div>
 
     </div>
 
     <div class="engine-conclusion">
+
       <div class="engine">
-        <span class="engine-id">GRADE</span>
-        <span class="engine-text">GRADE produces the number.
-        It weighs what every engine found and arrives at a
-        PTL Score that reflects how the infrastructure
-        actually performs.</span>
+        <span class="engine-name">GRADE</span>
+        <span class="engine-desc">GRADE produces the number. It weighs what every engine found and arrives at a PTL Score between 0.0 and 1.0, where 1.0 represents the full potential of the hardware and configuration in use. The score reflects how the infrastructure actually performs, not how it was intended to perform.</span>
       </div>
+
       <div class="engine">
-        <span class="engine-id">ATLAS</span>
-        <span class="engine-text">A score is only useful if
-        it points somewhere. ATLAS ranks the changes most
-        likely to improve the next assessment, ordered by
-        impact, not by difficulty.</span>
+        <span class="engine-name">ATLAS</span>
+        <span class="engine-desc">A score is only useful if it points somewhere. ATLAS ranks the changes most likely to improve the next assessment, ordered by impact, not by difficulty.</span>
       </div>
+
     </div>
 
     <div class="engine engine-claw">
-      <span class="engine-id id-claw">CLAW</span>
-      <span class="engine-text">A NemoClaw-compatible agent
-      that runs inside the infrastructure being assessed.
-      The cluster describes itself.</span>
+      <span class="engine-name">CLAW</span>
+      <span class="engine-desc">A NemoClaw-compatible agent that runs inside the infrastructure being assessed. The cluster describes itself.</span>
     </div>
 
   </div>
 
   <div class="section" id="pilot">
     <span class="section-label">Work with us</span>
-    <div class="pilot-body">
+    <div class="contact-body">
       <p>We are taking three pilots this quarter.
-      The findings belong to your organization.
-      We keep the methodology.</p>
-      <a href="mailto:jesus@plaintheory.org"
-         class="pilot-email">jesus@plaintheory.org</a>
+The findings belong to your organization.
+We keep the methodology.</p>
+      <a href="mailto:research@plaintheory.org"
+         class="contact-email">research@plaintheory.org</a>
     </div>
   </div>
+
+  <footer>
+    <span>Plain Theory Labs</span>
+    <span>2026</span>
+  </footer>
+
+</div>
 
 </BaseLayout>

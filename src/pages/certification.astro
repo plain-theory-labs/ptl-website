@@ -1,128 +1,21 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 
-const description =
-  "Certification — Plain Theory Labs";
+const description = "Certification — Plain Theory Labs";
 ---
 
 <BaseLayout title="Certification — Plain Theory Labs" description={description}>
-
-  <!-- How certification works -->
-  <section class="prose-section">
-    <div class="section-inner">
+  <div class="wrap">
+    <div class="section">
       <span class="section-label">Certification</span>
-      <p>
-        PTL scores AI compute infrastructure on a 0.0 to 1.0 scale against a
-        documented methodology. The performance tier — BASELINE through FRONTIER —
-        is shorthand for where the score lands. The score is the truth; the tier
-        is the label. The certification is a longitudinal record, not a one-time
-        audit. Year one is a baseline. Year three is a dataset.
-      </p>
-
-      <hr class="rule" />
-
-      <span class="section-label">How certification works</span>
-      <p>
-        <em>Data collection.</em> You provide a Slurm scheduler export and basic
-        facility information — cooling type, location, carbon accounting method.
-        Additional engines require additional data. Every data requirement is
-        documented before the engagement begins.
-      </p>
-      <p>
-        <em>Engine analysis.</em> Each engine runs independently against your data.
-        ACE grades GPU efficiency. COOL grades cooling performance. FLUX grades
-        carbon accounting methodology. PACE grades scheduler policy. CORE grades
-        hardware-workload fit. Every finding includes a confidence label and
-        disclosed assumptions.
-      </p>
-      <p>
-        <em>GRADE certification.</em> Engine scores are weighted and aggregated into
-        a composite. The composite determines your certification tier. Engines you
-        have not yet provided data for are excluded from the composite — partial
-        certification is meaningful certification.
-      </p>
-      <p>
-        <em>ATLAS recommendations.</em> ATLAS ranks the actions most likely to
-        improve your certification in the next assessment. Priority is determined
-        by gap size, engine weight, and operational impact. You receive a ranked
-        action plan alongside your certification.
-      </p>
-    </div>
-  </section>
-
-  <!-- Certification tiers -->
-  <section class="prose-section">
-    <div class="section-inner">
-      <span class="section-label">Certification tiers</span>
-      <p>
-        PTL scores clusters on a 0.0 to 1.0 scale. The performance tier is
-        shorthand for where the score lands. The number is the truth — the
-        tier is the label.
-      </p>
-      <div class="tier-table">
-        <div class="tier-row">
-          <span class="tier-name">FRONTIER</span>
-          <span class="tier-desc">All five engines · PTL Score ≥ 0.85</span>
-        </div>
-        <div class="tier-row">
-          <span class="tier-name">OPTIMIZED</span>
-          <span class="tier-desc">Four or more engines · PTL Score ≥ 0.70</span>
-        </div>
-        <div class="tier-row">
-          <span class="tier-name">CAPABLE</span>
-          <span class="tier-desc">Three or more engines · PTL Score ≥ 0.60</span>
-        </div>
-        <div class="tier-row">
-          <span class="tier-name">DEVELOPING</span>
-          <span class="tier-desc">Two or more engines · PTL Score ≥ 0.45</span>
-        </div>
-        <div class="tier-row">
-          <span class="tier-name">BASELINE</span>
-          <span class="tier-desc">ACE only — first scored assessment</span>
-        </div>
-        <div class="tier-row">
-          <span class="tier-name">PENDING</span>
-          <span class="tier-desc">No engines complete</span>
-        </div>
+      <div class="contact-body">
+        <p>The PTL certification process, tier structure, and longitudinal record are fully documented. A score between 0.0 and 1.0. One tier. Your findings.</p>
+        <a href="/docs/certification/" class="contact-email">Read how certification works</a>
       </div>
-      <p>
-        MIT Supercloud scored 0.450 on its first assessment — DEVELOPING tier.
-        The ATLAS engine identified GPU scheduler configuration as the
-        highest-impact improvement, specific enough to act on the same week.
-      </p>
     </div>
-  </section>
-
-  <!-- The longitudinal record -->
-  <section class="prose-section">
-    <div class="section-inner">
-      <span class="section-label">The longitudinal record</span>
-      <p>
-        Certification is most valuable over time. An organization that improves from
-        BASELINE to DEVELOPING to CAPABLE across three annual assessments has something
-        regulators, funders, and procurement offices can evaluate. PTL maintains the
-        certification record. You own the findings.
-      </p>
-    </div>
-  </section>
-
-  <!-- Start a certification — dark closing -->
-  <section class="pilot-section">
-    <div class="section-inner">
-      <span class="section-label-dark">Start a certification</span>
-      <p>
-        We are taking three pilot organizations this quarter. A pilot begins with your
-        Slurm scheduler export and basic facility information. We run the analysis,
-        deliver private findings to your team, and work through what the results mean
-        together. You decide what to do with it.
-      </p>
-      <p>
-        The findings belong to your organization. We keep the methodology.
-      </p>
-      <a href="mailto:jesus@plaintheory.org" class="cta-link-light" style="margin-top: 32px;">
-        Start a pilot
-      </a>
-    </div>
-  </section>
-
+    <footer>
+      <span>Plain Theory Labs</span>
+      <span>2026</span>
+    </footer>
+  </div>
 </BaseLayout>
