@@ -164,13 +164,36 @@ is capable of.</span>
   <div class="engine" data-engine-idx="4">
     <span class="engine-name">CORE</span>
     <svg class="engine-icon" viewBox="0 0 44 44" fill="none">
-      <rect x="4" y="15" width="16" height="14" rx="2" stroke="#334155" stroke-width="1.4" fill="none" stroke-dasharray="60" stroke-dashoffset="60"><animate attributeName="stroke-dashoffset" from="60" to="0" dur="0.48s" fill="freeze" begin="0.05s"/></rect>
-      <text x="12" y="24" font-family="monospace" font-size="7" fill="#334155" text-anchor="middle" font-weight="500" opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.2s" fill="freeze" begin="0.6s"/>H100</text>
-      <text x="12" y="32" font-family="monospace" font-size="5.5" fill="#94918a" text-anchor="middle" opacity="0"><animate attributeName="opacity" from="0" to="0.8" dur="0.2s" fill="freeze" begin="0.7s"/>2022</text>
-      <text x="24" y="24" font-family="serif" font-size="9" fill="#94918a" text-anchor="middle" opacity="0"><animate attributeName="opacity" from="0" to="0.6" dur="0.2s" fill="freeze" begin="0.95s"/>&#x2260;</text>
-      <rect x="24" y="15" width="16" height="14" rx="2" stroke="#92400e" stroke-width="1.4" fill="none" stroke-dasharray="60" stroke-dashoffset="60"><animate attributeName="stroke-dashoffset" from="60" to="0" dur="0.48s" fill="freeze" begin="0.45s"/></rect>
-      <text x="32" y="24" font-family="monospace" font-size="6.5" fill="#92400e" text-anchor="middle" font-weight="500" opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.2s" fill="freeze" begin="0.75s"/>infer</text>
-      <text x="32" y="32" font-family="monospace" font-size="5.5" fill="#94918a" text-anchor="middle" opacity="0"><animate attributeName="opacity" from="0" to="0.8" dur="0.2s" fill="freeze" begin="0.85s"/>2026</text>
+      <!-- Rack frame — tall narrow rectangle, server rack shape -->
+      <rect x="12" y="4" width="20" height="36" rx="1.5"
+        stroke="#28251e" stroke-width="1.4" fill="none"
+        stroke-dasharray="112" stroke-dashoffset="112">
+        <animate attributeName="stroke-dashoffset" from="112" to="0" dur="0.6s" fill="freeze" begin="0.05s"/>
+      </rect>
+      <!-- Slot 1 — green, running well -->
+      <rect x="15" y="8" width="14" height="4" rx="0.5" fill="#14532d" opacity="0">
+        <animate attributeName="opacity" from="0" to="0.9" dur="0.12s" fill="freeze" begin="0.7s"/>
+      </rect>
+      <!-- Slot 2 — green -->
+      <rect x="15" y="15" width="14" height="4" rx="0.5" fill="#14532d" opacity="0">
+        <animate attributeName="opacity" from="0" to="0.9" dur="0.12s" fill="freeze" begin="0.82s"/>
+      </rect>
+      <!-- Slot 3 — green -->
+      <rect x="15" y="22" width="14" height="4" rx="0.5" fill="#14532d" opacity="0">
+        <animate attributeName="opacity" from="0" to="0.9" dur="0.12s" fill="freeze" begin="0.94s"/>
+      </rect>
+      <!-- Slot 4 — amber, wrong workload for this hardware -->
+      <rect x="15" y="29" width="14" height="4" rx="0.5" fill="#92400e" opacity="0">
+        <animate attributeName="opacity" from="0" to="0.8" dur="0.12s" fill="freeze" begin="1.06s"/>
+      </rect>
+      <!-- Slot 5 — empty -->
+      <rect x="15" y="36" width="14" height="4" rx="0.5" fill="#dedad2" opacity="0">
+        <animate attributeName="opacity" from="0" to="1" dur="0.12s" fill="freeze" begin="1.18s"/>
+      </rect>
+      <!-- Amber dot — flags the mismatch slot -->
+      <circle cx="27" cy="31" r="1.2" fill="#92400e" opacity="0">
+        <animate attributeName="opacity" from="0" to="1" dur="0.15s" fill="freeze" begin="1.22s"/>
+      </circle>
     </svg>
     <div class="engine-body">
       <p class="engine-title">Is this the right hardware for this work?</p>
@@ -263,8 +286,7 @@ is capable of.</span>
 
   <div class="section contact-section" id="pilot">
     <p class="vision-statement">AI infrastructure should perform
-at the level of the science it supports.<br>
-PTL measures whether it does.</p>
+at the level of the science it supports.</p>
     <a href="mailto:research@plaintheory.org"
        class="contact-email">research@plaintheory.org</a>
   </div>
