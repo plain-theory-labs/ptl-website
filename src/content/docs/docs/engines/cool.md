@@ -6,7 +6,7 @@ description: COOL grades cooling system efficiency using PUE relative to benchma
 The Cooling Operations Optimization Layer (COOL) measures how efficiently your facility converts incoming power into useful compute — the fraction lost to cooling overhead. COOL uses Power Usage Effectiveness (PUE) as its primary input and scores against continuous linear benchmarks derived from operational data.
 
 :::note[Version]
-COOL v0.1.0 · Released 2026-02-14
+COOL v0.1.0 · Released 2026-03-16
 :::
 
 ## Primary metric

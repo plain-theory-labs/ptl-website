@@ -69,8 +69,8 @@ NVIDIA announced NemoClaw at GTC 2026. PTL's CLAW intake agent is designed to op
 CLAW runs inside a NemoClaw OpenShell sandbox.
 
 ```bash
-# Install via NemoClaw
-nemoclaw install ptl-claw
+# Install via OpenClaw
+openclaw install ptl-claw
 
 # Or install directly
 pip install ptl-claw

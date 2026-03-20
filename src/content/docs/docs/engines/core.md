@@ -6,7 +6,7 @@ description: CORE evaluates hardware-workload fit, fleet age, and embodied carbo
 The Capital and Operations Resource Evaluator (CORE) grades your hardware against your workloads — whether the GPUs you are operating are the right hardware for the jobs you are running, how old the fleet is, and what the embodied carbon cost of that hardware represents.
 
 :::note[Version]
-CORE v2.0.0 · Released 2026-03-11
+CORE v2.0.0 · Released 2026-03-16
 :::
 
 ## Primary metric
