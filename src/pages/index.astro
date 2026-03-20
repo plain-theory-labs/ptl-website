@@ -77,8 +77,49 @@ is capable of.</span>
 
     <div class="engine-list" id="engineList">
 
-  <!-- ACE -->
+  <!-- PROFILE -->
   <div class="engine" data-engine-idx="0">
+    <span class="engine-name">PROFILE</span>
+    <svg class="engine-icon engine-icon-profile" viewBox="0 0 52 52" fill="none">
+      <!-- Gear — 8 teeth, clean rectangular form, centered -->
+      <path d="
+        M23 5 L29 5 L29 9.5
+        C32 10 34.5 11.5 36.5 13.5 L40.5 11.5 L44.5 15.5 L42.5 19.5
+        C43.5 21.5 44 23.5 44 26
+        L48 26 L48 32 L44 32
+        C44 34.5 43.5 36.5 42.5 38.5 L44.5 42.5 L40.5 46.5 L36.5 44.5
+        C34.5 46.5 32 48 29 48.5 L29 52 L23 52 L23 48.5
+        C20 48 17.5 46.5 15.5 44.5 L11.5 46.5 L7.5 42.5 L9.5 38.5
+        C8.5 36.5 8 34.5 8 32 L4 32 L4 26 L8 26
+        C8 23.5 8.5 21.5 9.5 19.5 L7.5 15.5 L11.5 11.5 L15.5 13.5
+        C17.5 11.5 20 10 23 9.5 Z"
+        stroke="#28251e" stroke-width="1.4" fill="none"
+        stroke-dasharray="220" stroke-dashoffset="220">
+        <animate attributeName="stroke-dashoffset" from="220" to="0" dur="1.0s" fill="freeze" begin="0.05s" calcMode="spline" keySplines="0.4 0 0.2 1"/>
+      </path>
+      <!-- Inner circle -->
+      <circle cx="26" cy="28.5" r="9"
+        stroke="#28251e" stroke-width="1.2" fill="none"
+        stroke-dasharray="56" stroke-dashoffset="56">
+        <animate attributeName="stroke-dashoffset" from="56" to="0" dur="0.4s" fill="freeze" begin="1.05s"/>
+      </circle>
+      <!-- Subtle green fill -->
+      <circle cx="26" cy="28.5" r="9" fill="#14532d" opacity="0">
+        <animate attributeName="opacity" from="0" to="0.15" dur="0.25s" fill="freeze" begin="1.45s"/>
+      </circle>
+      <!-- Center hub -->
+      <circle cx="26" cy="28.5" r="3" fill="#14532d" opacity="0">
+        <animate attributeName="opacity" from="0" to="1" dur="0.2s" fill="freeze" begin="1.48s"/>
+      </circle>
+    </svg>
+    <div class="engine-body">
+      <p class="engine-title">The cluster characterizes itself first.</p>
+      <p class="engine-desc">PROFILE runs before any other engine. It identifies the scheduler, hardware, and workload types in use — then routes each engine to the highest-fidelity data source available. Everything that follows depends on what PROFILE finds.</p>
+    </div>
+  </div>
+
+  <!-- ACE -->
+  <div class="engine" data-engine-idx="1">
     <span class="engine-name">ACE</span>
     <svg class="engine-icon" viewBox="0 0 44 44" fill="none">
       <rect x="9" y="9" width="26" height="26" rx="2" stroke="#28251e" stroke-width="1.4" fill="none" stroke-dasharray="104" stroke-dashoffset="104"><animate attributeName="stroke-dashoffset" from="104" to="0" dur="0.55s" fill="freeze" begin="0.05s"/></rect>
@@ -104,7 +145,7 @@ is capable of.</span>
   </div>
 
   <!-- COOL -->
-  <div class="engine" data-engine-idx="1">
+  <div class="engine" data-engine-idx="2">
     <span class="engine-name">COOL</span>
     <svg class="engine-icon" viewBox="0 0 44 44" fill="none">
       <line x1="22" y1="8" x2="22" y2="31" stroke="#28251e" stroke-width="1.4" stroke-linecap="round" stroke-dasharray="23" stroke-dashoffset="23"><animate attributeName="stroke-dashoffset" from="23" to="0" dur="0.4s" fill="freeze" begin="0.05s"/></line>
@@ -122,7 +163,7 @@ is capable of.</span>
   </div>
 
   <!-- FLUX -->
-  <div class="engine" data-engine-idx="2">
+  <div class="engine" data-engine-idx="3">
     <span class="engine-name">FLUX</span>
     <svg class="engine-icon" viewBox="0 0 44 44" fill="none">
       <rect x="7" y="9" width="30" height="26" rx="2.5" stroke="#14532d" stroke-width="1.4" fill="none" stroke-dasharray="112" stroke-dashoffset="112"><animate attributeName="stroke-dashoffset" from="112" to="0" dur="0.6s" fill="freeze" begin="0.05s"/></rect>
@@ -141,7 +182,7 @@ is capable of.</span>
   </div>
 
   <!-- PACE -->
-  <div class="engine" data-engine-idx="3">
+  <div class="engine" data-engine-idx="4">
     <span class="engine-name">PACE</span>
     <svg class="engine-icon" viewBox="0 0 44 44" fill="none">
       <rect x="7" y="9" width="9" height="8" rx="1" fill="#14532d" opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.13s" fill="freeze" begin="0.15s"/></rect>
@@ -161,7 +202,7 @@ is capable of.</span>
   </div>
 
   <!-- CORE -->
-  <div class="engine" data-engine-idx="4">
+  <div class="engine" data-engine-idx="5">
     <span class="engine-name">CORE</span>
     <svg class="engine-icon" viewBox="0 0 44 44" fill="none">
       <!-- Rack frame — tall narrow rectangle, server rack shape -->
@@ -202,7 +243,7 @@ is capable of.</span>
   </div>
 
   <!-- GRADE -->
-  <div class="engine" data-engine-idx="5">
+  <div class="engine" data-engine-idx="6">
     <span class="engine-name">GRADE</span>
     <svg class="engine-icon" viewBox="0 0 44 44" fill="none">
       <rect x="6" y="19" width="32" height="10" rx="5" fill="#dedad2"/>
@@ -223,7 +264,7 @@ is capable of.</span>
   </div>
 
   <!-- ATLAS -->
-  <div class="engine" data-engine-idx="6">
+  <div class="engine" data-engine-idx="7">
     <span class="engine-name">ATLAS</span>
     <svg class="engine-icon" viewBox="0 0 44 44" fill="none">
       <rect x="13" y="8" width="26" height="8" rx="1" fill="#14532d" opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.18s" fill="freeze" begin="0.15s"/></rect>
@@ -240,7 +281,7 @@ is capable of.</span>
   </div>
 
   <!-- CLAW -->
-  <div class="engine engine-claw" data-engine-idx="7">
+  <div class="engine engine-claw" data-engine-idx="8">
     <span class="engine-name">CLAW</span>
     <svg class="engine-icon" viewBox="0 0 44 44" fill="none">
       <path d="M7 40 C7 33 9 26 14 21 C18 17 23 15 28 17 C34 19 37 25 35 31 C33 36 28 40 21 40 Z"
@@ -285,6 +326,7 @@ is capable of.</span>
   </div>
 
   <div class="section contact-section" id="pilot">
+    <span class="section-label">Work begins here</span>
     <p class="vision-statement">AI infrastructure should perform
 at the level of the science it supports.</p>
     <a href="mailto:research@plaintheory.org"
