@@ -11,8 +11,10 @@ const description = "One honest score for AI compute infrastructure.";
   <div class="statement">
     <span class="hero-eyebrow">Plain Theory Labs</span>
     <h1>One honest score for AI compute infrastructure.</h1>
-    <p class="hero-sub">The science running on AI infrastructure matters deeply.
-We built the instrument that measures how well it performs.</p>
+    <p class="hero-sub">
+  The science running on AI infrastructure matters deeply.<br>
+  We built the instrument that measures how well it performs.
+</p>
   </div>
 
   <div class="hero-data">
@@ -37,22 +39,25 @@ is capable of.</span>
         <span class="sec-num opt">0.814</span>
         <span class="sec-tier">Optimized</span>
         <span class="sec-org">Meridian AI</span>
-        <span class="sec-context">High performance.
-Room to grow.</span>
+        <span class="sec-context">High performance.<br>Room to grow.</span>
       </div>
       <div class="sec opt">
         <span class="sec-num opt">0.736</span>
         <span class="sec-tier">Optimized</span>
         <span class="sec-org">OLCF Frontier</span>
-        <span class="sec-context">Strong efficiency.
-Notable gaps identified.</span>
+        <span class="sec-context">Strong efficiency.<br>Notable gaps identified.</span>
+      </div>
+      <div class="sec dev">
+        <span class="sec-num dev">0.538</span>
+        <span class="sec-tier">Developing</span>
+        <span class="sec-org">ALCF Polaris</span>
+        <span class="sec-context">Gaps identified.<br>Clear path forward.</span>
       </div>
       <div class="sec dev">
         <span class="sec-num dev">0.450</span>
         <span class="sec-tier">Developing</span>
         <span class="sec-org">MIT Supercloud</span>
-        <span class="sec-context">First assessment.
-Clear path forward.</span>
+        <span class="sec-context">First assessment.<br>Clear path forward.</span>
       </div>
     </div>
 
@@ -66,11 +71,6 @@ Clear path forward.</span>
 </section>
 
 <div class="wrap">
-
-  <div class="section">
-    <p class="about-text">We built PTL because the measurement
-didn't exist, and we believed it should.</p>
-  </div>
 
   <div class="section" id="engines">
     <span class="section-label">The framework</span>
@@ -261,15 +261,12 @@ didn't exist, and we believed it should.</p>
 
   </div>
 
-  <div class="section" id="pilot">
-    <span class="section-label">Work with us</span>
-    <div class="contact-body">
-      <p>We are taking three pilots this quarter.
-The findings belong to your organization.
-We keep the methodology.</p>
-      <a href="mailto:research@plaintheory.org"
-         class="contact-email">research@plaintheory.org</a>
-    </div>
+  <div class="section contact-section" id="pilot">
+    <p class="vision-statement">AI infrastructure should perform
+at the level of the science it supports.<br>
+PTL measures whether it does.</p>
+    <a href="mailto:research@plaintheory.org"
+       class="contact-email">research@plaintheory.org</a>
   </div>
 
   <footer>
@@ -283,33 +280,26 @@ We keep the methodology.</p>
 
 <script>
 (function() {
-  // Ease out quart — fast approach, slow settle
-  // Feels like a precision instrument reading
   function easeOutQuart(t) {
     return 1 - Math.pow(1 - t, 4);
   }
 
   function animateCounter(el, target, duration, delay) {
-    // Set to 0.000 immediately so there's no flash of the real number
     el.textContent = '0.000';
-
     setTimeout(function() {
       var start = null;
-
       function step(timestamp) {
         if (!start) start = timestamp;
         var elapsed = timestamp - start;
         var progress = Math.min(elapsed / duration, 1);
         var eased = easeOutQuart(progress);
         el.textContent = (eased * target).toFixed(3);
-
         if (progress < 1) {
           requestAnimationFrame(step);
         } else {
           el.textContent = target.toFixed(3);
         }
       }
-
       requestAnimationFrame(step);
     }, delay);
   }
@@ -317,66 +307,50 @@ We keep the methodology.</p>
   function runAnimation() {
     var primary = document.querySelector('.primary-number');
     var secs = document.querySelectorAll('.sec-num');
-    var targets = [0.814, 0.736, 0.450];
+    var targets = [0.814, 0.736, 0.538, 0.450];
 
-    if (primary) {
-      animateCounter(primary, 0.873, 1600, 0);
-    }
-
+    if (primary) animateCounter(primary, 0.873, 1600, 0);
     secs.forEach(function(el, i) {
       animateCounter(el, targets[i], 1200, 200 + i * 80);
     });
   }
 
-  // Use IntersectionObserver — fires when scores enter viewport
-  var scoreSection = document.querySelector('.primary-score');
-
-  if (!scoreSection) {
-    // Fallback — run on load if no score section found
-    window.addEventListener('load', runAnimation);
-    return;
-  }
-
-  var observer = new IntersectionObserver(function(entries) {
-    entries.forEach(function(entry) {
-      if (entry.isIntersecting) {
-        runAnimation();
-        observer.disconnect(); // Fire once only
-      }
-    });
-  }, {
-    threshold: 0.2  // Trigger when 20% of section is visible
-  });
-
-  observer.observe(scoreSection);
-
-  // Also set numbers to 0.000 immediately on DOM ready
-  // so the real number never flashes before animation
+  // Set to 0.000 immediately to prevent flash
   document.addEventListener('DOMContentLoaded', function() {
     var primary = document.querySelector('.primary-number');
     var secs = document.querySelectorAll('.sec-num');
     if (primary) primary.textContent = '0.000';
     secs.forEach(function(el) { el.textContent = '0.000'; });
   });
-})();
 
-// Engine row scroll-triggered fade-in
-(function() {
-  var rows = document.querySelectorAll('.engine[data-engine-idx]');
-  if (!rows.length) return;
-  var obs = new IntersectionObserver(function(entries) {
-    entries.forEach(function(entry) {
-      if (entry.isIntersecting) {
-        var el = entry.target;
-        var i = parseInt(el.getAttribute('data-engine-idx') || 0);
-        setTimeout(function() {
-          el.classList.add('engine-visible');
-        }, i * 55);
-        obs.unobserve(el);
-      }
+  // Run animation on load — not on IntersectionObserver
+  // The score section is always in view on load
+  if (document.readyState === 'complete') {
+    setTimeout(runAnimation, 300);
+  } else {
+    window.addEventListener('load', function() {
+      setTimeout(runAnimation, 300);
     });
-  }, { threshold: 0.1 });
-  rows.forEach(function(r) { obs.observe(r); });
+  }
+
+  // Engine row scroll animation
+  document.addEventListener('DOMContentLoaded', function() {
+    var rows = document.querySelectorAll('.engine[data-engine-idx]');
+    if (!rows.length) return;
+    var obs = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          var el = entry.target;
+          var i = parseInt(el.getAttribute('data-engine-idx') || 0);
+          setTimeout(function() {
+            el.classList.add('engine-visible');
+          }, i * 55);
+          obs.unobserve(el);
+        }
+      });
+    }, { threshold: 0.1 });
+    rows.forEach(function(r) { obs.observe(r); });
+  });
 })();
 </script>
 
