@@ -3,11 +3,11 @@ title: PROFILE — Cluster Profile Engine
 description: PROFILE characterizes your cluster and routes data to downstream PTL engines.
 ---
 
-PROFILE is the first engine in every PTL assessment.
+PROFILE is the first engine in every PTL assessment. It characterizes your cluster — scheduler type, GPU fleet, telemetry sources, MIG configuration — and produces the routing manifest that all downstream engines use. PROFILE is not scored. It is a prerequisite.
 
 :::note[Version]
 PROFILE v0.1.0 · Released 2026-03-16
-::: It characterizes your cluster — scheduler type, GPU fleet, telemetry sources, MIG configuration — and produces the routing manifest that all downstream engines use. PROFILE is not scored. It is a prerequisite.
+:::
 
 ## What PROFILE does
 
