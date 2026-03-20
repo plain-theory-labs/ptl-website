@@ -6,7 +6,7 @@ description: FLUX grades carbon accounting methodology and power source document
 The Facility Load and Utilization Index (FLUX) grades your carbon accounting methodology — how you document, measure, and report the carbon intensity of your facility's power supply. FLUX does not measure emissions. It grades the rigor of the methodology you use to measure and report them.
 
 :::note[Version]
-FLUX v0.1.0 · Released 2026-02-14
+FLUX v0.1.0 · Released 2026-03-16
 :::
 
 ## Primary metric

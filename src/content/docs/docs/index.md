@@ -13,13 +13,23 @@ A PTL certification is a PTL Score — a number between 0.0 and 1.0 — derived 
 
 Each engine addresses a distinct dimension of infrastructure performance:
 
-*Data collection.* PROFILE characterizes your cluster — scheduler type, GPU fleet, telemetry sources — and routes data to downstream engines. CLAW is the intake agent that automates data collection where permitted.
+*Data collection.* PROFILE characterizes your cluster — scheduler type, GPU fleet, telemetry sources — and routes data to downstream engines. CLAW is the intake agent. It installs as an OpenClaw plugin (`openclaw install ptl-claw`) and automates data collection inside NemoClaw environments.
 
 *Efficiency measurement.* ACE (Adaptive Compute Efficiency Engine) measures GPU utilization from Slurm, Kubernetes, or DCGM telemetry. PACE measures scheduler efficiency — how well your cluster allocates resources across competing workloads.
 
 *Facility and hardware.* COOL measures cooling system performance relative to a PUE benchmark. FLUX grades your carbon accounting methodology. CORE evaluates hardware-workload fit, fleet age, and embodied carbon.
 
 *Certification and recommendations.* GRADE aggregates engine scores into a composite PTL Score and produces the certification report. ATLAS generates a ranked action plan — the specific changes most likely to improve your score in the next assessment.
+
+## Validated results
+
+| Organization     | Score | Tier       | Data                 |
+|------------------|-------|------------|----------------------|
+| NERSC Perlmutter | 0.873 | Frontier   | Operational          |
+| Meridian AI      | 0.814 | Optimized  | Operational          |
+| OLCF Frontier    | 0.736 | Optimized  | Operational          |
+| ALCF Polaris     | 0.538 | Developing | Operational          |
+| MIT Supercloud   | 0.450 | Developing | HPCA22 peer-reviewed |
 
 ## Longitudinal certification
 
@@ -33,7 +43,7 @@ Read [how certification works](/docs/certification/) or [start a pilot](/docs/pi
 
 | Repository | Description | License |
 |------------|-------------|---------|
-| [ptl-engines](https://github.com/plain-theory-labs/ptl-engines) | All nine analytical engines — 864 tests | MIT |
+| [ptl-engines](https://github.com/plain-theory-labs/ptl-engines) | All nine analytical engines — 888 tests | MIT |
 | [ptl-methodology](https://github.com/plain-theory-labs/ptl-methodology) | Scoring formulas, coefficients, tiers | CC BY 4.0 |
 | [ptl-website](https://github.com/plain-theory-labs/ptl-website) | This documentation site | MIT |
 | [ptl-context](https://github.com/plain-theory-labs/ptl-context) | Engineering context and session logs | Private |

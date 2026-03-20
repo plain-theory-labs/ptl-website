@@ -3,7 +3,7 @@ title: Start a Pilot
 description: How to begin a PTL pilot certification — what you provide, what we deliver.
 ---
 
-We are taking three pilot organizations this quarter. A pilot begins with your Slurm scheduler export and four questions about your facility. We run the analysis and deliver a private certification report to your team. The data collection takes under two hours.
+A pilot begins with your Slurm scheduler export and four questions about your facility. We run the analysis and deliver a private certification report to your team. The data collection takes under two hours.
 
 ## What a pilot covers
 
@@ -29,4 +29,4 @@ You decide what to do with the results. We do not publish pilot findings without
 
 ## Start a pilot
 
-Write to [jesus@plaintheory.org](mailto:jesus@plaintheory.org). Include a brief description of your cluster — scheduler type, approximate GPU count, and primary workload category. We will send the pilot intake form within one business day.
+Write to [research@plaintheory.org](mailto:research@plaintheory.org). Include a brief description of your cluster — scheduler type, approximate GPU count, and primary workload category. We will send the pilot intake form within one business day.
