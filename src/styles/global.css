@@ -126,7 +126,7 @@ h1 {
   font-size: 1.3rem;
   color: var(--ink-3);
   line-height: 1.68;
-  max-width: 480px;
+  max-width: 560px;
 }
 
 .hero-data { padding-bottom: 64px; }
@@ -294,15 +294,6 @@ h1 {
   margin-bottom: 60px;
 }
 
-.about-text {
-  font-family: var(--serif);
-  font-size: 1.65rem;
-  font-style: italic;
-  color: var(--ink-2);
-  line-height: 1.58;
-  max-width: 680px;
-}
-
 .engine-list { display: flex; flex-direction: column; }
 
 .engine {
@@ -366,13 +357,15 @@ h1 {
 
 .engine-claw .engine-name { color: var(--claw); }
 
-.contact-body { max-width: 560px; }
-
-.contact-body p {
+.vision-statement {
   font-family: var(--serif);
-  font-size: 1.25rem;
-  color: var(--ink-2);
-  line-height: 1.75;
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: var(--ink-1);
+  line-height: 1.5;
+  max-width: 640px;
+  margin-bottom: 28px;
+  font-style: italic;
 }
 
 .contact-email {
@@ -439,8 +432,7 @@ footer span {
   .engine { grid-template-columns: 44px 36px 1fr; gap: 0 14px; }
   .engine-icon { width: 36px; height: 36px; }
   .engine-desc { font-size: 1rem; }
-  .about-text { font-size: 1.35rem; }
-  .contact-body p { font-size: 1.15rem; }
+  .vision-statement { font-size: 1.25rem; }
   .contact-email { font-size: 11px; }
   footer { flex-direction: column; gap: 8px; }
 }
