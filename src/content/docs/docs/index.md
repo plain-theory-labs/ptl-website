@@ -29,7 +29,7 @@ Each engine addresses a distinct dimension of infrastructure performance:
 | Meridian AI      | 0.814 | Optimized  | Operational          |
 | OLCF Frontier    | 0.736 | Optimized  | Operational          |
 | ALCF Polaris     | 0.538 | Developing | Operational          |
-| MIT Supercloud   | 0.450 | Developing | HPCA22 peer-reviewed |
+| MIT Supercloud   | 0.457 | Developing | HPCA22 peer-reviewed |
 
 ## Longitudinal certification
 
