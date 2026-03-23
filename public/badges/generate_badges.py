@@ -11,12 +11,12 @@ from pathlib import Path
 OUTPUT_DIR = Path(__file__).parent
 
 TIERS = [
-    {"name": "PLATINUM", "color": "#b8860b"},
-    {"name": "GOLD",     "color": "#c9a84c"},
-    {"name": "SILVER",   "color": "#708090"},
-    {"name": "BRONZE",   "color": "#8b5e3c"},
-    {"name": "MEASURED", "color": "#5a5248"},
-    {"name": "PENDING",  "color": "#8a8078"},
+    {"name": "FRONTIER",   "color": "#b8860b"},
+    {"name": "OPTIMIZED",  "color": "#c9a84c"},
+    {"name": "CAPABLE",    "color": "#708090"},
+    {"name": "DEVELOPING", "color": "#8b5e3c"},
+    {"name": "BASELINE",   "color": "#5a5248"},
+    {"name": "PENDING",    "color": "#8a8078"},
 ]
 
 
@@ -78,10 +78,10 @@ def main():
         generated.append(filename)
         print(f"  {filename}")
 
-    # MIT Supercloud sample — MEASURED tier, 2022
-    sample_tier = next(t for t in TIERS if t["name"] == "MEASURED")
+    # MIT Supercloud sample — DEVELOPING tier, 2022
+    sample_tier = next(t for t in TIERS if t["name"] == "DEVELOPING")
     sample_svg = make_badge(
-        tier_name="MEASURED",
+        tier_name="DEVELOPING",
         color=sample_tier["color"],
         org="MIT Supercloud",
         year="2022",
@@ -93,10 +93,10 @@ def main():
 
     print(f"\nGenerated {len(generated)} badges in {OUTPUT_DIR}")
 
-    # Print BRONZE badge source for verification
-    bronze_path = OUTPUT_DIR / "ptl-certified-bronze.svg"
-    print("\n--- BRONZE badge SVG source ---")
-    print(bronze_path.read_text(encoding="utf-8"))
+    # Print DEVELOPING badge source for verification
+    developing_path = OUTPUT_DIR / "ptl-certified-developing.svg"
+    print("\n--- DEVELOPING badge SVG source ---")
+    print(developing_path.read_text(encoding="utf-8"))
     print("--- end ---")
 
 

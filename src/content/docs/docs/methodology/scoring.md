@@ -33,14 +33,14 @@ Using NERSC Perlmutter Q1 2026 results:
 
 ```
 Engine scores:
-  ACE  = 0.891 × 0.35 = 0.31185
-  PACE = 0.821 × 0.25 = 0.20525
-  COOL = 0.912 × 0.20 = 0.18240
-  CORE = 0.880 × 0.12 = 0.10560
-  FLUX = 0.850 × 0.08 = 0.06800
+  ACE  = 0.740 × 0.35 = 0.25900
+  PACE = 0.853 × 0.25 = 0.21325
+  COOL = 1.000 × 0.20 = 0.20000
+  CORE = 0.713 × 0.12 = 0.08556
+  FLUX = 1.000 × 0.08 = 0.08000
   ─────────────────────────────
-  PTL Score = 0.87310 → 0.873
-  Tier: Frontier (≥ 0.85, all five engines)
+  PTL Score = 0.83781 → 0.838
+  Tier: Optimized (≥ 0.70, all five engines)
 ```
 
 ### Partial assessment example
