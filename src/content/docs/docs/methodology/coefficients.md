@@ -37,7 +37,7 @@ Carbon accounting methodology is important. It is also the dimension where organ
 
 ## Coefficient versioning
 
-Current coefficients: v2.0, published 2026-01-15. Changes from v1.0: CORE weight increased from 0.08 to 0.12 (Blackwell embodied carbon significance); FLUX weight decreased from 0.12 to 0.08 (geographic constraint acknowledgment). Previous version coefficients are archived in the ptl-methodology repository.
+Current coefficients: v2.0, published 2026-03-18. These are the initial published coefficients. No prior version exists. Previous tags in ptl-engines predate this methodology and used different values; those tags are retained for history only and should not be cited as methodology references.
 
 ## Source
 
