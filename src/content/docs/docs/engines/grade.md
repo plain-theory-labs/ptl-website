@@ -51,31 +51,31 @@ CORE normalized = 0.12 / 0.72 = 0.167
 
 ## Worked example
 
-**Input** (all five engines present):
+**Input** (all five engines present, NERSC Perlmutter):
 
 | Engine | Score | Weight |
 |--------|-------|--------|
-| ACE    | 0.891 | 0.35   |
-| PACE   | 0.821 | 0.25   |
-| COOL   | 0.912 | 0.20   |
-| CORE   | 0.880 | 0.12   |
-| FLUX   | 0.850 | 0.08   |
+| ACE    | 0.740 | 0.35   |
+| PACE   | 0.853 | 0.25   |
+| COOL   | 1.000 | 0.20   |
+| CORE   | 0.713 | 0.12   |
+| FLUX   | 1.000 | 0.08   |
 
 **Calculation:**
 
 ```
 PTL_Score =
-  (0.891 × 0.35) +
-  (0.821 × 0.25) +
-  (0.912 × 0.20) +
-  (0.880 × 0.12) +
-  (0.850 × 0.08)
+  (0.740 × 0.35) +
+  (0.853 × 0.25) +
+  (1.000 × 0.20) +
+  (0.713 × 0.12) +
+  (1.000 × 0.08)
 
-= 0.31185 + 0.20525 + 0.18240 + 0.10560 + 0.06800
-= 0.87310
+= 0.25900 + 0.21325 + 0.20000 + 0.08556 + 0.08000
+= 0.83781
 ```
 
-**Result:** PTL Score 0.873 — Frontier. This matches the NERSC Perlmutter certification.
+**Result:** PTL Score 0.838 — Optimized. This matches the NERSC Perlmutter certification.
 
 ## Composite scoring
 
