@@ -87,12 +87,12 @@ Engine weights are published in [Coefficients](/docs/methodology/coefficients/).
 
 | PTL Score | Tier | Engines required |
 |-----------|------|-----------------|
-| ≥ 0.85 | Frontier | All five engines |
-| ≥ 0.70 | Optimized | Four or more engines |
-| ≥ 0.60 | Capable | Three or more engines |
-| ≥ 0.45 | Developing | Two or more engines incl. ACE |
-| ACE only | Baseline | First measurement |
-| None | Pending | No engines complete |
+| ≥ 0.85 | FRONTIER | All five engines |
+| ≥ 0.70 | OPTIMIZED | Four or more engines |
+| ≥ 0.60 | CAPABLE | Three or more engines |
+| ≥ 0.45 | DEVELOPING | Two or more engines incl. ACE |
+| ACE only | BASELINE | First measurement |
+| None | PENDING | No engines complete |
 
 ## Certification record
 
