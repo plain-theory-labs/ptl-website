@@ -25,10 +25,10 @@ Each engine addresses a distinct dimension of infrastructure performance:
 
 | Organization     | Score | Tier       | Data                 |
 |------------------|-------|------------|----------------------|
-| NERSC Perlmutter | 0.873 | Frontier   | Operational          |
-| Meridian AI      | 0.814 | Optimized  | Operational          |
-| OLCF Frontier    | 0.736 | Optimized  | Operational          |
-| ALCF Polaris     | 0.538 | Developing | Operational          |
+| NERSC Perlmutter | 0.838 | Optimized  | Operational          |
+| Meridian AI      | 0.808 | Optimized  | Operational          |
+| OLCF Frontier    | 0.746 | Optimized  | Operational          |
+| ALCF Polaris     | 0.606 | Capable    | Operational          |
 | MIT Supercloud   | 0.457 | Developing | HPCA22 peer-reviewed |
 
 ## Longitudinal certification

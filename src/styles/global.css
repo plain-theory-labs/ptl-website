@@ -225,6 +225,7 @@ h1 {
   font-variant-numeric: tabular-nums;
 }
 .sec-num.opt { color: var(--teal); }
+.sec-num.cap { color: var(--green); }
 .sec-num.dev { color: var(--amber); }
 
 .sec-tier {
@@ -235,6 +236,7 @@ h1 {
   text-transform: uppercase;
 }
 .sec.opt .sec-tier { color: var(--teal); }
+.sec.cap .sec-tier { color: var(--green); }
 .sec.dev .sec-tier { color: var(--amber); }
 
 .sec-org {
