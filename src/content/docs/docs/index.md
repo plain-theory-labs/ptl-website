@@ -43,7 +43,7 @@ Read [how certification works](/docs/certification/) or [start a pilot](/docs/pi
 
 | Repository | Description | License |
 |------------|-------------|---------|
-| [ptl-engines](https://github.com/plain-theory-labs/ptl-engines) | All nine analytical engines — 1,245 tests | MIT |
+| [ptl-engines](https://github.com/plain-theory-labs/ptl-engines) | All nine analytical engines — 1,274 tests | MIT |
 | [ptl-methodology](https://github.com/plain-theory-labs/ptl-methodology) | Scoring formulas, coefficients, tiers | CC BY 4.0 |
 | [ptl-website](https://github.com/plain-theory-labs/ptl-website) | This documentation site | MIT |
 | [ptl-context](https://github.com/plain-theory-labs/ptl-context) | Engineering context and session logs | Private |
