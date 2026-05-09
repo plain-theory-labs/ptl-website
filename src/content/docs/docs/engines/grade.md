@@ -90,9 +90,33 @@ above are hypothetical inputs used to demonstrate the formula.
 
 ## Composite scoring
 
-GRADE weights engine scores using published coefficients and aggregates them into the composite. Engines for which data was not provided are excluded from the composite. Partial certification is meaningful certification — a cluster certified on three engines has a real score, not a penalty for missing the other two.
+GRADE weights engine scores using published coefficients and aggregates them into the composite. Engines for which data was not provided are excluded from the composite — they do not count as zero. Partial certification is real certification. A cluster certified on two engines has a legitimate score on those two dimensions.
 
 Engine weights are published in [Coefficients](/docs/methodology/coefficients/).
+
+## Data quality tracking
+
+GRADE tracks the input quality of each engine score and reports a composite confidence level. Not all engine inputs are equally verifiable.
+
+| Engine | Input type |
+|--------|-----------|
+| ACE | Trace-derived — computed from Slurm sacct or DCGM telemetry |
+| PACE | Trace-derived — computed from job wait-time metrics |
+| COOL | Operator-reported — facility provides annual PUE |
+| CORE | Operator-reported — facility provides hardware inventory |
+| FLUX | Operator-reported — facility reports carbon accounting method |
+
+The composite confidence label:
+
+| Label | Meaning |
+|-------|---------|
+| HIGH | All present engines are trace-derived or directly measured |
+| MEDIUM | Mix of trace-derived and operator-reported engines |
+| LOW | All present engines are operator-reported |
+
+When ACE and PACE are both run, the composite confidence is MEDIUM at minimum — those two engines anchor the score in measured data. A five-engine score with all operator-reported inputs (COOL + CORE + FLUX only, no ACE or PACE) carries LOW confidence.
+
+This is displayed in the certification report and included in the certification record JSON.
 
 ## Tier assignment
 

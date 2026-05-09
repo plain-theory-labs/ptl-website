@@ -47,6 +47,35 @@ Queue incentive measures scheduling outcomes, not feature flags. All three signa
 are computed from job submit_time, start_time, end_time, and GPU count — the same
 fields present in sacct exports, Alibaba Helios traces, and Microsoft Philly logs.
 
+### Request accuracy — job calibration rate (from ACE output)
+
+When ACE has been run, PACE request accuracy uses **job calibration rate**
+rather than the aggregate GPU ratio — avoiding double-counting with ACE
+in the GRADE composite.
+
+```
+job_calibration_rate = 1.0 - flagged_jobs_pct   (from ACE output)
+```
+
+ACE answers: how hard did GPUs work on average?
+PACE calibration answers: what fraction of jobs were appropriately sized?
+
+These diverge meaningfully. A cluster where all jobs use exactly 55% of GPUs
+has ACE = 0.55 but calibration rate = 1.00 (none flagged). A cluster where
+half the jobs use 0% and half use 100% has ACE = 0.50 but calibration rate = 0.50.
+
+| Calibration rate | Score |
+|------------------|-------|
+| ≥ 0.80 | 1.00 |
+| ≥ 0.60 | 0.75 |
+| ≥ 0.40 | 0.50 |
+| ≥ 0.20 | 0.25 |
+| < 0.20 | 0.00 |
+
+When ACE output is not available, PACE falls back to the aggregate GPU ratio
+(`total_gpu_used / total_gpu_requested`). This fallback measures the same
+signal as ACE and the overlap is documented in the GRADE data quality output.
+
 **Signal 1 — Scheduling pressure ratio (40% of queue incentive)**
 
 ```
