@@ -203,5 +203,5 @@ Engines are excluded simply by omitting their report path — absent paths are n
 
 - [View GRADE source on GitHub](https://github.com/plain-theory-labs/ptl-engines/tree/main/grade)
 - [GRADE methodology document](https://github.com/plain-theory-labs/ptl-methodology/blob/main/engines/grade_methodology.md)
-- [Coefficients changelog](https://github.com/plain-theory-labs/ptl-methodology/blob/main/coefficients.md)
+- [Coefficients changelog](https://github.com/plain-theory-labs/ptl-methodology/blob/main/changelog.md)
 - [Report an issue](https://github.com/plain-theory-labs/ptl-engines/issues)

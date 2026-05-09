@@ -46,4 +46,5 @@ An organization that improves from BASELINE (0.42) to DEVELOPING (0.58) to CAPAB
 
 - [Full methodology repository](https://github.com/plain-theory-labs/ptl-methodology)
 - [Tiers document](https://github.com/plain-theory-labs/ptl-methodology/blob/main/tiers.md)
+- [Grade methodology document](https://github.com/plain-theory-labs/ptl-methodology/blob/main/engines/grade_methodology.md)
 - [Suggest a change](https://github.com/plain-theory-labs/ptl-methodology/issues)

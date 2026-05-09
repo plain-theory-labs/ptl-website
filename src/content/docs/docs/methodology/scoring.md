@@ -15,9 +15,9 @@ Each engine's scoring formula is fully documented:
 
 **ACE** — GPU-hours weighted efficiency rate: `gpu_hours_used / gpu_hours_requested`. Large, long jobs count proportionally more than small, short jobs. This correctly reflects infrastructure efficiency in physical terms. ACE also reports `gpu_efficiency_score` (per-job mean, equal job weighting) as a secondary finding for scheduler analysis.
 
-**COOL** — continuous linear function of PUE. PUE 1.20 → 1.00; PUE 1.60 → 0.00. Every tenth of a PUE point matters.
+**COOL** — continuous linear score derived from the gap between reported PUE and a climate-adjusted efficient benchmark. The benchmark varies by cooling type (air, water, liquid_to_chip, hybrid), facility age band, and ASHRAE climate zone. `delta = annual_pue − climate_adjusted_benchmark`. Delta ≤ −0.05 → score 1.0 (outperforming benchmark). Delta ≥ 0.30 → score 0.0. Every hundredth of a PUE point matters, and the same PUE score differently in Miami and Minneapolis.
 
-**FLUX** — discrete score by carbon accounting method. Grid average → 0.50. Direct documented PPA → 1.00. Unbundled RECs with claimed emissions → 0.10.
+**FLUX** — additive score by carbon accounting method, capped at 1.0. Grid average → 0.50. Direct documented PPA → 1.00. Unbundled RECs → 0.20. Optional bonuses: +0.15 for vintage-matched RECs, +0.10 for PPA documentation. A greenwashing flag fires separately when a REC-based method claims renewables but reported carbon is below 50% of the grid-implied actual — it does not alter the methodology score.
 
 **PACE** — weighted composite: request accuracy (50%), queue incentive (30%), fragmentation (20%). Queue incentive is computed from job trace data — scheduling pressure ratio, small-job wait advantage, and wait time spread — not self-reported feature flags.
 
@@ -91,4 +91,5 @@ PTL scoring is deterministic. The same input produces the same output. This is a
 
 - [Full methodology repository](https://github.com/plain-theory-labs/ptl-methodology)
 - [Scoring methodology document](https://github.com/plain-theory-labs/ptl-methodology/blob/main/scoring.md)
+- [Engine methodology documents](https://github.com/plain-theory-labs/ptl-methodology/tree/main/engines)
 - [Suggest a methodology change](https://github.com/plain-theory-labs/ptl-methodology/issues)
