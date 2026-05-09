@@ -66,23 +66,42 @@ NVIDIA announced NemoClaw at GTC 2026. PTL's CLAW intake agent is designed to op
 
 ## Installation
 
-CLAW runs inside a NemoClaw OpenShell sandbox.
+CLAW has two interfaces: a Python CLI for standalone use, and a TypeScript plugin for NemoClaw/OpenClaw environments.
+
+**Python CLI (standalone):**
+
+```bash
+# Install directly
+pip install ptl-claw
+
+# Run cluster discovery and package for PTL
+claw collect
+claw collect --output ptl_claw_package.json
+
+# Run discovery only — no packaging
+claw discover
+
+# Print version
+claw version
+```
+
+**OpenClaw plugin (NemoClaw environments):**
 
 ```bash
 # Install via OpenClaw
 openclaw install ptl-claw
 
-# Or install directly
-pip install ptl-claw
+# One-shot collection
+ptl-claw collect --profile one_shot
 
-# Verify installation
-claw --version
+# Show collection status and active data sources
+ptl-claw status
 
-# Run a one-time assessment package
-claw collect --output claw_package.json
+# Show packaged output location before transmission
+ptl-claw package
 
-# Run continuous telemetry (daemon mode)
-claw daemon --interval 300 --output-dir /var/ptl/telemetry
+# Continuous background collection
+ptl-claw daemon --interval 300
 ```
 
 ## Privacy model
@@ -93,21 +112,26 @@ In NemoClaw environments, OpenShell policy controls what data CLAW can access. N
 
 ## Output schema
 
-CLAW produces a structured JSON package:
+`claw collect` writes a JSON package (`ptl_claw_package.json` by default) with the following top-level structure:
 
 | Field | Type | Description |
 |-------|------|-------------|
-| claw_version | string | CLAW agent version |
-| collection_timestamp | ISO8601 | When collection ran |
-| cluster_id | string | Unique cluster identifier |
-| gpu_fleet | array | Detected GPU models and counts |
-| scheduler_type | string | slurm, kubernetes, pbs, ray |
-| dcgm_available | boolean | Whether DCGM metrics were collected |
-| utilization_samples | array | GPU utilization time-series |
-| job_accounting | object | Slurm/PBS accounting summary (if available) |
-| pod_metrics | object | Kubernetes pod GPU metrics (if available) |
-| inference_servers | array | Detected inference endpoints and status |
-| data_sources_used | array | Which of the five sources were active |
+| `ptl_component` | string | Always `"claw"` |
+| `version` | string | CLAW agent version |
+| `package_timestamp` | ISO8601 | When the package was written |
+| `organization` | string | Organization name (if provided) |
+| `transmission_method` | string | `"manual_v01"` in v0.1 |
+| `discovery` | object | Discovery results (see below) |
+| `instructions` | string | Transmission instructions |
+
+**`discovery` object:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `ptl_claw_version` | string | CLAW version |
+| `discovery_timestamp` | ISO8601 | When discovery ran |
+| `collection_results` | object | Per-source results (nvidia_smi, k8s_nodes, dcgm, inference_servers) |
+| `data_sources_found` | object | Per-source success boolean |
 
 ## Source
 
