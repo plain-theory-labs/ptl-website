@@ -6,7 +6,7 @@ description: PACE measures scheduler efficiency — how well your cluster alloca
 Predictive Allocation and Cluster Efficiency (PACE) measures how well your cluster scheduler allocates resources across competing workloads. GPU efficiency (ACE) tells you whether jobs use what they request. PACE tells you whether the scheduler is giving resources to the right jobs at the right time — and whether users have any incentive to ask for only what they need.
 
 :::note[Version]
-PACE v2.0.0 · Released 2026-03-16 · Queue incentive redesigned v0.2 2026-05-09
+PACE v0.1.0 · Released 2026-03-16 · Queue incentive redesigned methodology v0.2 2026-05-09
 :::
 
 ## Primary metric
@@ -272,23 +272,54 @@ the deprecated self-reported feature flag path.
 ## CLI usage
 
 ```bash
-# Analyze a Slurm cluster with data-driven queue metrics
+# Score a single organization from a pace_input_v1.json file
 pace analyze \
-  --gpu-hours-requested 1200000 \
-  --gpu-hours-used 864000 \
-  --scheduling-pressure-ratio 1.8 \
-  --small-job-wait-ratio 0.95 \
-  --wait-spread-ratio 12.0
+  --input pace_input.json \
+  --output pace_output.json
 
-# Analyze a Kubernetes cluster
-pace analyze \
-  --input-path kubernetes \
-  --resource-request-ratio 0.91 \
-  --avg-pod-pending-minutes 3.2 \
-  --quota-utilization 0.87
+# Run all synthetic organizations and print grades
+pace demo
 
-# Output to JSON
-pace analyze --input slurm_data.json --output pace_result.json
+# Validate a ptl_output_v1.json export against the PTL schema
+pace validate --input pace_output.json
+```
+
+**Example `pace_input.json` (Slurm, data-driven queue metrics):**
+
+```json
+{
+  "organization": "Midwest University HPC",
+  "period": "2026",
+  "scheduler": "slurm",
+  "total_jobs": 45000,
+  "total_gpu_requested": 1200000,
+  "total_gpu_used": 864000,
+  "total_cpu_requested": 8400000,
+  "total_cpu_used": 6720000,
+  "scheduling_pressure_ratio": 1.8,
+  "small_job_wait_ratio": 0.95,
+  "wait_spread_ratio": 12.0,
+  "short_job_pct": 0.03
+}
+```
+
+**Example `pace_input.json` (Kubernetes):**
+
+```json
+{
+  "organization": "ML Platform Team",
+  "period": "2026",
+  "scheduler": "kubernetes",
+  "total_jobs": 12000,
+  "total_gpu_requested": 480000,
+  "total_gpu_used": 437000,
+  "total_cpu_requested": 2400000,
+  "total_cpu_used": 2100000,
+  "input_path": "kubernetes",
+  "k8s_resource_request_ratio": 0.91,
+  "k8s_avg_pod_pending_minutes": 3.2,
+  "k8s_quota_utilization": 0.87
+}
 ```
 
 ## Source
