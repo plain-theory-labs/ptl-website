@@ -15,31 +15,35 @@ ATLAS receives all engine output JSON files and ranks actions by expected compos
 
 ```
 recommendation_priority =
-  (expected_score_delta × engine_weight) / estimated_effort
+  gap × engine_weight × impact_factor
 
 where:
-  expected_score_delta = projected improvement to engine score
-  engine_weight        = that engine's coefficient in GRADE
-  estimated_effort     = low (1) | medium (2) | high (3)
+  gap             = target_score - current_engine_score
+  engine_weight   = ATLAS operational weight (reflects tractability,
+                    not the GRADE scoring coefficient)
+  impact_factor   = per-engine multiplier for operational impact
+
+ATLAS operational weights (tractability — how quickly improvement lands):
+  ACE  × 0.35  — scheduler/right-sizing, zero downtime, immediate
+  PACE × 0.30  — scheduler config changes, zero downtime, immediate
+  COOL × 0.20  — facilities team, medium term
+  FLUX × 0.10  — utility contracts, external dependencies
+  CORE × 0.05  — hardware refresh cycle, capital expenditure
 ```
 
 Actions are ranked highest-priority-first. ATLAS never recommends actions that require capital investment before operational changes — configuration improvements appear before hardware recommendations.
 
 ## Worked example
 
-**Input:** MIT Supercloud engine findings
+**Input:** MIT Supercloud ACE findings (HPCA22 real data — ACE engine only)
 
 ```
 ACE findings:
   gpu_efficiency_score = 0.257
-  flagged_jobs_count   = 18,441
+  jobs_analyzed        = 73,367
+  flagged_jobs_pct     = 0.89   (89% below utilization threshold)
   near_zero_jobs_pct   = 0.23
   short_jobs_pct       = 0.411
-
-PACE findings:
-  request_accuracy = 0.31
-  queue_incentive  = 0.42
-  short_job_pct    = 0.411
 ```
 
 **ATLAS output (ranked):**
@@ -78,13 +82,13 @@ ATLAS maintains separate recommendation templates for:
 
 ## Example recommendations
 
-MIT Supercloud (PTL Score 0.450, DEVELOPING):
+MIT Supercloud (ACE score 0.257, BASELINE — ACE engine only):
 
-**Recommendation 1 — ACE (priority 0.18):**
-ACE analyzed 73,367 jobs. 89% ran below the 40% GPU utilization threshold. 38.7% showed near-zero GPU activity — likely walltime padding or misconfigured job scripts. Primary action: audit the top 10 job scripts by GPU-hours wasted and implement a right-sizing policy for repeat offenders. Secondary action: enable `--gpu-bind=closest` in Slurm defaults. Expected improvement: 10–20 percentage points in average utilization (current: 25.7%).
+**Recommendation 1 — ACE (highest priority):**
+ACE analyzed 73,367 jobs. 89% ran below the 60% GPU utilization threshold. Primary action: audit the top 10 job scripts by GPU-hours wasted and implement a right-sizing policy for repeat offenders. Secondary action: enable `--gpu-bind=closest` in Slurm defaults. Expected improvement: 10–20 percentage points in average utilization (current: 25.7%).
 
-**Recommendation 2 — PACE (priority 0.02):**
-Preemption is not configured. High-priority jobs currently queue behind lower-priority jobs holding idle GPUs. Recommended: `PreemptType=preempt/qos` in `slurm.conf` with a grace period of 60–120 seconds.
+**Recommendation 2 — Add PACE analysis:**
+PACE has not been run. Adding scheduler efficiency analysis will reveal whether the queue incentive structure is contributing to the low GPU utilization. Run `pace.queue_metrics.compute_queue_metrics()` on the sacct export to compute wait-time signals.
 
 ## Trajectory analysis
 

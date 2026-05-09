@@ -1,12 +1,12 @@
 ---
 title: PACE — Predictive Allocation and Cluster Efficiency
-description: PACE measures scheduler efficiency — how well your cluster allocates resources across competing workloads.
+description: PACE measures scheduler efficiency — how well your cluster allocates resources and schedules jobs.
 ---
 
-Predictive Allocation and Cluster Efficiency (PACE) measures how well your cluster scheduler allocates resources across competing workloads. GPU efficiency (ACE) tells you whether jobs use what they request. PACE tells you whether the scheduler is giving resources to the right jobs at the right time.
+Predictive Allocation and Cluster Efficiency (PACE) measures how well your cluster scheduler allocates resources across competing workloads. GPU efficiency (ACE) tells you whether jobs use what they request. PACE tells you whether the scheduler is giving resources to the right jobs at the right time — and whether users have any incentive to ask for only what they need.
 
 :::note[Version]
-PACE v2.0.0 · Released 2026-03-16
+PACE v2.0.0 · Released 2026-03-16 · Queue incentive redesigned v0.2 2026-05-09
 :::
 
 ## Primary metric
@@ -14,8 +14,8 @@ PACE v2.0.0 · Released 2026-03-16
 `pace_composite_score` — a number from 0.0 to 1.0 composed of three components:
 
 - **Request accuracy** (50%) — how well job resource requests match actual usage
-- **Queue incentive** (30%) — whether the scheduler configuration rewards efficient behavior
-- **Fragmentation** (20%) — GPU node fragmentation from poorly-matched job sizes
+- **Queue incentive** (30%) — whether the scheduler produces efficient scheduling outcomes, measured from job traces
+- **Fragmentation** (20%) — GPU allocation waste from poorly-matched job sizes
 
 ## Formula
 
@@ -28,16 +28,80 @@ pace_composite_score =
   fragmentation      × 0.20
 
 where:
-  request_accuracy = gpu_hours_used / gpu_hours_requested
+  request_accuracy = (gpu_accuracy_score + cpu_accuracy_score) / 2
+    gpu_accuracy_score = f(total_gpu_used / total_gpu_requested)
+    cpu_accuracy_score = f(total_cpu_used / total_cpu_requested)
 
-  queue_incentive  = base_queue_score × short_job_multiplier
-    base_queue_score = f(preemption, QOS policies, fairshare config)
-    short_job_multiplier = 1.0 - max(0, (short_job_pct - 0.25) × 2.0)
-    (penalty activates when >25% of jobs run under 5 minutes)
+  queue_incentive = data-driven composite from job traces:
+    scheduling_pressure_score × 0.40
+    + small_job_advantage_score × 0.35
+    + wait_spread_score × 0.25
 
-  fragmentation    = 1.0 - (fragmented_node_pct)
-    fragmented_node_pct = nodes with mixed job sizes / total nodes
+  fragmentation = 1.0 - fragmentation_penalty
+    fragmentation_penalty = f(gpu_waste_pct)
 ```
+
+### Queue incentive signals (computed from job traces)
+
+Queue incentive measures scheduling outcomes, not feature flags. All three signals
+are computed from job submit_time, start_time, end_time, and GPU count — the same
+fields present in sacct exports, Alibaba Helios traces, and Microsoft Philly logs.
+
+**Signal 1 — Scheduling pressure ratio (40% of queue incentive)**
+
+```
+scheduling_pressure_ratio = median(queue_wait_hours) / median(job_duration_hours)
+```
+
+Measures how long jobs wait relative to how long they run. Backfill, preemption,
+and priority decay all reduce this ratio — the score captures their combined effect
+without requiring the operator to report which features are configured.
+
+| Ratio  | Score | What it means |
+|--------|-------|---------------|
+| < 0.10 | 1.00  | Jobs wait less than 10% of their runtime |
+| < 0.25 | 0.85  | |
+| < 0.50 | 0.70  | |
+| < 1.00 | 0.50  | Jobs wait as long as they run |
+| < 2.00 | 0.30  | |
+| ≥ 2.00 | 0.10  | Jobs wait more than twice their runtime |
+
+Calibration: NERSC Perlmutter median wait ~15 min / median job ~4 hrs → ratio ~0.06.
+University HPC average: ratio ~2.0. Source: NERSC Annual Reports 2022–2023.
+
+**Signal 2 — Small-job wait advantage (35% of queue incentive)**
+
+```
+small_job_wait_ratio = median_wait(jobs ≤ 2 GPUs) / median_wait(jobs ≥ 8 GPUs)
+```
+
+Backfill's measurable signature: small jobs fill scheduling gaps and start faster
+than large jobs. Ratio < 1.0 indicates backfill is producing its intended effect.
+
+| Ratio  | Score |
+|--------|-------|
+| < 0.40 | 1.00  |
+| < 0.60 | 0.85  |
+| < 0.80 | 0.65  |
+| < 1.00 | 0.45  |
+| ≥ 1.00 | 0.20  |
+
+**Signal 3 — Wait time spread (25% of queue incentive)**
+
+```
+wait_spread_ratio = p90(queue_wait_hours) / p10(queue_wait_hours)
+```
+
+Fairshare and priority decay narrow the spread of wait times across users and jobs.
+Low ratio = relatively uniform access. High ratio = structural unfairness.
+
+| Ratio   | Score |
+|---------|-------|
+| < 3.0   | 1.00  |
+| < 5.0   | 0.80  |
+| < 10.0  | 0.55  |
+| < 20.0  | 0.30  |
+| ≥ 20.0  | 0.10  |
 
 ### Kubernetes path
 
@@ -60,58 +124,78 @@ where:
   coverage           = quota_utilized / quota_granted
 ```
 
+## Computing queue metrics from a job trace
+
+Use `pace.queue_metrics.compute_queue_metrics()` to compute all three signals
+from any job trace CSV with submit_time, start_time, end_time, and GPU count columns:
+
+```python
+from pace.queue_metrics import compute_queue_metrics
+
+metrics = compute_queue_metrics(
+    "sacct_export.csv",
+    submit_col="submit",
+    start_col="start",
+    end_col="end",
+    gpu_col="allocgres",
+)
+
+# metrics.scheduling_pressure_ratio → float
+# metrics.small_job_wait_ratio      → float
+# metrics.wait_spread_ratio         → float
+# metrics.short_job_pct             → float
+# metrics.jobs_analyzed             → int
+# metrics.confidence                → "high" | "medium" | "low"
+```
+
+The helper accepts column name overrides so it works with sacct, Alibaba Helios,
+Microsoft Philly, and SURFsara trace formats.
+
 ## Worked example
 
-**Input** (Slurm cluster):
+**Input** (Slurm cluster, computed from job traces):
 
 ```
-gpu_hours_requested = 1,200,000
-gpu_hours_used      = 864,000
-short_job_pct       = 0.411   (41.1% of jobs < 5 min)
-preemption_enabled  = false
-qos_policies        = none
-fragmented_node_pct = 0.12
+total_gpu_requested    = 1,200,000 GPU-hours
+total_gpu_used         = 864,000 GPU-hours
+→ gpu_accuracy_ratio   = 0.720 → score 0.65 (Good band)
+
+scheduling_pressure_ratio = 1.8  (jobs wait 1.8x their runtime)
+→ scheduling_pressure_score = 0.30
+
+small_job_wait_ratio      = 0.95 (small jobs barely faster)
+→ small_job_advantage_score = 0.45
+
+wait_spread_ratio          = 12.0 (p90 wait = 12x p10 wait)
+→ wait_spread_score         = 0.30
+
+queue_incentive = 0.30×0.40 + 0.45×0.35 + 0.30×0.25
+               = 0.120 + 0.158 + 0.075
+               = 0.353
+
+fragmentation (gpu_waste_pct = 28%):
+→ fragmentation_score = 0.90 (Moderate band, penalty 0.10)
 ```
 
 **Calculation:**
 
 ```
-request_accuracy = 864,000 / 1,200,000 = 0.720
-
-base_queue_score = 0.50  (no preemption, no QOS)
-short_job_multiplier = 1.0 - max(0, (0.411 - 0.25) × 2.0)
-                     = 1.0 - (0.161 × 2.0)
-                     = 1.0 - 0.322
-                     = 0.678
-queue_incentive = 0.50 × 0.678 = 0.339
-
-fragmentation = 1.0 - 0.12 = 0.880
-
 pace_composite_score =
-  (0.720 × 0.50) + (0.339 × 0.30) + (0.880 × 0.20)
-= 0.360 + 0.102 + 0.176
-= 0.638
+  (0.650 × 0.50) + (0.353 × 0.30) + (0.900 × 0.20)
+= 0.325 + 0.106 + 0.180
+= 0.611
 ```
 
-**Result:** PACE score 0.638. The short-job penalty reduced queue incentive from 0.50 to 0.339. This matches the MIT Supercloud PACE score of 0.475 (which had additional queue configuration gaps).
+## ACE cross-engine correlation
 
-## Slurm scoring
+Low ACE + Low PACE → systemic. The scheduler is producing the underutilization.
+Fix the scheduler first — configuration changes, zero downtime.
 
-In Slurm mode, PACE analyzes `sacct` exports. Request accuracy is the ratio of used GPU-hours to requested GPU-hours. Queue incentive is scored from Slurm configuration — whether preemption is enabled, whether QOS policies exist, whether short-job penalties are in place.
+Low ACE + High PACE → workload. The scheduler is well-configured but the work
+is inherently variable. Remediation: workload profiling and job right-sizing.
 
-The queue incentive component includes a short-job penalty: if more than 25% of jobs run for under 5 minutes, the queue incentive score is reduced proportionally. Short jobs indicate scheduling overhead problems, and schedulers that tolerate high short-job fractions are not directing compute efficiently.
-
-For MIT Supercloud (41.1% short jobs), the short-job penalty reduced queue incentive by 8.2 percentage points, contributing to a PACE score of 0.475.
-
-## Kubernetes scoring
-
-In Kubernetes mode, PACE uses a different formula with different components:
-
-- **Resource accuracy** (50%) — ratio of actual to requested GPU resources across pods
-- **Scheduling quality** (30%) — average pod pending time in bands (0–5 min → 1.0, >60 min → 0.0)
-- **Coverage** (20%) — GPU quota utilization across namespaces
-
-PROFILE sets the input path. If your cluster runs Kubernetes, PACE runs the Kubernetes scoring path automatically.
+High ACE + Low PACE → fragile. The cluster performs today but the scheduling
+structure is weak. A change in workload mix will expose it.
 
 ## Input schema
 
@@ -119,35 +203,37 @@ PROFILE sets the input path. If your cluster runs Kubernetes, PACE runs the Kube
 
 | Field | Type | Required | Description |
 |-------|------|----------|-------------|
-| gpu_hours_requested | float | yes | Total GPU-hours requested across all jobs |
-| gpu_hours_used | float | yes | Total GPU-hours actually consumed |
-| short_job_pct | float | yes | Fraction of jobs running under 5 minutes (0.0–1.0) |
-| preemption_enabled | boolean | yes | Whether Slurm preemption is configured |
-| qos_policies_count | int | no | Number of active QOS policies |
-| fairshare_enabled | boolean | no | Whether fairshare scheduling is active |
-| fragmented_node_pct | float | no | Fraction of nodes with fragmented GPU allocation |
+| total_gpu_requested | float | yes | Total GPU-hours requested across all jobs |
+| total_gpu_used | float | yes | Total GPU-hours actually consumed |
+| total_cpu_requested | float | yes | Total CPU-hours requested |
+| total_cpu_used | float | yes | Total CPU-hours consumed |
+| scheduling_pressure_ratio | float | no | median_wait / median_duration — from job traces |
+| small_job_wait_ratio | float | no | wait(small jobs) / wait(large jobs) — from job traces |
+| wait_spread_ratio | float | no | p90_wait / p10_wait — from job traces |
+| short_job_pct | float | no | Fraction of jobs running under 1 minute |
+
+When scheduling_pressure_ratio, small_job_wait_ratio, and wait_spread_ratio are
+all provided, the data-driven queue incentive is used. Otherwise falls back to
+the deprecated self-reported feature flag path.
 
 ### Kubernetes path
 
 | Field | Type | Required | Description |
 |-------|------|----------|-------------|
-| resource_request_ratio | float | yes | Mean(actual_gpu / requested_gpu) across pods |
-| avg_pod_pending_minutes | float | yes | Average time pods wait before scheduling |
-| quota_utilization | float | yes | GPU quota used / GPU quota granted (0.0–1.0) |
-
-## What low PACE scores mean
-
-Low request accuracy indicates jobs are requesting resources they do not use — a different measurement than ACE's utilization score. Low queue incentive often indicates a scheduler with no preemption configured and no policies to reward GPU-efficient behavior. ATLAS receives the PACE findings and generates specific Slurm configuration recommendations: the exact `slurm.conf` parameters to add, with expected impact ranges.
+| k8s_resource_request_ratio | float | yes | Mean(actual_gpu / requested_gpu) across pods |
+| k8s_avg_pod_pending_minutes | float | yes | Average time pods wait before scheduling |
+| k8s_quota_utilization | float | yes | GPU quota used / GPU quota granted (0.0–1.0) |
 
 ## CLI usage
 
 ```bash
-# Analyze a Slurm cluster
+# Analyze a Slurm cluster with data-driven queue metrics
 pace analyze \
   --gpu-hours-requested 1200000 \
   --gpu-hours-used 864000 \
-  --short-job-pct 0.41 \
-  --preemption-enabled false
+  --scheduling-pressure-ratio 1.8 \
+  --small-job-wait-ratio 0.95 \
+  --wait-spread-ratio 12.0
 
 # Analyze a Kubernetes cluster
 pace analyze \
