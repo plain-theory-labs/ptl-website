@@ -39,7 +39,8 @@ Actions are ranked highest-priority-first. ATLAS never recommends actions that r
 
 ```
 ACE findings:
-  gpu_efficiency_score = 0.257
+  gpu_efficiency_rate  = 0.339   (GRADE primary — GPU-hours weighted)
+  gpu_efficiency_score = 0.257   (secondary — per-job mean)
   jobs_analyzed        = 73,367
   flagged_jobs_pct     = 0.89   (89% below utilization threshold)
   near_zero_jobs_pct   = 0.23
@@ -82,7 +83,7 @@ ATLAS maintains separate recommendation templates for:
 
 ## Example recommendations
 
-MIT Supercloud (ACE score 0.257, BASELINE — ACE engine only):
+MIT Supercloud (ACE score 0.339, BASELINE — ACE engine only, GPU-hours weighted):
 
 **Recommendation 1 — ACE (highest priority):**
 ACE analyzed 73,367 jobs. 89% ran below the 60% GPU utilization threshold. Primary action: audit the top 10 job scripts by GPU-hours wasted and implement a right-sizing policy for repeat offenders. Secondary action: enable `--gpu-bind=closest` in Slurm defaults. Expected improvement: 10–20 percentage points in average utilization (current: 25.7%).

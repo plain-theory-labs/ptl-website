@@ -11,46 +11,58 @@ ACE v2.0.0 · Released 2026-03-16
 
 ## Primary metric
 
-`gpu_efficiency_score` — a number from 0.0 to 1.0. The formula is the mean of per-job GPU utilization across all analyzed jobs.
+`gpu_efficiency_rate` — GPU-hours weighted efficiency. Of all the GPU-hours allocated across all jobs, what fraction did useful compute work? This is the metric GRADE uses in the composite score.
 
-The score is linear and direct: 25.7% average GPU utilization produces a score of 0.257. There is no curve and no adjustment for workload type. A cluster where jobs request eight GPUs and use two earns a 0.25.
+```
+gpu_efficiency_rate = gpu_hours_used / gpu_hours_requested
+                    = Σ(used_gpus_i × duration_i) / Σ(requested_gpus_i × duration_i)
+```
 
-## Formula
+Large, long jobs contribute proportionally more than small, short jobs. This correctly reflects infrastructure efficiency: wasted GPU-hours equal wasted energy. A cluster running a few large wasteful jobs cannot hide behind many small efficient ones.
 
-The gpu_efficiency_score is the mean of per-job GPU utilization across all jobs in the assessment window:
+## Secondary metric
+
+`gpu_efficiency_score` — per-job mean utilization. Equal weight per job regardless of size or duration.
 
 ```
 gpu_efficiency_score = (1/N) × Σ(used_gpus_i / requested_gpus_i)
-
-where:
-  N                  = number of jobs analyzed
-  used_gpus_i        = actual GPU utilization for job i
-  requested_gpus_i   = GPUs requested by job i
 ```
 
-The score is linear and direct. No curve, no adjustment for workload type. A job that requests 8 GPUs and uses 2 contributes 0.25 to the mean.
+This is useful for scheduler analysis — it captures how many scheduling decisions produced poorly-calibrated jobs. PACE uses `flagged_jobs_pct` (derived from this threshold) for its calibration rate calculation.
+
+## Why two metrics
+
+A cluster running 1,000 small efficient jobs (0.9 utilization) and 10 large wasteful jobs (0.1 utilization, 100× the GPU-hours) scores:
+- `gpu_efficiency_score`: 0.89 (looks good — most jobs are efficient)
+- `gpu_efficiency_rate`: 0.11 (tells the truth — large jobs dominate resources)
+
+GRADE uses `gpu_efficiency_rate`. Both are reported in ACE findings.
 
 ## Worked example
 
 **Input** (three jobs from a Slurm sacct export):
 
-| Job ID | GPUs requested | GPUs used | Utilization |
-|--------|----------------|-----------|-------------|
-| 1041   | 8              | 7.2       | 0.900       |
-| 1042   | 4              | 0.8       | 0.200       |
-| 1043   | 8              | 6.4       | 0.800       |
+| Job ID | GPUs requested | Duration (hrs) | GPUs used | Utilization |
+|--------|----------------|----------------|-----------|-------------|
+| 1041   | 8              | 10.0           | 7.2       | 0.900       |
+| 1042   | 4              | 0.5            | 0.8       | 0.200       |
+| 1043   | 8              | 8.0            | 6.4       | 0.800       |
 
 **Calculation:**
 
 ```
-gpu_efficiency_score = (0.900 + 0.200 + 0.800) / 3
-                     = 1.900 / 3
-                     = 0.633
+gpu_hours_requested = (8×10) + (4×0.5) + (8×8) = 80 + 2 + 64 = 146
+gpu_hours_used      = (7.2×10) + (0.8×0.5) + (6.4×8) = 72 + 0.4 + 51.2 = 123.6
+
+gpu_efficiency_rate  = 123.6 / 146 = 0.847   ← GRADE primary
+gpu_efficiency_score = (0.9 + 0.2 + 0.8) / 3 = 0.633  ← secondary
 ```
 
-**Result:** ACE score 0.633 — Capable range. Job 1042 is flagged for right-sizing: it requested 4 GPUs and used 0.8, contributing a 0.200 to the mean. ATLAS would identify this job by script and recommend reducing its GPU request to 1.
+Job 1042 is small and short — it barely moves `gpu_efficiency_rate` but is flagged for right-sizing by the per-job threshold.
 
-**Validated against:** MIT Supercloud HPCA22 dataset — 73,367 production jobs, gpu_efficiency_score = 0.257.
+**Validated against:** MIT Supercloud HPCA22 dataset — 73,367 production jobs.
+- `gpu_efficiency_rate`: 0.339 (GRADE primary)
+- `gpu_efficiency_score`: 0.257 (per-job mean, secondary)
 
 ## Input paths
 

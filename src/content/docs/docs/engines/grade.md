@@ -53,20 +53,21 @@ CORE normalized = 0.12 / 0.72 = 0.167
 
 **Input** (ACE only, MIT Supercloud — HPCA22 real data):
 
-| Engine | Score | Weight (rescaled) |
-|--------|-------|------------------|
-| ACE    | 0.257 | 1.00             |
+| Engine | Score | Metric | Weight (rescaled) |
+|--------|-------|--------|------------------|
+| ACE    | 0.339 | gpu_efficiency_rate (GPU-hours weighted) | 1.00 |
 
 **Calculation:**
 
 ```
-PTL_Score = 0.257 × 1.00 = 0.257
+PTL_Score = 0.339 × 1.00 = 0.339
 Tier: BASELINE (ACE only, first measurement)
 ```
 
-**Result:** ACE Score 0.257 — BASELINE. 73,367 production Slurm jobs from the
-MIT Supercloud HPCA22 public dataset. Average GPU utilization 25.7%, consistent
-with EE HPC WG benchmarks for university HPC clusters.
+**Result:** ACE Score 0.339 — BASELINE. 73,367 production Slurm jobs from the
+MIT Supercloud HPCA22 public dataset. 33.9% of allocated GPU-hours did useful
+work (GPU-hours weighted). Per-job mean utilization is 0.257 — also in the
+findings, but not the GRADE primary metric.
 
 **Five-engine methodology illustration** (hypothetical, showing formula):
 
@@ -154,7 +155,7 @@ The GRADE report contains six sections:
 
 ## What GRADE does not do
 
-GRADE does not soften findings. If ACE scores 0.257, the report says 0.257 and describes what that means in operational terms. PTL's value is the specificity of the measurement. An independent certification that rounds up or adds qualitative adjustments for difficult circumstances is not a certification.
+GRADE does not soften findings. If ACE scores 0.339, the report says 0.339 and describes what that means in operational terms. PTL's value is the specificity of the measurement. An independent certification that rounds up or adds qualitative adjustments for difficult circumstances is not a certification.
 
 ## CLI usage
 

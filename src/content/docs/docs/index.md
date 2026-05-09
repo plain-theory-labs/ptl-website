@@ -25,12 +25,19 @@ Each engine addresses a distinct dimension of infrastructure performance:
 
 | Organization   | ACE Score | Engines Run | Data                             |
 |----------------|-----------|-------------|----------------------------------|
-| MIT Supercloud | 0.257     | ACE         | HPCA22 public dataset — 73,367 Slurm GPU jobs, peer-reviewed |
+| MIT Supercloud | 0.339     | ACE         | HPCA22 public dataset — 73,367 Slurm GPU jobs, peer-reviewed |
 
 MIT Supercloud is the only result computed from real job-level telemetry obtained from
 a public dataset. The HPCA22 release (Samsi et al., SC22) contains 73,367 production
-GPU jobs from MIT's research cluster. ACE scored GPU efficiency at 0.257 — consistent
-with published EE HPC WG benchmarks for university HPC environments.
+GPU jobs from MIT's research cluster.
+
+ACE reports two efficiency metrics for this dataset:
+- **GPU-hours weighted efficiency (GRADE primary): 0.339** — of all GPU-hours allocated, 33.9% did useful work
+- Per-job mean utilization: 0.257 — average per-job GPU utilization, equal weight per job
+
+GRADE uses the GPU-hours weighted metric because it correctly reflects infrastructure
+efficiency in physical terms: wasted GPU-hours equal wasted energy. Both numbers are
+consistent with published EE HPC WG benchmarks for university HPC environments.
 
 Methodology worked examples using published operational statistics (NERSC, OLCF, ALCF)
 are available in [ptl-methodology/validation.md](https://github.com/plain-theory-labs/ptl-methodology)

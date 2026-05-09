@@ -13,7 +13,7 @@ PTL reports PTL Score first. The certification tier — FRONTIER, OPTIMIZED, CAP
 
 Each engine's scoring formula is fully documented:
 
-**ACE** — mean of per-job GPU utilization across all analyzed jobs. Linear: 0.257 average utilization → 0.257 score. No curve.
+**ACE** — GPU-hours weighted efficiency rate: `gpu_hours_used / gpu_hours_requested`. Large, long jobs count proportionally more than small, short jobs. This correctly reflects infrastructure efficiency in physical terms. ACE also reports `gpu_efficiency_score` (per-job mean, equal job weighting) as a secondary finding for scheduler analysis.
 
 **COOL** — continuous linear function of PUE. PUE 1.20 → 1.00; PUE 1.60 → 0.00. Every tenth of a PUE point matters.
 
@@ -35,10 +35,16 @@ MIT Supercloud, computed from the HPCA22 public dataset (73,367 Slurm GPU jobs):
 Active engines: ACE only
 Active weight sum: 0.35
 
-ACE score: 0.257  (25.7% average GPU utilization across 73,367 jobs)
+ACE primary score: 0.339  (gpu_efficiency_rate — GPU-hours weighted)
+  gpu_hours_used / gpu_hours_requested = 229,242 / 675,447 = 0.339
+  Larger jobs weighted proportionally by resource consumption.
+
+ACE secondary (not GRADE input): 0.257  (gpu_efficiency_score — per-job mean)
+  mean(used/requested) across all 73,367 jobs, equal weighting per job.
+
 Normalized weight: 0.35 / 0.35 = 1.00
 
-PTL Score = 0.257 × 1.00 = 0.257
+PTL Score = 0.339 × 1.00 = 0.339
 Tier: BASELINE (ACE only, first measurement)
 ```
 
