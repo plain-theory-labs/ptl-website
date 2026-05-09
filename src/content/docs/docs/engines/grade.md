@@ -6,7 +6,7 @@ description: GRADE aggregates engine scores into a composite PTL Score and produ
 Granular Rating for AI Datacenter Efficiency (GRADE) is the aggregation and reporting engine. GRADE ingests all upstream engine outputs, applies published coefficients, computes the composite PTL Score, assigns a certification tier, and produces the full certification report.
 
 :::note[Version]
-GRADE v2.0.0 · Released 2026-03-13
+GRADE v0.1.0 · Released 2026-03-13
 :::
 
 ## What GRADE produces
@@ -160,30 +160,44 @@ GRADE does not soften findings. If ACE scores 0.339, the report says 0.339 and d
 ## CLI usage
 
 ```bash
-# Run GRADE on individual engine output files
-grade aggregate \
-  --ace ace_result.json \
-  --pace pace_result.json \
-  --cool cool_result.json \
-  --core core_result.json \
-  --flux flux_result.json
+# Certify one organization from a grade_input JSON file
+grade certify \
+  --input grade_input.json \
+  --output grade_output.json \
+  --report certification_report.html
 
-# Run with partial engines (COOL and FLUX excluded)
-grade aggregate \
-  --ace ace_result.json \
-  --pace pace_result.json \
-  --core core_result.json
+# With ATLAS recommendations section
+grade certify \
+  --input grade_input.json \
+  --output grade_output.json \
+  --report certification_report.html \
+  --atlas atlas_output.json
 
-# Generate full certification report
-grade aggregate \
-  --ace ace_result.json \
-  --pace pace_result.json \
-  --cool cool_result.json \
-  --core core_result.json \
-  --flux flux_result.json \
-  --org "NERSC Perlmutter" \
-  --output ptl_report.json
+# Run all synthetic organizations and print tiers
+grade demo
+
+# Validate a ptl_output_v1.json export against the PTL schema
+grade validate --input grade_output.json
 ```
+
+**Example `grade_input.json`:**
+
+```json
+{
+  "organization": "NERSC Perlmutter",
+  "period": "2026",
+  "ace_report":  "ace_output.json",
+  "pace_report": "pace_output.json",
+  "cool_report": "cool_output.json",
+  "core_report": "core_output.json",
+  "flux_report": "flux_output.json",
+  "prior_certifications": [
+    {"year": "2025", "tier": "CAPABLE", "composite": 0.631}
+  ]
+}
+```
+
+Engines are excluded simply by omitting their report path — absent paths are not counted as zero. Partial certification is real certification.
 
 ## Source
 
