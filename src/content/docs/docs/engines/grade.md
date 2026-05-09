@@ -51,31 +51,42 @@ CORE normalized = 0.12 / 0.72 = 0.167
 
 ## Worked example
 
-**Input** (all five engines present, NERSC Perlmutter):
+**Input** (ACE only, MIT Supercloud — HPCA22 real data):
 
-| Engine | Score | Weight |
-|--------|-------|--------|
-| ACE    | 0.740 | 0.35   |
-| PACE   | 0.853 | 0.25   |
-| COOL   | 1.000 | 0.20   |
-| CORE   | 0.713 | 0.12   |
-| FLUX   | 1.000 | 0.08   |
+| Engine | Score | Weight (rescaled) |
+|--------|-------|------------------|
+| ACE    | 0.257 | 1.00             |
 
 **Calculation:**
 
 ```
-PTL_Score =
-  (0.740 × 0.35) +
-  (0.853 × 0.25) +
-  (1.000 × 0.20) +
-  (0.713 × 0.12) +
-  (1.000 × 0.08)
-
-= 0.25900 + 0.21325 + 0.20000 + 0.08556 + 0.08000
-= 0.83781
+PTL_Score = 0.257 × 1.00 = 0.257
+Tier: BASELINE (ACE only, first measurement)
 ```
 
-**Result:** PTL Score 0.838 — Optimized. This matches the NERSC Perlmutter certification.
+**Result:** ACE Score 0.257 — BASELINE. 73,367 production Slurm jobs from the
+MIT Supercloud HPCA22 public dataset. Average GPU utilization 25.7%, consistent
+with EE HPC WG benchmarks for university HPC clusters.
+
+**Five-engine methodology illustration** (hypothetical, showing formula):
+
+| Engine | Example Score | Weight |
+|--------|--------------|--------|
+| ACE    | 0.740        | 0.35   |
+| PACE   | 0.853        | 0.25   |
+| COOL   | 1.000        | 0.20   |
+| CORE   | 0.713        | 0.12   |
+| FLUX   | 1.000        | 0.08   |
+
+```
+PTL_Score =
+  (0.740 × 0.35) + (0.853 × 0.25) + (1.000 × 0.20) +
+  (0.713 × 0.12) + (1.000 × 0.08)
+= 0.83781 → 0.838 — Optimized tier
+```
+
+This illustrates how GRADE aggregates all five engines. The specific numbers
+above are hypothetical inputs used to demonstrate the formula.
 
 ## Composite scoring
 

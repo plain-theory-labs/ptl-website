@@ -19,7 +19,7 @@ Each engine's scoring formula is fully documented:
 
 **FLUX** — discrete score by carbon accounting method. Grid average → 0.50. Direct documented PPA → 1.00. Unbundled RECs with claimed emissions → 0.10.
 
-**PACE** — weighted composite: request accuracy (50%), queue incentive (30%), fragmentation (20%). Queue incentive includes a short-job penalty.
+**PACE** — weighted composite: request accuracy (50%), queue incentive (30%), fragmentation (20%). Queue incentive is computed from job trace data — scheduling pressure ratio, small-job wait advantage, and wait time spread — not self-reported feature flags.
 
 **CORE** — weighted composite: hardware fit (40%), fleet age (35%), embodied carbon (25%).
 
@@ -27,12 +27,27 @@ Each engine's scoring formula is fully documented:
 
 GRADE computes the composite as a weighted average of engine scores using the coefficients published in [Coefficients](/docs/methodology/coefficients/). Engines not included in the assessment are excluded from the composite — they do not count as zero.
 
-### Full worked example
+### Validated result — MIT Supercloud (real data)
 
-Using NERSC Perlmutter Q1 2026 results:
+MIT Supercloud, computed from the HPCA22 public dataset (73,367 Slurm GPU jobs):
 
 ```
-Engine scores:
+Active engines: ACE only
+Active weight sum: 0.35
+
+ACE score: 0.257  (25.7% average GPU utilization across 73,367 jobs)
+Normalized weight: 0.35 / 0.35 = 1.00
+
+PTL Score = 0.257 × 1.00 = 0.257
+Tier: BASELINE (ACE only, first measurement)
+```
+
+### Five-engine formula illustration (hypothetical)
+
+Demonstrating how GRADE aggregates all five engines when present:
+
+```
+Engine scores (hypothetical inputs):
   ACE  = 0.740 × 0.35 = 0.25900
   PACE = 0.853 × 0.25 = 0.21325
   COOL = 1.000 × 0.20 = 0.20000
@@ -40,23 +55,11 @@ Engine scores:
   FLUX = 1.000 × 0.08 = 0.08000
   ─────────────────────────────
   PTL Score = 0.83781 → 0.838
-  Tier: Optimized (≥ 0.70, all five engines)
+  Tier: OPTIMIZED (≥ 0.70, all five engines)
 ```
 
-### Partial assessment example
-
-Using MIT Supercloud with ACE only (first assessment):
-
-```
-Active engines: ACE only
-Active weight sum: 0.35
-
-ACE score: 0.257
-Normalized weight: 0.35 / 0.35 = 1.00
-
-PTL Score = 0.257 × 1.00 = 0.257
-Tier: Baseline (ACE only, first measurement)
-```
+These are hypothetical values used to illustrate the formula, not
+results from an actual PTL assessment.
 
 ## Confidence labels
 

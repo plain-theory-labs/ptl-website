@@ -23,13 +23,19 @@ Each engine addresses a distinct dimension of infrastructure performance:
 
 ## Validated results
 
-| Organization     | Score | Tier       | Data                 |
-|------------------|-------|------------|----------------------|
-| NERSC Perlmutter | 0.838 | Optimized  | Operational          |
-| Meridian AI      | 0.808 | Optimized  | Operational          |
-| OLCF Frontier    | 0.746 | Optimized  | Operational          |
-| ALCF Polaris     | 0.606 | Capable    | Operational          |
-| MIT Supercloud   | 0.457 | Developing | HPCA22 peer-reviewed |
+| Organization   | ACE Score | Engines Run | Data                             |
+|----------------|-----------|-------------|----------------------------------|
+| MIT Supercloud | 0.257     | ACE         | HPCA22 public dataset — 73,367 Slurm GPU jobs, peer-reviewed |
+
+MIT Supercloud is the only result computed from real job-level telemetry obtained from
+a public dataset. The HPCA22 release (Samsi et al., SC22) contains 73,367 production
+GPU jobs from MIT's research cluster. ACE scored GPU efficiency at 0.257 — consistent
+with published EE HPC WG benchmarks for university HPC environments.
+
+Methodology worked examples using published operational statistics (NERSC, OLCF, ALCF)
+are available in [ptl-methodology/validation.md](https://github.com/plain-theory-labs/ptl-methodology)
+with full assumptions documented. These are illustrations of the methodology, not
+independent certifications of those facilities.
 
 ## Longitudinal certification
 
