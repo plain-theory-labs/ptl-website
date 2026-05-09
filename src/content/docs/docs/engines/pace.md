@@ -19,7 +19,23 @@ PACE v2.0.0 · Released 2026-03-16 · Queue incentive redesigned v0.2 2026-05-09
 
 ## Formula
 
-### Slurm path
+### Slurm path — when ACE output is present
+
+Fragmentation weight is dropped and given to queue incentive. Fragmentation
+uses the same aggregate GPU ratio as ACE — carrying it would count GPU
+utilization a third time in GRADE. Queue incentive captures the scheduling
+dynamics that ACE cannot see.
+
+```
+pace_composite_score =
+  request_accuracy   × 0.40 +   ← job calibration rate (different from ACE)
+  queue_incentive    × 0.60     ← wait-time scheduling signals (independent)
+```
+
+### Slurm path — when ACE output is absent
+
+Standard three-way split. Overlap with ACE is absent since ACE is not
+running, and the data quality output labels this clearly.
 
 ```
 pace_composite_score =
