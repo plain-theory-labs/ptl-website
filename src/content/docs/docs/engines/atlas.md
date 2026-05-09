@@ -6,7 +6,7 @@ description: ATLAS ranks the actions most likely to improve your PTL certificati
 Actionable Trajectory and Longitudinal Analysis (ATLAS) receives all engine outputs and produces a ranked action plan. Each recommendation is specific enough to act on immediately — not a category of improvement but the exact configuration change, the expected impact, and the current baseline.
 
 :::note[Version]
-ATLAS v2.0.0 · Released 2026-03-16
+ATLAS v0.1.0 · Released 2026-03-16
 :::
 
 ## How ATLAS ranks recommendations
@@ -100,27 +100,38 @@ Trajectory analysis becomes meaningful after the second assessment. The first as
 ## CLI usage
 
 ```bash
-# Generate recommendations from engine outputs
-atlas recommend \
-  --ace ace_result.json \
-  --pace pace_result.json \
-  --cool cool_result.json \
-  --core core_result.json \
-  --flux flux_result.json \
-  --profile profile_output.json
+# Analyze one organization from an atlas_input JSON file
+atlas analyze \
+  --input atlas_input.json \
+  --output atlas_output.json
 
-# Output ranked recommendations to JSON
-atlas recommend \
-  --ace ace_result.json \
-  --pace pace_result.json \
-  --output atlas_recommendations.json
+# Run all synthetic scenarios and print ranked recommendations
+atlas demo
 
-# Limit to top N recommendations
-atlas recommend \
-  --ace ace_result.json \
-  --pace pace_result.json \
-  --top 5
+# Validate an atlas output file
+atlas validate --input atlas_output.json
 ```
+
+**Example `atlas_input.json`:**
+
+```json
+{
+  "organization": "MIT Supercloud",
+  "period": "2026",
+  "grade_report_path": "grade_output.json",
+  "ace_report_path":   "ace_output.json",
+  "pace_report_path":  "pace_output.json",
+  "cool_report_path":  "cool_output.json",
+  "core_report_path":  "core_output.json",
+  "flux_report_path":  "flux_output.json",
+  "prior_periods": [
+    {"period": 2025, "composite": 0.521},
+    {"period": 2024, "composite": 0.487}
+  ]
+}
+```
+
+ATLAS requires the GRADE output as its primary input (`grade_report_path`). Engine outputs are optional — when present, ATLAS generates specific recommendation text using real metric values from each engine rather than generic templates.
 
 ## Source
 
