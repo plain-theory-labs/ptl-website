@@ -3,7 +3,7 @@ title: Plain Theory Labs
 description: Documentation for the PTL certification framework for AI compute infrastructure.
 ---
 
-Plain Theory Labs is an independent certification framework for AI compute infrastructure. We measure what GPU clusters are actually doing, score it against a documented methodology, and deliver findings against a published standard.
+Plain Theory Labs is an open, independent certification framework for AI compute infrastructure. We measure what GPU clusters are actually doing, score it against a documented methodology, and deliver findings against a published standard.
 
 ## What PTL produces
 
@@ -49,11 +49,13 @@ Read [how certification works](/docs/certification/) or [start a pilot](/docs/pi
 
 ## Repositories
 
+Every number PTL produces is reproducible from source. The engines, methodology, and this documentation site are all public.
+
 | Repository | Description | License |
 |------------|-------------|---------|
 | [ptl-engines](https://github.com/plain-theory-labs/ptl-engines) | All nine analytical engines, 220 tests, dataset converters | MIT |
 | [ptl-methodology](https://github.com/plain-theory-labs/ptl-methodology) | Scoring formulas, coefficients, tiers | CC BY 4.0 |
 | [ptl-website](https://github.com/plain-theory-labs/ptl-website) | This documentation site | MIT |
-| [ptl-context](https://github.com/plain-theory-labs/ptl-context) | Engineering context and session logs | Private |
+| [ptl-context](https://github.com/plain-theory-labs/ptl-context) | Engineering session logs and internal notes — not methodology or scoring logic | Private |
 
 All methodology is public and citable. Source code is open under MIT license. The organization is at [github.com/plain-theory-labs](https://github.com/plain-theory-labs).

@@ -187,7 +187,7 @@ h1 {
 .primary-context {
   font-family: var(--serif);
   font-size: 1rem;
-  color: var(--ink-4);
+  color: var(--ink-3);
   line-height: 1.5;
   max-width: 200px;
   font-style: italic;
@@ -245,13 +245,13 @@ h1 {
   font-weight: 300;
   letter-spacing: 1px;
   text-transform: uppercase;
-  color: var(--ink-4);
+  color: var(--ink-3);
 }
 
 .sec-context {
   font-family: var(--serif);
   font-size: 0.88rem;
-  color: var(--ink-5);
+  color: var(--ink-4);
   font-style: italic;
   line-height: 1.4;
   max-width: 160px;

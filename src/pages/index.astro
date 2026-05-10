@@ -12,8 +12,8 @@ const description = "One honest score for AI compute infrastructure.";
     <span class="hero-eyebrow">Plain Theory Labs</span>
     <h1>One honest score for AI compute infrastructure.</h1>
     <p class="hero-sub">
-  The science running on AI infrastructure matters deeply.<br>
-  We built the instrument that measures how well it performs.
+  The science running on AI infrastructure deserves proper measurement.<br>
+  We built the instrument, published the methodology, and opened the source<br>so anyone can verify or build on it.
 </p>
   </div>
 
@@ -21,33 +21,48 @@ const description = "One honest score for AI compute infrastructure.";
 
     <div class="primary-score">
       <div class="primary-row">
-        <span class="primary-number">0.339</span>
+        <div class="primary-metrics">
+          <div class="primary-metric-row">
+            <span class="primary-number">0.000</span>
+            <span class="primary-metric-label">GPU-hours weighted</span>
+          </div>
+          <div class="primary-metric-row">
+            <span class="primary-mean">0.000</span>
+            <span class="primary-metric-label">per-job mean</span>
+          </div>
+        </div>
         <div class="primary-labels">
           <span class="primary-tier">ACE Score</span>
           <span class="primary-org">MIT Supercloud</span>
-          <span class="primary-context">73,367 production
-GPU jobs. HPCA22
-public dataset.</span>
+          <span class="primary-context"><span class="job-count" data-jobs="73367">0</span> production GPU jobs.<br>HPCA22 public dataset.</span>
         </div>
       </div>
     </div>
 
-    <span class="scale-note">ACE Score · 0.0 to 1.0 · GPU efficiency · 508,885 jobs validated across 3 peer-reviewed datasets</span>
+    <span class="scale-note">ACE Score · 0.0 to 1.0 · GPU efficiency · <span class="total-jobs-count">0</span> jobs validated across 3 peer-reviewed datasets</span>
 
     <div class="secondaries">
       <div class="sec dev">
-        <span class="sec-num dev">0.214</span>
+        <span class="sec-num dev">0.000</span>
+        <span class="sec-metric-label">GPU-hours weighted</span>
+        <span class="sec-mean">0.000</span>
+        <span class="sec-metric-label">per-job mean</span>
         <span class="sec-tier">ACE Score</span>
         <span class="sec-org">Alibaba Helios 2020</span>
-        <span class="sec-context">361,498 jobs.<br>Hardware sensor.</span>
+        <span class="sec-context"><span class="job-count" data-jobs="361498">0</span> jobs · Hardware sensor</span>
       </div>
       <div class="sec dev">
-        <span class="sec-num dev">0.502</span>
+        <span class="sec-num dev">0.000</span>
+        <span class="sec-metric-label">GPU-hours weighted</span>
+        <span class="sec-mean">0.000</span>
+        <span class="sec-metric-label">per-job mean</span>
         <span class="sec-tier">ACE Score</span>
         <span class="sec-org">Microsoft Philly 2017</span>
-        <span class="sec-context">74,020 jobs.<br>nvidia-smi.</span>
+        <span class="sec-context"><span class="job-count" data-jobs="74020">0</span> jobs · nvidia-smi</span>
       </div>
     </div>
+
+    <p class="repro-note">Every score is reproducible from source data using open converters in the <a href="https://github.com/plain-theory-labs/ptl-engines/tree/main/ace/tools">ptl-engines repository</a>.</p>
 
     <div class="actions">
       <a href="#pilot" class="cta cta-primary">Start a pilot</a>
@@ -247,7 +262,7 @@ public dataset.</span>
     </svg>
     <div class="engine-body">
       <p class="engine-title">Five engines become one number.</p>
-      <p class="engine-desc">GRADE weighs what every engine found and produces a PTL Score between 0.0 and 1.0. The weights are published. The formula is deterministic. The same inputs always produce the same number.</p>
+      <p class="engine-desc">GRADE weighs what every engine found and produces a PTL Score between 0.0 and 1.0. The weights are published. The formula is deterministic. The same inputs always produce the same number. The engine source is public.</p>
     </div>
   </div>
 
@@ -323,8 +338,11 @@ at the level of the science it supports.</p>
 
   <footer>
     <span>Plain Theory Labs</span>
-    <a href="https://github.com/plain-theory-labs"
-       class="footer-github">github.com/plain-theory-labs</a>
+    <div class="footer-center">
+      <span class="footer-oss">Engines and methodology are open source — MIT and CC BY 4.0.</span>
+      <a href="https://github.com/plain-theory-labs"
+         class="footer-github">github.com/plain-theory-labs</a>
+    </div>
     <span>2026</span>
   </footer>
 
@@ -336,53 +354,76 @@ at the level of the science it supports.</p>
     return 1 - Math.pow(1 - t, 4);
   }
 
-  function animateCounter(el, target, duration, delay) {
+  function animateFloat(el, target, duration, delay) {
     el.textContent = '0.000';
     setTimeout(function() {
       var start = null;
       function step(timestamp) {
         if (!start) start = timestamp;
-        var elapsed = timestamp - start;
-        var progress = Math.min(elapsed / duration, 1);
-        var eased = easeOutQuart(progress);
-        el.textContent = (eased * target).toFixed(3);
-        if (progress < 1) {
-          requestAnimationFrame(step);
-        } else {
-          el.textContent = target.toFixed(3);
-        }
+        var progress = Math.min((timestamp - start) / duration, 1);
+        el.textContent = (easeOutQuart(progress) * target).toFixed(3);
+        if (progress < 1) requestAnimationFrame(step);
+        else el.textContent = target.toFixed(3);
+      }
+      requestAnimationFrame(step);
+    }, delay);
+  }
+
+  function animateInteger(el, target, duration, delay) {
+    el.textContent = '0';
+    setTimeout(function() {
+      var start = null;
+      function step(timestamp) {
+        if (!start) start = timestamp;
+        var progress = Math.min((timestamp - start) / duration, 1);
+        el.textContent = Math.round(easeOutQuart(progress) * target).toLocaleString();
+        if (progress < 1) requestAnimationFrame(step);
+        else el.textContent = target.toLocaleString();
       }
       requestAnimationFrame(step);
     }, delay);
   }
 
   function runAnimation() {
-    var primary = document.querySelector('.primary-number');
-    var secs = document.querySelectorAll('.sec-num');
-    var targets = [0.214, 0.502];
+    var primary  = document.querySelector('.primary-number');
+    var mean     = document.querySelector('.primary-mean');
+    var secNums  = document.querySelectorAll('.sec-num');
+    var secMeans = document.querySelectorAll('.sec-mean');
+    var jobEls   = document.querySelectorAll('.job-count');
+    var totalEl  = document.querySelector('.total-jobs-count');
 
-    if (primary) animateCounter(primary, 0.339, 1600, 0);
-    secs.forEach(function(el, i) {
-      animateCounter(el, targets[i], 1200, 200 + i * 80);
+    // Efficiency rates animate first
+    if (primary) animateFloat(primary, 0.339, 1500, 0);
+    if (mean)    animateFloat(mean,    0.257, 1500, 300);  // per-job mean follows 300ms later
+
+    var rateTargets = [0.214, 0.502];
+    var meanTargets = [0.127, 0.320];
+    secNums.forEach(function(el, i)  { animateFloat(el, rateTargets[i], 1500, 150 + i * 80); });
+    secMeans.forEach(function(el, i) { animateFloat(el, meanTargets[i], 1500, 450 + i * 80); });
+
+    // Job counts animate after efficiency scores settle
+    jobEls.forEach(function(el, i) {
+      var target = parseInt(el.getAttribute('data-jobs') || '0');
+      animateInteger(el, target, 1200, 900 + i * 120);
     });
+
+    // Total counter rolls up after all three dataset counts
+    if (totalEl) animateInteger(totalEl, 508885, 1000, 1500);
   }
 
-  // Set to 0.000 immediately to prevent flash
+  // Prevent flash — set all counters to zero immediately
   document.addEventListener('DOMContentLoaded', function() {
-    var primary = document.querySelector('.primary-number');
-    var secs = document.querySelectorAll('.sec-num');
-    if (primary) primary.textContent = '0.000';
-    secs.forEach(function(el) { el.textContent = '0.000'; });
+    document.querySelectorAll('.primary-number, .primary-mean, .sec-num, .sec-mean')
+      .forEach(function(el) { el.textContent = '0.000'; });
+    document.querySelectorAll('.job-count').forEach(function(el) { el.textContent = '0'; });
+    var tot = document.querySelector('.total-jobs-count');
+    if (tot) tot.textContent = '0';
   });
 
-  // Run animation on load — not on IntersectionObserver
-  // The score section is always in view on load
   if (document.readyState === 'complete') {
     setTimeout(runAnimation, 300);
   } else {
-    window.addEventListener('load', function() {
-      setTimeout(runAnimation, 300);
-    });
+    window.addEventListener('load', function() { setTimeout(runAnimation, 300); });
   }
 
   // Engine row scroll animation
@@ -394,9 +435,7 @@ at the level of the science it supports.</p>
         if (entry.isIntersecting) {
           var el = entry.target;
           var i = parseInt(el.getAttribute('data-engine-idx') || 0);
-          setTimeout(function() {
-            el.classList.add('engine-visible');
-          }, i * 55);
+          setTimeout(function() { el.classList.add('engine-visible'); }, i * 55);
           obs.unobserve(el);
         }
       });
@@ -407,41 +446,84 @@ at the level of the science it supports.</p>
 </script>
 
 <style>
-.validation-grid {
-  display: flex;
-  gap: 1.25rem;
-  margin-bottom: 1rem;
-  flex-wrap: wrap;
+/* Primary score — dual metric layout */
+.primary-row { align-items: flex-start; }
+.primary-metrics { display: flex; flex-direction: column; gap: 10px; }
+.primary-metric-row { display: flex; align-items: baseline; gap: 18px; }
+.primary-mean {
+  font-family: var(--mono);
+  font-size: clamp(44px, 7.5vw, 68px);
+  font-weight: 300;
+  color: var(--green);
+  opacity: 0.5;
+  letter-spacing: -3px;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  min-width: 5ch;
 }
-.vcard {
+.primary-metric-label {
+  font-family: var(--mono);
+  font-size: 9px;
+  font-weight: 300;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--ink-4);
+  white-space: nowrap;
+}
+
+/* Secondary cards — per-job mean */
+.sec-mean {
+  font-family: var(--mono);
+  font-size: 20px;
+  font-weight: 300;
+  letter-spacing: -0.5px;
+  line-height: 1;
+  color: var(--amber);
+  opacity: 0.6;
+  font-variant-numeric: tabular-nums;
+  margin-top: 2px;
+}
+.sec-metric-label {
+  font-family: var(--mono);
+  font-size: 8px;
+  font-weight: 300;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--ink-5);
+  margin-bottom: 6px;
+}
+
+/* Reproducibility note */
+.repro-note {
+  font-family: var(--serif);
+  font-size: 0.82rem;
+  color: var(--ink-4);
+  line-height: 1.5;
+  margin-bottom: 24px;
+  font-style: italic;
+}
+.repro-note a { color: var(--ink-3); }
+
+/* Footer open source line */
+.footer-center {
   display: flex;
   flex-direction: column;
-  gap: 0.2rem;
-  flex: 1;
-  min-width: 140px;
+  align-items: center;
+  gap: 5px;
 }
-.vcard-score {
-  font-family: monospace;
-  font-size: 2.1rem;
-  font-weight: 600;
-  letter-spacing: -0.02em;
-  color: #14532d;
-  line-height: 1;
+.footer-oss {
+  font-family: var(--mono);
+  font-size: 9px;
+  font-weight: 300;
+  letter-spacing: 1px;
+  color: var(--ink-5);
+  text-transform: uppercase;
 }
-.vcard-org {
-  font-size: 0.78rem;
-  font-weight: 600;
-  color: #28251e;
-  letter-spacing: 0.01em;
+
+@media (max-width: 760px) {
+  .primary-mean { font-size: 36px; letter-spacing: -2px; }
+  .footer-center { align-items: flex-start; }
 }
-.vcard-detail {
-  font-size: 0.68rem;
-  color: #94918a;
-  line-height: 1.4;
-}
-@media (max-width: 600px) {
-  .validation-grid { flex-direction: column; gap: 1rem; }
-  .vcard-score { font-size: 1.7rem; }
-}
+
 </style>
 </BaseLayout>
