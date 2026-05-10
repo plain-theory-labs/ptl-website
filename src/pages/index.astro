@@ -1,7 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 
-const description = "Open-source tools that measure whether AI infrastructure is doing what it claims. Built by researchers, for the scientific community.";
+const description = "One honest score for AI compute infrastructure.";
 ---
 
 <BaseLayout title="Plain Theory Labs" description={description}>
@@ -12,33 +12,42 @@ const description = "Open-source tools that measure whether AI infrastructure is
     <span class="hero-eyebrow">Plain Theory Labs</span>
     <h1>One honest score for AI compute infrastructure.</h1>
     <p class="hero-sub">
-  Scientific progress runs on AI infrastructure.<br>
-  We built open-source tools to measure whether it is working —<br>
-  and to find, specifically, where it falls short.
+  The science running on AI infrastructure matters deeply.<br>
+  We built the instrument that measures how well it performs.
 </p>
   </div>
 
   <div class="hero-data">
 
-    <div class="validation-grid">
-      <div class="vcard">
-        <span class="vcard-score" data-target="0.339">0.000</span>
-        <span class="vcard-org">MIT Supercloud</span>
-        <span class="vcard-detail">DCGM telemetry · 73,367 jobs · SC22</span>
-      </div>
-      <div class="vcard">
-        <span class="vcard-score" data-target="0.214">0.000</span>
-        <span class="vcard-org">Alibaba Helios 2020</span>
-        <span class="vcard-detail">Hardware sensor · 361,498 jobs · NSDI 2022</span>
-      </div>
-      <div class="vcard">
-        <span class="vcard-score" data-target="0.502">0.000</span>
-        <span class="vcard-org">Microsoft Philly 2017</span>
-        <span class="vcard-detail">nvidia-smi · 74,020 jobs · USENIX ATC 2019</span>
+    <div class="primary-score">
+      <div class="primary-row">
+        <span class="primary-number">0.339</span>
+        <div class="primary-labels">
+          <span class="primary-tier">ACE Score</span>
+          <span class="primary-org">MIT Supercloud</span>
+          <span class="primary-context">73,367 production
+GPU jobs. HPCA22
+public dataset.</span>
+        </div>
       </div>
     </div>
 
-    <span class="scale-note">gpu_efficiency_rate · 0.0 to 1.0 · 508,885 real jobs · open source · reproducible</span>
+    <span class="scale-note">ACE Score · 0.0 to 1.0 · GPU efficiency · 508,885 jobs validated across 3 peer-reviewed datasets</span>
+
+    <div class="secondaries">
+      <div class="sec dev">
+        <span class="sec-num dev">0.214</span>
+        <span class="sec-tier">ACE Score</span>
+        <span class="sec-org">Alibaba Helios 2020</span>
+        <span class="sec-context">361,498 jobs.<br>Hardware sensor.</span>
+      </div>
+      <div class="sec dev">
+        <span class="sec-num dev">0.502</span>
+        <span class="sec-tier">ACE Score</span>
+        <span class="sec-org">Microsoft Philly 2017</span>
+        <span class="sec-context">74,020 jobs.<br>nvidia-smi.</span>
+      </div>
+    </div>
 
     <div class="actions">
       <a href="#pilot" class="cta cta-primary">Start a pilot</a>
@@ -348,17 +357,22 @@ at the level of the science it supports.</p>
   }
 
   function runAnimation() {
-    var cards = document.querySelectorAll('.vcard-score');
-    cards.forEach(function(el, i) {
-      var target = parseFloat(el.getAttribute('data-target') || '0');
-      animateCounter(el, target, 1600, i * 180);
+    var primary = document.querySelector('.primary-number');
+    var secs = document.querySelectorAll('.sec-num');
+    var targets = [0.214, 0.502];
+
+    if (primary) animateCounter(primary, 0.339, 1600, 0);
+    secs.forEach(function(el, i) {
+      animateCounter(el, targets[i], 1200, 200 + i * 80);
     });
   }
 
   // Set to 0.000 immediately to prevent flash
   document.addEventListener('DOMContentLoaded', function() {
-    var cards = document.querySelectorAll('.vcard-score');
-    cards.forEach(function(el) { el.textContent = '0.000'; });
+    var primary = document.querySelector('.primary-number');
+    var secs = document.querySelectorAll('.sec-num');
+    if (primary) primary.textContent = '0.000';
+    secs.forEach(function(el) { el.textContent = '0.000'; });
   });
 
   // Run animation on load — not on IntersectionObserver
