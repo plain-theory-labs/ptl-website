@@ -12,8 +12,7 @@ const description = "One honest score for AI compute infrastructure.";
     <span class="hero-eyebrow">Plain Theory Labs</span>
     <h1>One honest score for AI compute infrastructure.</h1>
     <p class="hero-sub">
-  We built the instrument, published the methodology,<br>
-  and opened the source so anyone can verify or build on it.
+  AI infrastructure should perform at the level of the science it supports.
 </p>
   </div>
 
@@ -21,20 +20,10 @@ const description = "One honest score for AI compute infrastructure.";
 
     <div class="primary-score">
       <div class="primary-row">
-        <div class="primary-metrics">
-          <div class="primary-metric-row">
-            <span class="primary-number">0.000</span>
-            <span class="primary-metric-label">GPU-hours weighted</span>
-          </div>
-          <div class="primary-metric-row">
-            <span class="primary-mean">0.000</span>
-            <span class="primary-metric-label">per-job mean</span>
-          </div>
-        </div>
+        <span class="primary-number">0.000</span>
         <div class="primary-labels">
           <span class="primary-tier">ACE Score</span>
           <span class="primary-org">MIT Supercloud</span>
-          <span class="primary-context"><span class="job-count" data-jobs="73367">0</span> production GPU jobs.<br>HPCA22 public dataset.</span>
         </div>
       </div>
     </div>
@@ -44,25 +33,15 @@ const description = "One honest score for AI compute infrastructure.";
     <div class="secondaries">
       <div class="sec dev">
         <span class="sec-num dev">0.000</span>
-        <span class="sec-metric-label">GPU-hours weighted</span>
-        <span class="sec-mean">0.000</span>
-        <span class="sec-metric-label">per-job mean</span>
         <span class="sec-tier">ACE Score</span>
         <span class="sec-org">Alibaba Helios 2020</span>
-        <span class="sec-context"><span class="job-count" data-jobs="361498">0</span> jobs · Hardware sensor</span>
       </div>
       <div class="sec dev">
         <span class="sec-num dev">0.000</span>
-        <span class="sec-metric-label">GPU-hours weighted</span>
-        <span class="sec-mean">0.000</span>
-        <span class="sec-metric-label">per-job mean</span>
         <span class="sec-tier">ACE Score</span>
         <span class="sec-org">Microsoft Philly 2017</span>
-        <span class="sec-context"><span class="job-count" data-jobs="74020">0</span> jobs · nvidia-smi</span>
       </div>
     </div>
-
-    <p class="repro-note">Every score is reproducible from source data using open converters in the <a href="https://github.com/plain-theory-labs/ptl-engines/tree/main/ace/tools">ptl-engines repository</a>.</p>
 
     <div class="actions">
       <a href="#pilot" class="cta cta-primary">Start a pilot</a>
@@ -329,9 +308,6 @@ const description = "One honest score for AI compute infrastructure.";
   </div>
 
   <div class="section contact-section" id="pilot">
-    <span class="section-label">Work begins here</span>
-    <p class="vision-statement">AI infrastructure should perform
-at the level of the science it supports.</p>
     <a href="mailto:research@plaintheory.org"
        class="contact-email">research@plaintheory.org</a>
   </div>
@@ -385,37 +361,20 @@ at the level of the science it supports.</p>
   }
 
   function runAnimation() {
-    var primary  = document.querySelector('.primary-number');
-    var mean     = document.querySelector('.primary-mean');
-    var secNums  = document.querySelectorAll('.sec-num');
-    var secMeans = document.querySelectorAll('.sec-mean');
-    var jobEls   = document.querySelectorAll('.job-count');
-    var totalEl  = document.querySelector('.total-jobs-count');
+    var primary = document.querySelector('.primary-number');
+    var secs    = document.querySelectorAll('.sec-num');
+    var totalEl = document.querySelector('.total-jobs-count');
 
-    // Efficiency rates animate first
     if (primary) animateFloat(primary, 0.339, 1500, 0);
-    if (mean)    animateFloat(mean,    0.257, 1500, 300);  // per-job mean follows 300ms later
-
     var rateTargets = [0.214, 0.502];
-    var meanTargets = [0.127, 0.320];
-    secNums.forEach(function(el, i)  { animateFloat(el, rateTargets[i], 1500, 150 + i * 80); });
-    secMeans.forEach(function(el, i) { animateFloat(el, meanTargets[i], 1500, 450 + i * 80); });
-
-    // Job counts animate after efficiency scores settle
-    jobEls.forEach(function(el, i) {
-      var target = parseInt(el.getAttribute('data-jobs') || '0');
-      animateInteger(el, target, 1200, 900 + i * 120);
-    });
-
-    // Total counter rolls up after all three dataset counts
-    if (totalEl) animateInteger(totalEl, 508885, 1000, 1500);
+    secs.forEach(function(el, i) { animateFloat(el, rateTargets[i], 1500, 150 + i * 80); });
+    if (totalEl) animateInteger(totalEl, 508885, 1400, 300);
   }
 
   // Prevent flash — set all counters to zero immediately
   document.addEventListener('DOMContentLoaded', function() {
-    document.querySelectorAll('.primary-number, .primary-mean, .sec-num, .sec-mean')
+    document.querySelectorAll('.primary-number, .sec-num')
       .forEach(function(el) { el.textContent = '0.000'; });
-    document.querySelectorAll('.job-count').forEach(function(el) { el.textContent = '0'; });
     var tot = document.querySelector('.total-jobs-count');
     if (tot) tot.textContent = '0';
   });
@@ -446,64 +405,6 @@ at the level of the science it supports.</p>
 </script>
 
 <style>
-/* Primary score — dual metric layout */
-.primary-row { align-items: flex-start; }
-.primary-metrics { display: flex; flex-direction: column; gap: 10px; }
-.primary-metric-row { display: flex; align-items: baseline; gap: 18px; }
-.primary-mean {
-  font-family: var(--mono);
-  font-size: clamp(44px, 7.5vw, 68px);
-  font-weight: 300;
-  color: var(--green);
-  opacity: 0.5;
-  letter-spacing: -3px;
-  line-height: 1;
-  font-variant-numeric: tabular-nums;
-  min-width: 5ch;
-}
-.primary-metric-label {
-  font-family: var(--mono);
-  font-size: 9px;
-  font-weight: 300;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  color: var(--ink-4);
-  white-space: nowrap;
-}
-
-/* Secondary cards — per-job mean */
-.sec-mean {
-  font-family: var(--mono);
-  font-size: 20px;
-  font-weight: 300;
-  letter-spacing: -0.5px;
-  line-height: 1;
-  color: var(--amber);
-  opacity: 0.6;
-  font-variant-numeric: tabular-nums;
-  margin-top: 2px;
-}
-.sec-metric-label {
-  font-family: var(--mono);
-  font-size: 8px;
-  font-weight: 300;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  color: var(--ink-5);
-  margin-bottom: 6px;
-}
-
-/* Reproducibility note */
-.repro-note {
-  font-family: var(--serif);
-  font-size: 0.82rem;
-  color: var(--ink-4);
-  line-height: 1.5;
-  margin-bottom: 24px;
-  font-style: italic;
-}
-.repro-note a { color: var(--ink-3); }
-
 /* Footer open source line */
 .footer-center {
   display: flex;
@@ -521,9 +422,7 @@ at the level of the science it supports.</p>
 }
 
 @media (max-width: 760px) {
-  .primary-mean { font-size: 36px; letter-spacing: -2px; }
   .footer-center { align-items: flex-start; }
 }
-
 </style>
 </BaseLayout>
