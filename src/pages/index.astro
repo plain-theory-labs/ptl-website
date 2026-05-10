@@ -20,16 +20,25 @@ const description = "One honest score for AI compute infrastructure.";
 
     <div class="score-list">
       <div class="score-row">
-        <span class="score-label">MIT Supercloud</span>
-        <span class="score-val score-val--anim">0.000</span>
+        <span class="score-label score-label--mit">MIT Supercloud</span>
+        <div class="score-right">
+          <span class="score-val score-val--anim score-val--mit">0.000</span>
+          <span class="score-desc">of GPU-hours did useful work</span>
+        </div>
       </div>
       <div class="score-row">
-        <span class="score-label">Alibaba Helios 2020</span>
-        <span class="score-val score-val--anim">0.000</span>
+        <span class="score-label score-label--helios">Alibaba Helios 2020</span>
+        <div class="score-right">
+          <span class="score-val score-val--anim score-val--helios">0.000</span>
+          <span class="score-desc">of GPU-hours did useful work</span>
+        </div>
       </div>
       <div class="score-row">
-        <span class="score-label">Microsoft Philly 2017</span>
-        <span class="score-val score-val--anim">0.000</span>
+        <span class="score-label score-label--philly">Microsoft Philly 2017</span>
+        <div class="score-right">
+          <span class="score-val score-val--anim score-val--philly">0.000</span>
+          <span class="score-desc">of GPU-hours did useful work</span>
+        </div>
       </div>
     </div>
 
@@ -397,7 +406,7 @@ const description = "One honest score for AI compute infrastructure.";
 </script>
 
 <style>
-/* Option B — score list */
+/* Score list */
 .score-list {
   border-top: 1px solid var(--rule);
   padding-top: 40px;
@@ -406,30 +415,53 @@ const description = "One honest score for AI compute infrastructure.";
 .score-row {
   display: flex;
   justify-content: space-between;
-  align-items: baseline;
-  padding: 18px 0;
+  align-items: center;
+  padding: 20px 0;
   border-bottom: 0.5px solid var(--soft);
+  flex-wrap: wrap;
+  gap: 12px;
 }
 .score-label {
   font-family: var(--mono);
-  font-size: 11px;
-  font-weight: 300;
+  font-size: clamp(15px, 2.2vw, 22px);
+  font-weight: 400;
   letter-spacing: 2px;
   text-transform: uppercase;
-  color: var(--ink-3);
+  line-height: 1.2;
+}
+.score-label--mit    { color: #14532d; }
+.score-label--helios { color: #134e4a; }
+.score-label--philly { color: #78350f; }
+
+.score-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 3px;
 }
 .score-val {
   font-family: var(--mono);
   font-size: clamp(40px, 7vw, 64px);
   font-weight: 300;
-  color: var(--green);
   letter-spacing: -3px;
   line-height: 1;
   font-variant-numeric: tabular-nums;
 }
+.score-val--mit    { color: #14532d; }
+.score-val--helios { color: #134e4a; }
+.score-val--philly { color: #78350f; }
+
+.score-desc {
+  font-family: var(--serif);
+  font-size: 0.72rem;
+  color: var(--ink-4);
+  font-style: italic;
+  line-height: 1;
+  text-align: right;
+}
 @media (max-width: 760px) {
-  .score-val { font-size: 36px; letter-spacing: -2px; }
-  .score-label { font-size: 10px; }
+  .score-val   { font-size: 36px; letter-spacing: -2px; }
+  .score-label { font-size: 14px; letter-spacing: 1.5px; }
 }
 
 /* Footer open source line */
