@@ -18,29 +18,18 @@ const description = "One honest score for AI compute infrastructure.";
 
   <div class="hero-data">
 
-    <div class="primary-score">
-      <div class="primary-row">
-        <span class="primary-number">0.000</span>
-        <div class="primary-labels">
-          <span class="primary-tier">GPU Efficiency</span>
-          <div class="dataset-stack">
-            <div class="dataset-row dataset-row--primary">
-              <span class="dataset-name">MIT Supercloud</span>
-              <span class="dataset-sep">·</span>
-              <span class="dataset-score">0.339</span>
-            </div>
-            <div class="dataset-row">
-              <span class="dataset-name">Alibaba Helios 2020</span>
-              <span class="dataset-sep">·</span>
-              <span class="dataset-score dataset-score--anim">0.000</span>
-            </div>
-            <div class="dataset-row">
-              <span class="dataset-name">Microsoft Philly 2017</span>
-              <span class="dataset-sep">·</span>
-              <span class="dataset-score dataset-score--anim">0.000</span>
-            </div>
-          </div>
-        </div>
+    <div class="score-list">
+      <div class="score-row">
+        <span class="score-label">MIT Supercloud</span>
+        <span class="score-val score-val--anim">0.000</span>
+      </div>
+      <div class="score-row">
+        <span class="score-label">Alibaba Helios 2020</span>
+        <span class="score-val score-val--anim">0.000</span>
+      </div>
+      <div class="score-row">
+        <span class="score-label">Microsoft Philly 2017</span>
+        <span class="score-val score-val--anim">0.000</span>
       </div>
     </div>
 
@@ -364,21 +353,19 @@ const description = "One honest score for AI compute infrastructure.";
   }
 
   function runAnimation() {
-    var primary = document.querySelector('.primary-number');
-    var secVals = document.querySelectorAll('.dataset-score--anim');
+    var rows    = document.querySelectorAll('.score-val--anim');
     var totalEl = document.querySelector('.total-jobs-count');
+    var targets = [0.339, 0.214, 0.502];
 
-    if (primary) animateFloat(primary, 0.339, 1500, 0);
-    var targets = [0.214, 0.502];
-    secVals.forEach(function(el, i) { animateFloat(el, targets[i], 1500, 200 + i * 100); });
-    if (totalEl) animateInteger(totalEl, 508885, 1400, 300);
+    rows.forEach(function(el, i) {
+      animateFloat(el, targets[i], 1500, i * 120);
+    });
+    if (totalEl) animateInteger(totalEl, 508885, 1400, 500);
   }
 
-  // Prevent flash — set animated counters to zero immediately
+  // Prevent flash
   document.addEventListener('DOMContentLoaded', function() {
-    var primary = document.querySelector('.primary-number');
-    if (primary) primary.textContent = '0.000';
-    document.querySelectorAll('.dataset-score--anim')
+    document.querySelectorAll('.score-val--anim')
       .forEach(function(el) { el.textContent = '0.000'; });
     var tot = document.querySelector('.total-jobs-count');
     if (tot) tot.textContent = '0';
@@ -410,42 +397,39 @@ const description = "One honest score for AI compute infrastructure.";
 </script>
 
 <style>
-/* Dataset stack in primary labels */
-.dataset-stack {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin-top: 14px;
+/* Option B — score list */
+.score-list {
+  border-top: 1px solid var(--rule);
+  padding-top: 40px;
+  margin-bottom: 40px;
 }
-.dataset-row {
+.score-row {
   display: flex;
+  justify-content: space-between;
   align-items: baseline;
-  gap: 9px;
+  padding: 18px 0;
+  border-bottom: 0.5px solid var(--soft);
 }
-.dataset-name {
+.score-label {
   font-family: var(--mono);
   font-size: 11px;
   font-weight: 300;
-  letter-spacing: 1.5px;
+  letter-spacing: 2px;
   text-transform: uppercase;
   color: var(--ink-3);
 }
-.dataset-row--primary .dataset-name {
-  color: var(--ink-2);
-  font-weight: 400;
-}
-.dataset-sep {
+.score-val {
   font-family: var(--mono);
-  font-size: 11px;
-  color: var(--ink-4);
-}
-.dataset-score {
-  font-family: var(--mono);
-  font-size: 14px;
-  font-weight: 400;
+  font-size: clamp(40px, 7vw, 64px);
+  font-weight: 300;
   color: var(--green);
-  letter-spacing: -0.5px;
+  letter-spacing: -3px;
+  line-height: 1;
   font-variant-numeric: tabular-nums;
+}
+@media (max-width: 760px) {
+  .score-val { font-size: 36px; letter-spacing: -2px; }
+  .score-label { font-size: 10px; }
 }
 
 /* Footer open source line */
