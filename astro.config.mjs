@@ -18,9 +18,6 @@ export default defineConfig({
           href: 'https://github.com/plain-theory-labs',
         },
       ],
-      editLink: {
-        baseUrl: 'https://github.com/plain-theory-labs/ptl-website/edit/main/',
-      },
       sidebar: [
         {
           label: 'Getting Started',
