@@ -20,24 +20,33 @@ const description = "One honest score for AI compute infrastructure.";
 
     <div class="score-list">
       <div class="score-row">
-        <span class="score-label score-label--mit">MIT Supercloud</span>
+        <div class="score-left">
+          <span class="score-label score-label--mit">MIT Supercloud</span>
+          <span class="score-meta">73,367 jobs · Research HPC · Cambridge, MA · NVIDIA V100</span>
+        </div>
         <div class="score-right">
           <span class="score-val score-val--anim score-val--mit">0.000</span>
-          <span class="score-desc">of GPU-hours did useful work</span>
+          <span class="score-desc">of allocated compute utilized</span>
         </div>
       </div>
       <div class="score-row">
-        <span class="score-label score-label--helios">Alibaba Helios 2020</span>
+        <div class="score-left">
+          <span class="score-label score-label--helios">Alibaba Helios 2020</span>
+          <span class="score-meta">361,498 jobs · Production ML · Beijing, China · Heterogeneous GPU fleet</span>
+        </div>
         <div class="score-right">
           <span class="score-val score-val--anim score-val--helios">0.000</span>
-          <span class="score-desc">of GPU-hours did useful work</span>
+          <span class="score-desc">of allocated compute utilized</span>
         </div>
       </div>
       <div class="score-row">
-        <span class="score-label score-label--philly">Microsoft Philly 2017</span>
+        <div class="score-left">
+          <span class="score-label score-label--philly">Microsoft Philly 2017</span>
+          <span class="score-meta">74,020 jobs · DNN Training · Redmond, WA · NVIDIA K80 · P100 · V100</span>
+        </div>
         <div class="score-right">
           <span class="score-val score-val--anim score-val--philly">0.000</span>
-          <span class="score-desc">of GPU-hours did useful work</span>
+          <span class="score-desc">of allocated compute utilized</span>
         </div>
       </div>
     </div>
@@ -420,6 +429,20 @@ const description = "One honest score for AI compute infrastructure.";
   border-bottom: 0.5px solid var(--soft);
   flex-wrap: wrap;
   gap: 12px;
+}
+.score-left {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.score-meta {
+  font-family: var(--mono);
+  font-size: 9px;
+  font-weight: 300;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--ink-4);
+  line-height: 1.6;
 }
 .score-label {
   font-family: var(--mono);
