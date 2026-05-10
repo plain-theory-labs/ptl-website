@@ -25,23 +25,19 @@ Each engine addresses a distinct dimension of infrastructure performance:
 
 These results were computed directly from publicly available, peer-reviewed GPU cluster datasets. Every number is reproducible from source data using open converters in the ptl-engines repository.
 
-| Dataset | Jobs | Telemetry source | gpu_efficiency_rate | gpu_efficiency_score |
-|---|---|---|---|---|
-| MIT Supercloud HPCA22 | 73,367 | DCGM telemetry | **0.339** | **0.257** |
-| Alibaba Helios 2020 | 361,498 | Hardware sensor | **0.214** | **0.127** |
-| Microsoft Philly 2017 | 74,020 | nvidia-smi | **0.502** | **0.320** |
+| Organization        | ACE Score | Telemetry      | Jobs    | Reference        |
+|---------------------|-----------|----------------|---------|------------------|
+| MIT Supercloud      | 0.339     | DCGM           | 73,367  | Samsi et al., SC22 |
+| Alibaba Helios 2020 | 0.214     | Hardware sensor | 361,498 | Weng et al., NSDI 2022 |
+| Microsoft Philly 2017 | 0.502   | nvidia-smi     | 74,020  | Jeon et al., USENIX ATC 2019 |
 
-`gpu_efficiency_rate` is the GPU-hours weighted metric GRADE uses for certification. `gpu_efficiency_score` is the per-job mean — the number most facilities self-report internally. The gap between them is significant: a cluster running many small efficient jobs alongside a few large wasteful ones can report a high per-job score while the majority of its GPU-hours go unused. PTL reports both. Certification is based on the weighted metric because it reflects what physically happened to the hardware.
+ACE reports two efficiency metrics for each dataset:
+- **GPU-hours weighted efficiency (GRADE primary)** — of all GPU-hours allocated, what fraction did useful work. This is the certification metric.
+- **Per-job mean utilization** — average per-job GPU utilization, equal weight per job. This is what most facilities self-report internally.
 
-Across all three independent production environments, GPU efficiency ranges from 21% to 50%. The pattern is consistent with published findings from the EE HPC WG and the GPU scheduling research community.
+GRADE uses the GPU-hours weighted metric because it correctly reflects infrastructure efficiency in physical terms: wasted GPU-hours equal wasted energy. Both numbers are consistent with published EE HPC WG benchmarks for production GPU environments.
 
-**Dataset provenance**
-
-MIT Supercloud HPCA22 — 73,367 production GPU jobs from MIT's research cluster. Direct DCGM telemetry. Peer-reviewed at SC22 (Samsi et al.). Our primary validation reference.
-
-Alibaba Helios 2020 — 361,498 GPU jobs from a production ML training cluster. `gpu_wrk_util` is direct hardware sensor data per GPU instance. CC BY 4.0. Published at NSDI 2022 (Weng et al.). Converter: `ace/tools/convert_helios_to_ace.py`
-
-Microsoft Philly 2017 — 74,020 GPU jobs from Microsoft Research's internal DNN training cluster. Per-minute nvidia-smi readings per GPU, linked to job scheduling records. Published at USENIX ATC 2019 (Jeon et al.). Converter: `ace/tools/convert_philly_to_ace.py`
+Methodology worked examples using published operational statistics (NERSC, OLCF, ALCF) are available in [ptl-methodology/validation.md](https://github.com/plain-theory-labs/ptl-methodology) with full assumptions documented. These are illustrations of the methodology, not independent certifications of those facilities.
 
 ## Longitudinal certification
 
@@ -51,14 +47,13 @@ A PTL certification is not a one-time audit. Year one is a baseline. Year three 
 
 Read [how certification works](/docs/certification/) or [start a pilot](/docs/pilot/).
 
-## Open source
-
-All nine engines, the scoring methodology, and the validation converters are published under open licenses. The methodology is citable. The results are reproducible.
+## Repositories
 
 | Repository | Description | License |
-|---|---|---|
+|------------|-------------|---------|
 | [ptl-engines](https://github.com/plain-theory-labs/ptl-engines) | All nine analytical engines, 220 tests, dataset converters | MIT |
 | [ptl-methodology](https://github.com/plain-theory-labs/ptl-methodology) | Scoring formulas, coefficients, tiers | CC BY 4.0 |
 | [ptl-website](https://github.com/plain-theory-labs/ptl-website) | This documentation site | MIT |
+| [ptl-context](https://github.com/plain-theory-labs/ptl-context) | Engineering context and session logs | Private |
 
 All methodology is public and citable. Source code is open under MIT license. The organization is at [github.com/plain-theory-labs](https://github.com/plain-theory-labs).
