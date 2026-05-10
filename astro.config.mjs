@@ -28,6 +28,7 @@ export default defineConfig({
             { label: 'Overview', link: '/docs/' },
             { label: 'How certification works', link: '/docs/certification/' },
             { label: 'Start a pilot', link: '/docs/pilot/' },
+            { label: 'Recoverable Value', link: '/docs/recoverable-value/' },
           ],
         },
         {
