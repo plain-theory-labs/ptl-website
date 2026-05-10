@@ -21,7 +21,7 @@ const description = "One honest score for AI compute infrastructure.";
     <div class="score-list">
       <div class="score-row">
         <div class="score-left">
-          <span class="score-label score-label--mit">MIT Supercloud</span>
+          <span class="score-label score-label--mit">MIT Supercloud 2022</span>
           <span class="score-meta">73,367 jobs · Research HPC · Cambridge, MA · NVIDIA V100</span>
         </div>
         <div class="score-right">
@@ -52,11 +52,6 @@ const description = "One honest score for AI compute infrastructure.";
     </div>
 
     <span class="scale-note">GPU Efficiency · 0.0 to 1.0 · <span class="total-jobs-count">0</span> jobs validated across 3 peer-reviewed datasets</span>
-
-    <div class="actions">
-      <a href="#pilot" class="cta cta-primary">Start a pilot</a>
-      <a href="/docs" class="cta cta-docs">Read the documentation</a>
-    </div>
 
   </div>
 
@@ -317,6 +312,11 @@ const description = "One honest score for AI compute infrastructure.";
 
   </div>
 
+  <div class="actions actions--bottom">
+    <a href="#pilot" class="cta cta-primary">Start a pilot</a>
+    <a href="/docs" class="cta cta-docs">Read the documentation</a>
+  </div>
+
   <div class="section contact-section" id="pilot">
     <a href="mailto:research@plaintheory.org"
        class="contact-email">research@plaintheory.org</a>
@@ -446,7 +446,7 @@ const description = "One honest score for AI compute infrastructure.";
 }
 .score-label {
   font-family: var(--mono);
-  font-size: clamp(15px, 2.2vw, 22px);
+  font-size: clamp(18px, 2.6vw, 28px);
   font-weight: 400;
   letter-spacing: 2px;
   text-transform: uppercase;
@@ -482,9 +482,19 @@ const description = "One honest score for AI compute infrastructure.";
   line-height: 1;
   text-align: right;
 }
+.actions--bottom {
+  border-top: 1px solid var(--soft);
+  padding-top: 28px;
+  margin-top: 0;
+  display: flex;
+  align-items: center;
+  gap: 44px;
+  flex-wrap: wrap;
+}
 @media (max-width: 760px) {
   .score-val   { font-size: 36px; letter-spacing: -2px; }
-  .score-label { font-size: 14px; letter-spacing: 1.5px; }
+  .score-label { font-size: 16px; letter-spacing: 1.5px; }
+  .actions--bottom { gap: 20px; flex-direction: column; align-items: flex-start; }
 }
 
 /* Footer open source line */
