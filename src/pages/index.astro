@@ -22,26 +22,29 @@ const description = "One honest score for AI compute infrastructure.";
       <div class="primary-row">
         <span class="primary-number">0.000</span>
         <div class="primary-labels">
-          <span class="primary-tier">ACE Score</span>
-          <span class="primary-org">MIT Supercloud</span>
+          <span class="primary-tier">GPU Efficiency</span>
+          <div class="dataset-stack">
+            <div class="dataset-row dataset-row--primary">
+              <span class="dataset-name">MIT Supercloud</span>
+              <span class="dataset-sep">·</span>
+              <span class="dataset-score">0.339</span>
+            </div>
+            <div class="dataset-row">
+              <span class="dataset-name">Alibaba Helios 2020</span>
+              <span class="dataset-sep">·</span>
+              <span class="dataset-score dataset-score--anim">0.000</span>
+            </div>
+            <div class="dataset-row">
+              <span class="dataset-name">Microsoft Philly 2017</span>
+              <span class="dataset-sep">·</span>
+              <span class="dataset-score dataset-score--anim">0.000</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
 
-    <span class="scale-note">ACE Score · 0.0 to 1.0 · GPU efficiency · <span class="total-jobs-count">0</span> jobs validated across 3 peer-reviewed datasets</span>
-
-    <div class="secondaries">
-      <div class="sec dev">
-        <span class="sec-num dev">0.000</span>
-        <span class="sec-tier">ACE Score</span>
-        <span class="sec-org">Alibaba Helios 2020</span>
-      </div>
-      <div class="sec dev">
-        <span class="sec-num dev">0.000</span>
-        <span class="sec-tier">ACE Score</span>
-        <span class="sec-org">Microsoft Philly 2017</span>
-      </div>
-    </div>
+    <span class="scale-note">GPU Efficiency · 0.0 to 1.0 · <span class="total-jobs-count">0</span> jobs validated across 3 peer-reviewed datasets</span>
 
     <div class="actions">
       <a href="#pilot" class="cta cta-primary">Start a pilot</a>
@@ -362,18 +365,20 @@ const description = "One honest score for AI compute infrastructure.";
 
   function runAnimation() {
     var primary = document.querySelector('.primary-number');
-    var secs    = document.querySelectorAll('.sec-num');
+    var secVals = document.querySelectorAll('.dataset-score--anim');
     var totalEl = document.querySelector('.total-jobs-count');
 
     if (primary) animateFloat(primary, 0.339, 1500, 0);
-    var rateTargets = [0.214, 0.502];
-    secs.forEach(function(el, i) { animateFloat(el, rateTargets[i], 1500, 150 + i * 80); });
+    var targets = [0.214, 0.502];
+    secVals.forEach(function(el, i) { animateFloat(el, targets[i], 1500, 200 + i * 100); });
     if (totalEl) animateInteger(totalEl, 508885, 1400, 300);
   }
 
-  // Prevent flash — set all counters to zero immediately
+  // Prevent flash — set animated counters to zero immediately
   document.addEventListener('DOMContentLoaded', function() {
-    document.querySelectorAll('.primary-number, .sec-num')
+    var primary = document.querySelector('.primary-number');
+    if (primary) primary.textContent = '0.000';
+    document.querySelectorAll('.dataset-score--anim')
       .forEach(function(el) { el.textContent = '0.000'; });
     var tot = document.querySelector('.total-jobs-count');
     if (tot) tot.textContent = '0';
@@ -405,6 +410,44 @@ const description = "One honest score for AI compute infrastructure.";
 </script>
 
 <style>
+/* Dataset stack in primary labels */
+.dataset-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 14px;
+}
+.dataset-row {
+  display: flex;
+  align-items: baseline;
+  gap: 9px;
+}
+.dataset-name {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 300;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.dataset-row--primary .dataset-name {
+  color: var(--ink-2);
+  font-weight: 400;
+}
+.dataset-sep {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--ink-4);
+}
+.dataset-score {
+  font-family: var(--mono);
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--green);
+  letter-spacing: -0.5px;
+  font-variant-numeric: tabular-nums;
+}
+
 /* Footer open source line */
 .footer-center {
   display: flex;

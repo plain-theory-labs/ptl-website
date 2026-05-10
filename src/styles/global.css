@@ -197,9 +197,9 @@ h1 {
 .scale-note {
   font-family: var(--mono);
   font-size: 10px;
-  font-weight: 300;
+  font-weight: 500;
   letter-spacing: 1.5px;
-  color: var(--ink-5);
+  color: var(--ink-1);
   text-transform: uppercase;
   display: block;
   margin-bottom: 16px;
