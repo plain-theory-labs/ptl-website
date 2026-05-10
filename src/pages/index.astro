@@ -11,9 +11,10 @@ const description = "One honest score for AI compute infrastructure.";
   <div class="statement">
     <span class="hero-eyebrow">Plain Theory Labs</span>
     <h1>One honest score for AI compute infrastructure.</h1>
-    <p class="hero-sub">
-  AI infrastructure should perform at the level of the science it supports.
-</p>
+    <div class="hero-ctas">
+      <a href="#pilot" class="hero-cta hero-cta--primary">Start a pilot</a>
+      <a href="/docs" class="hero-cta hero-cta--docs">Read the documentation</a>
+    </div>
   </div>
 
   <div class="hero-data">
@@ -312,11 +313,6 @@ const description = "One honest score for AI compute infrastructure.";
 
   </div>
 
-  <div class="actions actions--bottom">
-    <a href="#pilot" class="cta cta-primary">Start a pilot</a>
-    <a href="/docs" class="cta cta-docs">Read the documentation</a>
-  </div>
-
   <div class="section contact-section" id="pilot">
     <a href="mailto:research@plaintheory.org"
        class="contact-email">research@plaintheory.org</a>
@@ -482,19 +478,40 @@ const description = "One honest score for AI compute infrastructure.";
   line-height: 1;
   text-align: right;
 }
-.actions--bottom {
-  border-top: 1px solid var(--soft);
-  padding-top: 28px;
-  margin-top: 0;
+/* Hero CTAs */
+.hero-ctas {
   display: flex;
   align-items: center;
-  gap: 44px;
+  gap: 36px;
+  margin-top: 28px;
   flex-wrap: wrap;
 }
+.hero-cta {
+  font-family: var(--mono);
+  font-size: 15px;
+  font-weight: 400;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-bottom: 1.5px solid;
+  padding-bottom: 3px;
+  transition: opacity 0.2s;
+}
+.hero-cta:hover { opacity: 0.4; }
+.hero-cta--primary {
+  color: #14532d;
+  border-color: #14532d;
+}
+.hero-cta--docs {
+  color: #164e63;
+  border-color: #164e63;
+}
+
 @media (max-width: 760px) {
-  .score-val   { font-size: 36px; letter-spacing: -2px; }
+  .score-val  { font-size: 36px; letter-spacing: -2px; }
   .score-label { font-size: 16px; letter-spacing: 1.5px; }
-  .actions--bottom { gap: 20px; flex-direction: column; align-items: flex-start; }
+  .hero-ctas  { gap: 20px; flex-direction: column; align-items: flex-start; }
+  .hero-cta   { font-size: 13px; }
 }
 
 /* Footer open source line */
