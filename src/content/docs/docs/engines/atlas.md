@@ -6,7 +6,7 @@ description: ATLAS ranks the actions most likely to improve your PTL certificati
 Actionable Trajectory and Longitudinal Analysis (ATLAS) receives all engine outputs and produces a ranked action plan. Each recommendation is specific enough to act on immediately — not a category of improvement but the exact configuration change, the expected impact, and the current baseline.
 
 :::note[Version]
-ATLAS v0.1.0 · Released 2026-03-16
+<span class="ptl-badge-row"><span class="ptl-badge ptl-badge--version">engine v0.1.0</span><span class="ptl-badge ptl-badge--release">public release 2026-05-11</span><span class="ptl-badge ptl-badge--license">MIT</span><span class="ptl-badge ptl-badge--checks">checks passing</span></span>
 :::
 
 ## How ATLAS ranks recommendations

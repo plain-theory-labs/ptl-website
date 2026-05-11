@@ -6,7 +6,7 @@ description: FLUX grades carbon accounting methodology quality and detects green
 The Facility Load and Utilization Index (FLUX) grades the rigor of an organization's carbon accounting methodology — not the carbon number itself. An organization can report a very low footprint using instruments that have no physical connection to actual renewable generation. The most common example: purchasing unbundled Renewable Energy Certificates with no temporal or geographic matching, then claiming 100% renewable status while consuming from a high-carbon grid. The reported figure may be near zero. The physical reality is the full eGRID intensity times every MWh consumed. FLUX scores the method, computes what the grid actually implies, and flags the gap.
 
 :::note[Version]
-FLUX v0.1.0 · Released 2026-03-16
+<span class="ptl-badge-row"><span class="ptl-badge ptl-badge--version">engine v0.1.0</span><span class="ptl-badge ptl-badge--release">public release 2026-05-11</span><span class="ptl-badge ptl-badge--license">MIT</span><span class="ptl-badge ptl-badge--checks">checks passing</span></span>
 :::
 
 ## Primary metric

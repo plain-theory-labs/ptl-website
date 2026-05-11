@@ -6,7 +6,7 @@ description: ACE measures GPU utilization across Slurm, PBS, LSF, XDMoD, Kuberne
 The Adaptive Compute Efficiency Engine (ACE) answers one question: of all the GPU compute your cluster allocated, how much of it did useful work? ACE ingests job accounting data from every major HPC scheduler — Slurm, PBS Pro, LSF, and XDMoD-aggregated multi-scheduler environments — alongside live hardware telemetry from NVIDIA DCGM and Kubernetes pod metrics. It scores each job against a documented efficiency methodology, identifies the exact scripts and workload types driving waste, blocks right-sizing recommendations it cannot defend (memory-bound jobs, healthy repeat scripts, multi-GPU topology constraints), and produces a structured export consumed by GRADE for certification scoring. The result is the single most actionable signal in a PTL certification: a GPU-hours-weighted efficiency rate that tells the truth about physical resource consumption rather than masking large wasteful jobs behind a count of small efficient ones.
 
 :::note[Version]
-ACE v0.3.0 · Released 2026-05-09
+<span class="ptl-badge-row"><span class="ptl-badge ptl-badge--version">engine v0.3.0</span><span class="ptl-badge ptl-badge--release">public release 2026-05-11</span><span class="ptl-badge ptl-badge--license">MIT</span><span class="ptl-badge ptl-badge--checks">checks passing</span></span>
 :::
 
 ## Primary metric

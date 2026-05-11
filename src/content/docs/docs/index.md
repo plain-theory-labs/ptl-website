@@ -37,7 +37,7 @@ ACE reports two efficiency metrics for each dataset:
 
 GRADE uses the GPU-hours weighted metric because it correctly reflects infrastructure efficiency in physical terms: wasted GPU-hours equal wasted energy. Both numbers are consistent with published EE HPC WG benchmarks for production GPU environments.
 
-Methodology worked examples using published operational statistics (NERSC, OLCF, ALCF) are available in [ptl-methodology/validation.md](https://github.com/plain-theory-labs/ptl-methodology) with full assumptions documented. These are illustrations of the methodology, not independent certifications of those facilities.
+Methodology worked examples using public datasets are available in [ptl-methodology/VALIDATION.md](https://github.com/plain-theory-labs/ptl-methodology/blob/main/VALIDATION.md) with full assumptions documented. These are illustrations of the methodology, not independent certifications of any facility.
 
 ## Longitudinal certification
 
@@ -53,7 +53,7 @@ Every number PTL produces is reproducible from source. The engines, methodology,
 
 | Repository | Description | License |
 |------------|-------------|---------|
-| [ptl-engines](https://github.com/plain-theory-labs/ptl-engines) | All nine analytical engines, 220 tests, dataset converters | MIT |
+| [ptl-engines](https://github.com/plain-theory-labs/ptl-engines) | All nine analytical engines, public fixtures, dataset converters, 1,426 passing tests | MIT |
 | [ptl-methodology](https://github.com/plain-theory-labs/ptl-methodology) | Scoring formulas, coefficients, tiers | CC BY 4.0 |
 | [ptl-website](https://github.com/plain-theory-labs/ptl-website) | This documentation site | MIT |
 | [ptl-context](https://github.com/plain-theory-labs/ptl-context) | Engineering session logs and internal notes — not methodology or scoring logic | Private |

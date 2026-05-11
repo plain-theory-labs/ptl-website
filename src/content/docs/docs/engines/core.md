@@ -6,7 +6,7 @@ description: CORE grades hardware-workload fit, fleet age, and embodied carbon e
 The Capital and Operations Resource Evaluator (CORE) grades the hardware layer of your AI infrastructure — whether the GPUs you operate are the right hardware for the workloads you run, how old the fleet is relative to the GPU refresh cycle, and how efficiently embodied carbon is amortized across the compute capacity those GPUs deliver. CORE identifies whether hardware decisions are creating a structural ceiling on what ACE and PACE can achieve.
 
 :::note[Version]
-CORE v0.1.0 · Released 2026-03-16 · Fit matrix updated from MLPerf v3.1/v4.0 2026-05-09
+<span class="ptl-badge-row"><span class="ptl-badge ptl-badge--version">engine v0.1.0</span><span class="ptl-badge ptl-badge--method">fit matrix update 2026-05-09</span><span class="ptl-badge ptl-badge--license">MIT</span><span class="ptl-badge ptl-badge--checks">checks passing</span></span>
 :::
 
 ## Primary metric

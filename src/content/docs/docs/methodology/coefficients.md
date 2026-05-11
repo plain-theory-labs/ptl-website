@@ -37,11 +37,11 @@ Carbon accounting methodology is important. It is also the dimension where organ
 
 ## Coefficient versioning
 
-Current coefficients: v2.0, published 2026-03-18. These are the initial published coefficients. No prior version exists. Previous tags in ptl-engines predate this methodology and used different values; those tags are retained for history only and should not be cited as methodology references.
+Current coefficients: v2.0, published 2026-03-18. These coefficients are documented in the public methodology repository. The cleaned public repository history begins at `v0.1.0`; older pre-public tags are no longer part of the public release surface.
 
 ## Source
 
 - [Full methodology repository](https://github.com/plain-theory-labs/ptl-methodology)
 - [Coefficients document](https://github.com/plain-theory-labs/ptl-methodology/blob/main/coefficients.md)
-- [Coefficient changelog](https://github.com/plain-theory-labs/ptl-methodology/blob/main/changelog.md)
+- [Coefficient changelog](https://github.com/plain-theory-labs/ptl-methodology/blob/main/CHANGELOG.md)
 - [Propose a coefficient change](https://github.com/plain-theory-labs/ptl-methodology/issues)

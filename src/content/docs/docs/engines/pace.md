@@ -6,7 +6,7 @@ description: PACE measures scheduler efficiency — how well your cluster alloca
 Predictive Allocation and Cluster Efficiency (PACE) measures how well your cluster scheduler allocates resources across competing workloads. GPU efficiency (ACE) tells you whether jobs use what they request. PACE tells you whether the scheduler is giving resources to the right jobs at the right time — and whether users have any incentive to ask for only what they need.
 
 :::note[Version]
-PACE v0.1.0 · Released 2026-03-16 · Queue incentive redesigned methodology v0.2 2026-05-09
+<span class="ptl-badge-row"><span class="ptl-badge ptl-badge--version">engine v0.1.0</span><span class="ptl-badge ptl-badge--method">queue method update 2026-05-09</span><span class="ptl-badge ptl-badge--license">MIT</span><span class="ptl-badge ptl-badge--checks">checks passing</span></span>
 :::
 
 ## Primary metric

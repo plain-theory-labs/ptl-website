@@ -6,7 +6,7 @@ description: GRADE aggregates engine scores into a composite PTL Score and produ
 Granular Rating for AI Datacenter Efficiency (GRADE) is the aggregation and reporting engine. GRADE ingests all upstream engine outputs, applies published coefficients, computes the composite PTL Score, assigns a certification tier, and produces the full certification report.
 
 :::note[Version]
-GRADE v0.1.0 · Released 2026-03-13
+<span class="ptl-badge-row"><span class="ptl-badge ptl-badge--version">engine v0.1.0</span><span class="ptl-badge ptl-badge--release">public release 2026-05-11</span><span class="ptl-badge ptl-badge--license">MIT</span><span class="ptl-badge ptl-badge--checks">checks passing</span></span>
 :::
 
 ## What GRADE produces
@@ -203,5 +203,5 @@ Engines are excluded simply by omitting their report path — absent paths are n
 
 - [View GRADE source on GitHub](https://github.com/plain-theory-labs/ptl-engines/tree/main/grade)
 - [GRADE methodology document](https://github.com/plain-theory-labs/ptl-methodology/blob/main/engines/grade_methodology.md)
-- [Coefficients changelog](https://github.com/plain-theory-labs/ptl-methodology/blob/main/changelog.md)
+- [Coefficients changelog](https://github.com/plain-theory-labs/ptl-methodology/blob/main/CHANGELOG.md)
 - [Report an issue](https://github.com/plain-theory-labs/ptl-engines/issues)

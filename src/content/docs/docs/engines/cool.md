@@ -6,7 +6,7 @@ description: COOL grades facility cooling efficiency by comparing reported PUE a
 The Cooling Operations Optimization Layer (COOL) answers one question: given your facility's cooling technology, age, and climate, is your Power Usage Effectiveness where it should be? A PUE of 1.45 is excellent for an air-cooled building from 2006 in Houston. It is poor for a liquid-cooled building from 2022 in Minneapolis. COOL provides that context through a benchmark matrix derived from industry survey data, adjusted for ASHRAE climate zone, and produces a letter grade (A–F) plus a continuous efficiency score consumed by GRADE for certification scoring.
 
 :::note[Version]
-COOL v0.1.0 · Released 2026-03-16
+<span class="ptl-badge-row"><span class="ptl-badge ptl-badge--version">engine v0.1.0</span><span class="ptl-badge ptl-badge--release">public release 2026-05-11</span><span class="ptl-badge ptl-badge--license">MIT</span><span class="ptl-badge ptl-badge--checks">checks passing</span></span>
 :::
 
 ## Primary metric

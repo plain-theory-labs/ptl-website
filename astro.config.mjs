@@ -31,6 +31,7 @@ export default defineConfig({
         {
           label: 'Engines',
           items: [
+            { label: 'Overview', link: '/docs/engines/' },
             { label: 'PROFILE', link: '/docs/engines/profile/' },
             { label: 'ACE', link: '/docs/engines/ace/' },
             { label: 'COOL', link: '/docs/engines/cool/' },

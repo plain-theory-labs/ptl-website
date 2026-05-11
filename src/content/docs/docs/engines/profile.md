@@ -6,7 +6,7 @@ description: PROFILE characterizes your cluster and routes data to downstream PT
 PROFILE is the first engine in every PTL assessment. It characterizes your cluster — scheduler type, GPU fleet, telemetry sources, MIG configuration — and produces the routing manifest that all downstream engines use. PROFILE is not scored. It is a prerequisite.
 
 :::note[Version]
-PROFILE v0.1.0 · Released 2026-03-16
+<span class="ptl-badge-row"><span class="ptl-badge ptl-badge--version">engine v0.1.0</span><span class="ptl-badge ptl-badge--release">public release 2026-05-11</span><span class="ptl-badge ptl-badge--license">MIT</span><span class="ptl-badge ptl-badge--checks">checks passing</span></span>
 :::
 
 ## What PROFILE does

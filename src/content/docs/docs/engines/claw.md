@@ -6,7 +6,7 @@ description: CLAW automates GPU telemetry collection for PTL assessments with a 
 CLAW is the PTL intake agent — software that runs inside your environment and automates the data collection step of a PTL assessment. CLAW supports three collection modes depending on your organization's data handling requirements. In all modes, CLAW is optional; a standard `sacct` export is sufficient for a full ACE, PACE, and GRADE assessment.
 
 :::note[Version]
-CLAW v0.1.0 · Released 2026-03-01
+<span class="ptl-badge-row"><span class="ptl-badge ptl-badge--version">engine v0.1.0</span><span class="ptl-badge ptl-badge--release">public release 2026-05-11</span><span class="ptl-badge ptl-badge--license">MIT</span><span class="ptl-badge ptl-badge--checks">checks passing</span></span>
 :::
 
 ## What CLAW collects
