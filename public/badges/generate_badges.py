@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-PTL certification badge generator.
-Generates SVG badge files for each certification tier.
+PTL assessment badge generator.
+Generates SVG badge files for each assessment tier.
 Output: ptl-website/public/badges/
 """
 
@@ -29,16 +29,16 @@ def make_badge(tier_name: str, color: str, org: str = "", year: str = "") -> str
     slug = tier_name.lower()
 
     svg = f"""<svg xmlns="http://www.w3.org/2000/svg" width="200" height="80" role="img"
-     aria-label="PTL {tier_name} Certified{' ' + year if year else ''}">
-  <title>PTL {tier_name} Certified{' ' + year if year else ''}</title>
+     aria-label="PTL {tier_name} Assessment{' ' + year if year else ''}">
+  <title>PTL {tier_name} Assessment{' ' + year if year else ''}</title>
   <rect width="200" height="80" rx="6" ry="6"
         fill="#ffffff" stroke="{color}" stroke-width="1.5"/>
-  <!-- Top label: PTL CERTIFIED -->
+  <!-- Top label: PTL ASSESSMENT -->
   <text x="100" y="20"
         font-family="'IBM Plex Mono', monospace"
         font-size="9" font-weight="400"
         fill="{color}" fill-opacity="0.7"
-        text-anchor="middle" letter-spacing="2">PTL CERTIFIED</text>
+        text-anchor="middle" letter-spacing="2">PTL ASSESSMENT</text>
   <!-- Tier name -->
   <text x="100" y="42"
         font-family="'IBM Plex Mono', monospace"
@@ -71,30 +71,17 @@ def main():
     for tier in TIERS:
         name = tier["name"]
         color = tier["color"]
-        filename = f"ptl-certified-{name.lower()}.svg"
+        filename = f"ptl-assessment-{name.lower()}.svg"
         path = OUTPUT_DIR / filename
         svg = make_badge(name, color)
         path.write_text(svg, encoding="utf-8")
         generated.append(filename)
         print(f"  {filename}")
 
-    # MIT Supercloud sample — DEVELOPING tier, 2022
-    sample_tier = next(t for t in TIERS if t["name"] == "DEVELOPING")
-    sample_svg = make_badge(
-        tier_name="DEVELOPING",
-        color=sample_tier["color"],
-        org="MIT Supercloud",
-        year="2022",
-    )
-    sample_filename = "ptl-certified-mit-supercloud-2022.svg"
-    (OUTPUT_DIR / sample_filename).write_text(sample_svg, encoding="utf-8")
-    generated.append(sample_filename)
-    print(f"  {sample_filename}")
-
     print(f"\nGenerated {len(generated)} badges in {OUTPUT_DIR}")
 
     # Print DEVELOPING badge source for verification
-    developing_path = OUTPUT_DIR / "ptl-certified-developing.svg"
+    developing_path = OUTPUT_DIR / "ptl-assessment-developing.svg"
     print("\n--- DEVELOPING badge SVG source ---")
     print(developing_path.read_text(encoding="utf-8"))
     print("--- end ---")

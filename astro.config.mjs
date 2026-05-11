@@ -8,7 +8,7 @@ export default defineConfig({
   integrations: [
     starlight({
       title: 'Plain Theory Labs',
-      description: 'Documentation for the PTL certification framework.',
+      description: 'Documentation for the PTL assessment framework.',
       defaultLocale: 'en',
       customCss: ['./src/styles/docs.css'],
       social: [
@@ -23,7 +23,7 @@ export default defineConfig({
           label: 'Getting Started',
           items: [
             { label: 'Overview', link: '/docs/' },
-            { label: 'How certification works', link: '/docs/certification/' },
+            { label: 'How assessment works', link: '/docs/certification/' },
             { label: 'Start a pilot', link: '/docs/pilot/' },
             { label: 'Recoverable Value', link: '/docs/recoverable-value/' },
           ],

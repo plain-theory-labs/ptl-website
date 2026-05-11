@@ -1,6 +1,6 @@
 ---
 title: ATLAS — Actionable Trajectory and Longitudinal Analysis
-description: ATLAS ranks the actions most likely to improve your PTL certification in the next assessment.
+description: ATLAS ranks the actions most likely to improve your PTL Score in the next assessment.
 ---
 
 Actionable Trajectory and Longitudinal Analysis (ATLAS) receives all engine outputs and produces a ranked action plan. Each recommendation is specific enough to act on immediately — not a category of improvement but the exact configuration change, the expected impact, and the current baseline.
@@ -35,7 +35,7 @@ Actions are ranked highest-priority-first. ATLAS never recommends actions that r
 
 ## Worked example
 
-**Input:** MIT Supercloud ACE findings (HPCA22 real data — ACE engine only)
+**Input:** MIT Supercloud ACE findings (HPCA22 public dataset — ACE engine only)
 
 ```
 ACE findings:
@@ -93,7 +93,7 @@ PACE has not been run. Adding scheduler efficiency analysis will reveal whether 
 
 ## Trajectory analysis
 
-With multi-year certification data, ATLAS generates trajectory projections — given the changes implemented since the last assessment, what composite improvement is plausible in the next assessment window. This projection is documented as an estimate with disclosed confidence. It is not a guarantee.
+With multi-year assessment data, ATLAS generates trajectory projections — given the changes implemented since the last assessment, what composite improvement is plausible in the next assessment window. This projection is documented as an estimate with disclosed confidence, not a promised outcome.
 
 Trajectory analysis becomes meaningful after the second assessment. The first assessment establishes the baseline.
 
@@ -131,7 +131,7 @@ atlas validate --input atlas_output.json
 }
 ```
 
-ATLAS requires the GRADE output as its primary input (`grade_report_path`). Engine outputs are optional — when present, ATLAS generates specific recommendation text using real metric values from each engine rather than generic templates.
+ATLAS requires the GRADE output as its primary input (`grade_report_path`). Engine outputs are optional — when present, ATLAS generates specific recommendation text using available metric values from each engine rather than generic templates.
 
 ## Source
 

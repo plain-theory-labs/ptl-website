@@ -62,7 +62,7 @@ CLAW v0.1.0 supports manual JSON delivery with the documented schema. The v1.0 p
 
 ## NemoClaw
 
-NVIDIA announced NemoClaw at GTC 2026. PTL's CLAW intake agent is designed to operate alongside NemoClaw for organizations adopting NVIDIA's enterprise GPU telemetry stack. Where NemoClaw provides process-level GPU activity data, CLAW ingests it as the highest-priority ACE input path.
+Where NemoClaw-compatible process-level GPU activity data is available, CLAW can ingest it as a high-fidelity ACE input path. This integration path is optional; CLAW also supports manual JSON delivery and standard scheduler exports.
 
 ## Installation
 
@@ -85,7 +85,7 @@ claw discover
 claw version
 ```
 
-**OpenClaw plugin (NemoClaw environments):**
+**OpenClaw plugin (compatible environments):**
 
 ```bash
 # Install via OpenClaw

@@ -1,9 +1,9 @@
 ---
 title: Start a Pilot
-description: How to begin a PTL pilot certification — what you provide, what we deliver.
+description: How to begin a PTL pilot assessment — what you provide, what we deliver.
 ---
 
-A pilot begins with your Slurm scheduler export and four questions about your facility. We run the analysis and deliver a private certification report to your team. The data collection takes under two hours.
+A pilot begins with your Slurm scheduler export and four questions about your facility. We run the analysis and deliver a private assessment report to your team. The data collection takes under two hours for a standard Slurm export.
 
 ## What a pilot covers
 
@@ -21,11 +21,11 @@ If your Slurm export contains sensitive job names or user identifiers, we work w
 
 Within five business days of receiving your data:
 
-- Full HTML certification report — PTL Score, tier, engine findings, ATLAS action plan
+- Full HTML assessment report — PTL Score, tier, engine findings, ATLAS action plan
 - Structured JSON exports for all engines you provide data for
 - A working session to review findings together
 
-You decide what to do with the results. We do not publish pilot findings without explicit permission. Pilot organizations that proceed to formal certification receive the pilot findings as their baseline assessment.
+You decide what to do with the results. We do not publish pilot findings without explicit permission. Follow-up assessments can use the pilot findings as the baseline.
 
 ## Start a pilot
 

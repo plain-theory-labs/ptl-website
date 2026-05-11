@@ -25,7 +25,7 @@ If COOL and FLUX are excluded (a common pattern for first assessments), the rema
 - PACE: 0.25 / 0.72 = 0.347
 - CORE: 0.12 / 0.72 = 0.167
 
-The composite is computed against the normalized weights. The certification report discloses which engines were included and the normalized weights applied.
+The composite is computed against the normalized weights. The assessment report discloses which engines were included and the normalized weights applied.
 
 ## Why ACE is weighted highest
 
@@ -33,7 +33,7 @@ GPU utilization directly measures whether allocated compute is doing useful work
 
 ## Why FLUX is weighted lowest
 
-Carbon accounting methodology is important. It is also the dimension where organizational control is most constrained by geography, utility availability, and regulatory environment. An organization in a region with no viable PPA market cannot easily move from 0.50 to 1.00 on FLUX in one assessment cycle. The coefficient reflects this constraint — FLUX is measured and reported, but not allowed to dominate the composite.
+Carbon accounting methodology is important. It is also the dimension where organizational control is most constrained by geography, utility availability, and policy environment. An organization in a region with no viable PPA market cannot easily move from 0.50 to 1.00 on FLUX in one assessment cycle. The coefficient reflects this constraint — FLUX is measured and reported, but not allowed to dominate the composite.
 
 ## Coefficient versioning
 

@@ -1,9 +1,9 @@
 ---
 title: ACE — Adaptive Compute Efficiency Engine
-description: ACE measures GPU utilization across Slurm, PBS, LSF, XDMoD, Kubernetes, and DCGM telemetry sources. It is the highest-weighted engine in the PTL composite and the most direct measure of whether a cluster is doing the work it claims to do.
+description: ACE measures GPU utilization across Slurm, PBS, LSF, XDMoD, Kubernetes, and DCGM telemetry sources. It is the highest-weighted engine in the PTL composite and the most direct measure of whether allocated compute is doing useful work.
 ---
 
-The Adaptive Compute Efficiency Engine (ACE) answers one question: of all the GPU compute your cluster allocated, how much of it did useful work? ACE ingests job accounting data from every major HPC scheduler — Slurm, PBS Pro, LSF, and XDMoD-aggregated multi-scheduler environments — alongside live hardware telemetry from NVIDIA DCGM and Kubernetes pod metrics. It scores each job against a documented efficiency methodology, identifies the exact scripts and workload types driving waste, blocks right-sizing recommendations it cannot defend (memory-bound jobs, healthy repeat scripts, multi-GPU topology constraints), and produces a structured export consumed by GRADE for certification scoring. The result is the single most actionable signal in a PTL certification: a GPU-hours-weighted efficiency rate that tells the truth about physical resource consumption rather than masking large wasteful jobs behind a count of small efficient ones.
+The Adaptive Compute Efficiency Engine (ACE) answers one question: of all the GPU compute your cluster allocated, how much of it did useful work? ACE ingests job accounting data from major HPC schedulers — Slurm, PBS Pro, LSF, and XDMoD-aggregated multi-scheduler environments — alongside hardware telemetry from NVIDIA DCGM and Kubernetes pod metrics where available. It scores each job against a documented efficiency methodology, identifies the scripts and workload types driving waste, blocks right-sizing recommendations it cannot defend (memory-bound jobs, healthy repeat scripts, multi-GPU topology constraints), and produces a structured export consumed by GRADE for assessment scoring. The result is a GPU-hours-weighted efficiency rate that reflects physical resource consumption rather than masking large wasteful jobs behind a count of small efficient ones.
 
 :::note[Version]
 <span class="ptl-badge-row"><span class="ptl-badge ptl-badge--version">engine v0.3.0</span><span class="ptl-badge ptl-badge--release">public release 2026-05-11</span><span class="ptl-badge ptl-badge--license">MIT</span><span class="ptl-badge ptl-badge--checks">checks passing</span></span>
@@ -18,7 +18,7 @@ gpu_efficiency_rate = gpu_hours_used / gpu_hours_requested
                     = Σ(used_gpus_i × duration_i) / Σ(requested_gpus_i × duration_i)
 ```
 
-Large, long jobs count proportionally more than small, short jobs. A cluster running 1,000 small efficient jobs and 10 large wasteful jobs (100× the GPU-hours) cannot hide behind the small ones. This is the metric GRADE uses in the certification composite.
+Large, long jobs count proportionally more than small, short jobs. A cluster running 1,000 small efficient jobs and 10 large wasteful jobs (100× the GPU-hours) cannot hide behind the small ones. This is the metric GRADE uses in the composite score.
 
 ## Secondary metric
 
@@ -26,7 +26,7 @@ Large, long jobs count proportionally more than small, short jobs. A cluster run
 
 ## Why two metrics
 
-MIT Supercloud (73,367 real Slurm jobs, HPCA22 dataset):
+MIT Supercloud (73,367 Slurm jobs, HPCA22 public dataset):
 
 | Metric | Value | What it says |
 |---|---|---|
@@ -142,7 +142,7 @@ When no per-job GPU utilization data is available (sacct-only, no DCGM), ACE acc
 - An `assumed_utilization_warning` finding with `confidence: low`
 - A top-level `"warnings"` list stating the value applied and that `gpu_efficiency_rate` is a uniform assumption, not a measurement
 
-A certification produced with `assume_util` looks numerically identical to a real measurement. The warning makes the distinction visible.
+An assessment produced with `assume_util` can look numerically identical to a direct measurement. The warning makes the distinction visible.
 
 ## Full findings list
 

@@ -1,7 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 
-const description = "Certification badges — Plain Theory Labs";
+const description = "Assessment badges — Plain Theory Labs";
 
 const tiers = [
   { name: "FRONTIER",   slug: "frontier" },
@@ -13,13 +13,13 @@ const tiers = [
 ];
 ---
 
-<BaseLayout title="Certification badges — Plain Theory Labs" description={description}>
+<BaseLayout title="Assessment badges — Plain Theory Labs" description={description}>
   <section class="section prose">
-    <h1>Certification badges</h1>
+    <h1>Assessment badges</h1>
 
     <p class="thesis">
-      Certified organizations may display their PTL certification badge on their
-      website. Badges link to plaintheory.org and verify the certification tier
+      Organizations may display a PTL assessment badge on their website after
+      choosing to publish a report. Badges link to plaintheory.org and show the assessment tier
       and period.
     </p>
 
@@ -28,16 +28,16 @@ const tiers = [
     {tiers.map((tier) => (
       <div class="badge-row">
         <img
-          src={`/badges/ptl-certified-${tier.slug}.svg`}
-          alt={`PTL ${tier.name} Certified`}
+          src={`/badges/ptl-assessment-${tier.slug}.svg`}
+          alt={`PTL ${tier.name} Assessment`}
           width="200"
           height="80"
           class="badge-preview"
         />
         <p class="badge-label">{tier.name}</p>
         <pre class="badge-code"><code>{`<a href="https://plaintheory.org">
-  <img src="https://plaintheory.org/badges/ptl-certified-${tier.slug}.svg"
-       alt="PTL ${tier.name} Certified [YEAR]"
+  <img src="https://plaintheory.org/badges/ptl-assessment-${tier.slug}.svg"
+       alt="PTL ${tier.name} Assessment [YEAR]"
        width="200" height="80">
 </a>`}</code></pre>
       </div>

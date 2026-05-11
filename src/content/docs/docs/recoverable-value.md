@@ -1,20 +1,20 @@
 ---
 title: Recoverable Value
-description: What GPU efficiency improvement is worth in dollars. Computed from real production cluster data, not vendor estimates.
+description: What GPU efficiency improvement is worth in dollars. Computed from public cluster datasets, not vendor estimates.
 ---
 
 GPU clusters are expensive to buy, expensive to power, and expensive to cool. Most of
 them are also substantially underutilized. PTL quantifies that gap — and this page shows
 what closing it is worth.
 
-These numbers come from the same real production datasets that validate ACE. The math
+These numbers come from the same public datasets used to evaluate ACE. The math
 is shown. You can check it.
 
 ---
 
 ## What the data shows
 
-Across three independent production GPU cluster datasets (508,885 real jobs):
+Across three public GPU cluster datasets (508,885 jobs):
 
 | Dataset | Jobs | gpu_efficiency_rate | GPU-hours wasted per 100 allocated |
 |---|---|---|---|
@@ -114,7 +114,7 @@ Wasted GPU power drives wasted cooling energy at the same ratio.
 
 ## What PTL measures and what moves the number
 
-PTL certification identifies the specific levers. ACE produces a ranked list of
+PTL assessment identifies the specific levers. ACE produces a ranked list of
 right-sizing recommendations — the exact jobs, scripts, and workload types
 contributing most to waste, with estimated GPU-hour impact per fix.
 
@@ -142,7 +142,7 @@ The four highest-impact findings in order of typical contribution:
 
 PTL does not claim that any specific organization can achieve any specific efficiency
 improvement. These are potential recoveries if efficiency improves — the underlying
-driver of improvement is operational change, not certification itself.
+driver of improvement is operational change, not the assessment itself.
 
 PTL measures the current state accurately, identifies what is driving waste, and
 tracks whether changes made between assessments moved the number. The recoverable

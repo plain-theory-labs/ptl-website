@@ -14,7 +14,7 @@ The Capital and Operations Resource Evaluator (CORE) grades the hardware layer o
 `core_efficiency_score` — a number from 0.0 to 1.0 composed of three fleet-weighted components:
 
 - **Hardware fit** (40%) — how well each GPU model matches the declared primary workload type
-- **Fleet age** (35%) — GPU age in years, anchored to production refresh cycle benchmarks
+- **Fleet age** (35%) — GPU age in years, anchored to published refresh-cycle references
 - **Embodied carbon** (25%) — carbon efficiency normalized by compute capacity delivered (kg CO₂e per TFLOP/s)
 
 ## Formula
@@ -65,7 +65,7 @@ fit_score_effective = fit_score × mig_multiplier
 
 ## Fleet age scoring
 
-Age is computed from `assessment_year − purchase_year` per GPU record, then weighted by GPU count across the fleet. Scoring is anchored to published GPU hardware refresh cycles in production AI infrastructure.
+Age is computed from `assessment_year − purchase_year` per GPU record, then weighted by GPU count across the fleet. Scoring is anchored to published GPU hardware refresh-cycle references.
 
 | Age (years) | Score | Rationale |
 |---|---|---|
@@ -75,7 +75,7 @@ Age is computed from `assessment_year − purchase_year` per GPU record, then we
 | ≤ 8 | 0.35 | EOL or near-EOL, limited workload support |
 | > 8 | 0.15 | Legacy, significant efficiency penalty |
 
-Sources: Google/Meta/Microsoft sustainability reports (3-year production refresh cycle); NVIDIA GPU generation cadence (~2 years major release); DOE ESIF hardware lifecycle documentation.
+Sources: public hyperscaler sustainability reports; GPU generation cadence references; DOE ESIF hardware lifecycle documentation.
 
 ## Embodied carbon scoring
 

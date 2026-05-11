@@ -3,7 +3,7 @@ title: COOL — Cooling Operations Optimization Layer
 description: COOL grades facility cooling efficiency by comparing reported PUE against climate-adjusted benchmarks calibrated to cooling technology and facility age. It identifies whether cooling infrastructure is the binding constraint on energy efficiency.
 ---
 
-The Cooling Operations Optimization Layer (COOL) answers one question: given your facility's cooling technology, age, and climate, is your Power Usage Effectiveness where it should be? A PUE of 1.45 is excellent for an air-cooled building from 2006 in Houston. It is poor for a liquid-cooled building from 2022 in Minneapolis. COOL provides that context through a benchmark matrix derived from industry survey data, adjusted for ASHRAE climate zone, and produces a letter grade (A–F) plus a continuous efficiency score consumed by GRADE for certification scoring.
+The Cooling Operations Optimization Layer (COOL) answers one question: given a facility's cooling technology, age, and climate, how does its Power Usage Effectiveness compare with the documented benchmark? A PUE of 1.45 can be reasonable for an older air-cooled building in a hot climate and weak for a newer liquid-cooled building in a cooler climate. COOL provides that context through a benchmark matrix derived from public survey data, adjusted for ASHRAE climate zone, and produces a letter grade (A-F) plus a continuous efficiency score consumed by GRADE for assessment scoring.
 
 :::note[Version]
 <span class="ptl-badge-row"><span class="ptl-badge ptl-badge--version">engine v0.1.0</span><span class="ptl-badge ptl-badge--release">public release 2026-05-11</span><span class="ptl-badge ptl-badge--license">MIT</span><span class="ptl-badge ptl-badge--checks">checks passing</span></span>
@@ -50,7 +50,7 @@ The benchmark varies by three dimensions: cooling type, facility age band, and A
 | `2010_2018` | 2010–2018 |
 | `post_2018` | After 2018 |
 
-Each combination has a `typical` benchmark (industry median) and an `efficient` benchmark (top quartile). COOL grades against the `efficient` benchmark — the bar is set by what the best-performing facilities of the same type achieve, not the average.
+Each combination has a `typical` benchmark (published survey median) and an `efficient` benchmark (top quartile). COOL grades against the `efficient` benchmark — the bar is set by what the best-performing facilities of the same type report, not the average.
 
 **Example benchmarks (efficient, pre-climate-adjustment):**
 
@@ -159,14 +159,14 @@ All findings carry `confidence: medium` for self-reported Level 1 input. Compute
 
 ## Confidence and self-reporting
 
-PUE at Level 1 is self-reported. PTL does not independently verify the value. The grade reflects what the organization reports — the certification is only as accurate as the input.
+PUE at Level 1 is self-reported. PTL does not independently verify the value. The grade reflects what the organization reports, so the assessment is only as reliable as the input.
 
 Level 2 (BMS timeseries from a Building Management System) is specified but not yet implemented. When available, it will enable seasonal variance analysis and higher-confidence findings.
 
 ## Known limits
 
 - Climate zone lookup is state-level for US facilities. Organizations in large, climatically varied states (California, Texas) may be assigned a zone that does not reflect their specific location. International facilities should supply the zone code directly.
-- Benchmarks reflect industry survey data through 2023 and will be reviewed annually.
+- Benchmarks reflect public survey data through 2023 and will be reviewed annually.
 - COOL v0.1.0 does not adjust for compute density. A high-density GPU cluster has higher heat rejection requirements than a traditional HPC cluster at the same PUE — this is not yet captured.
 
 ## Input schema

@@ -28,7 +28,7 @@ PROFILE produces a routing manifest JSON with:
 - `mig_enabled` — boolean; whether any GPUs are MIG-partitioned
 - `profile_version` — engine version string
 
-GRADE and ATLAS receive the profile path and use it to include a cluster profile section in the certification report.
+GRADE and ATLAS receive the profile path and use it to include a cluster profile section in the assessment report.
 
 ## Data requirements
 

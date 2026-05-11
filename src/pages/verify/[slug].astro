@@ -6,17 +6,17 @@ export function getStaticPaths() {
 }
 
 const { slug } = Astro.params;
-const description = "Certification verification — Plain Theory Labs";
+const description = "Assessment record lookup — Plain Theory Labs";
 ---
 
-<BaseLayout title="Certification verification — Plain Theory Labs" description={description}>
+<BaseLayout title="Assessment record lookup — Plain Theory Labs" description={description}>
   <section class="section prose">
-    <h1>Certification verification</h1>
+    <h1>Assessment record lookup</h1>
 
     <p>
-      This page will show the public certification record for verified
-      organizations. Contact <a href="mailto:jesus@plaintheory.org">jesus@plaintheory.org</a>
-      to verify a certification.
+      This page will show a public assessment record when an organization chooses
+      to publish one. Contact <a href="mailto:research@plaintheory.org">research@plaintheory.org</a>
+      to review a report ID.
     </p>
   </section>
 </BaseLayout>

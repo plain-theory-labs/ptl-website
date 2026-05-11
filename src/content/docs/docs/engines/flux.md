@@ -146,7 +146,7 @@ FLUX flags greenwashing when all three conditions hold:
 2. `claimed_renewable_pct > 0`
 3. `claimed_carbon_kg < actual_carbon_kg × 0.50`
 
-The flag is a separate finding (`greenwashing_flag = 1.0`). It does not change the methodology score — the score already reflects the weakness of the REC method. The flag surfaces in the GRADE certification report with the reason string, which includes the claimed percentage, the actual grid-implied carbon, and the claimed carbon.
+The flag is a separate finding (`greenwashing_flag = 1.0`). It does not change the methodology score — the score already reflects the weakness of the REC method. The flag surfaces in the GRADE assessment report with the reason string, which includes the claimed percentage, the actual grid-implied carbon, and the claimed carbon.
 
 The greenwashing check does not apply to `grid_average`, `marginal`, `ppa_proxy`, or `ppa_direct` — those methods do not involve certificate-based accounting.
 

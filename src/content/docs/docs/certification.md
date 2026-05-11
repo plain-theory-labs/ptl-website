@@ -1,9 +1,9 @@
 ---
-title: How Certification Works
-description: The PTL certification process — data collection, engine analysis, scoring, and delivery.
+title: How Assessment Works
+description: The PTL assessment process — data collection, engine analysis, scoring, and delivery.
 ---
 
-PTL certification is a structured process: data collection, independent engine analysis, composite scoring, and report delivery. Each step is documented before the engagement begins.
+PTL assessment is a structured process: data collection, independent engine analysis, composite scoring, and report delivery. Each step is documented before the engagement begins.
 
 ## Data collection
 
@@ -19,23 +19,23 @@ PROFILE runs first. It characterizes your cluster — scheduler type, GPU fleet,
 
 Scored engines: ACE, COOL, FLUX, PACE, CORE. Each produces a score between 0.0 and 1.0 and a structured findings JSON that GRADE ingests.
 
-## GRADE certification
+## GRADE scoring
 
-GRADE aggregates engine scores using published coefficients into a composite PTL Score. Engines for which you have not provided data are excluded from the composite — partial certification is meaningful certification.
+GRADE aggregates engine scores using published coefficients into a composite PTL Score. Engines for which you have not provided data are excluded from the composite, and the report labels which engines were included.
 
-The composite determines your certification tier. See [Tiers](/docs/methodology/tiers/) for the full table.
+The composite determines your assessment tier. See [Tiers](/docs/methodology/tiers/) for the full table.
 
 ## ATLAS recommendations
 
-ATLAS receives the engine outputs and ranks the actions most likely to improve your certification in the next assessment. Priority is determined by gap size, engine weight, and operational impact.
+ATLAS receives the engine outputs and ranks the actions most likely to improve your score in the next assessment. Priority is determined by gap size, engine weight, and operational impact.
 
-You receive a ranked action plan alongside your certification report. Recommendations are specific enough to act on: not "improve GPU utilization" but the precise Slurm configuration change and expected percentage point improvement.
+You receive a ranked action plan alongside your assessment report. Recommendations are specific enough to act on: not "improve GPU utilization" but the precise Slurm configuration change and estimated percentage point improvement.
 
 ## What you receive
 
-- HTML certification report with your PTL Score, tier, and engine findings
+- HTML assessment report with your PTL Score, tier, and engine findings
 - Structured JSON output for all engines
 - ATLAS ranked action plan
-- Certification record with a tamper-evident cert ID (format: `PTL-YYYYMMDD-ORGSLUG-TIER`)
+- Assessment record with a tamper-evident report ID (format: `PTL-YYYYMMDD-ORGSLUG-TIER`)
 
 The findings belong to your organization. PTL keeps the methodology public at [github.com/plain-theory-labs/ptl-methodology](https://github.com/plain-theory-labs/ptl-methodology) under CC BY 4.0.

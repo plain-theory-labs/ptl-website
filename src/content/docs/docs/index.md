@@ -1,13 +1,13 @@
 ---
 title: Plain Theory Labs
-description: Documentation for the PTL certification framework for AI compute infrastructure.
+description: Documentation for the PTL assessment framework for AI compute infrastructure.
 ---
 
-Plain Theory Labs is an open, independent certification framework for AI compute infrastructure. We measure what GPU clusters are actually doing, score it against a documented methodology, and deliver findings against a published standard.
+Plain Theory Labs is an open, independent assessment framework for AI compute infrastructure. We measure what GPU clusters are doing, score those observations against a documented methodology, and deliver reproducible findings with disclosed assumptions.
 
 ## What PTL produces
 
-A PTL certification is a PTL Score — a number between 0.0 and 1.0 — derived from up to nine analytical engines running independently against your operational data. The score determines your certification tier. The tier is shorthand. The score is the truth.
+A PTL assessment produces a PTL Score — a number between 0.0 and 1.0 — derived from analytical engines running independently against the provided data. The score determines the assessment tier. The tier is shorthand. The score carries the detail.
 
 ## Nine engines
 
@@ -19,11 +19,11 @@ Each engine addresses a distinct dimension of infrastructure performance:
 
 *Facility and hardware.* COOL measures cooling system performance relative to a PUE benchmark. FLUX grades your carbon accounting methodology. CORE evaluates hardware-workload fit, fleet age, and embodied carbon.
 
-*Certification and recommendations.* GRADE aggregates engine scores into a composite PTL Score and produces the certification report. ATLAS generates a ranked action plan — the specific changes most likely to improve your score in the next assessment.
+*Scoring and recommendations.* GRADE aggregates engine scores into a composite PTL Score and produces the assessment report. ATLAS generates a ranked action plan — the specific changes most likely to improve your score in the next assessment.
 
-## Validated results
+## Public dataset examples
 
-These results were computed directly from publicly available, peer-reviewed GPU cluster datasets. Every number is reproducible from source data using open converters in the ptl-engines repository.
+These results were computed from publicly available GPU cluster datasets. Every number is intended to be reproducible from source data using open converters in the ptl-engines repository.
 
 | Organization        | ACE Score | Telemetry      | Jobs    | Reference        |
 |---------------------|-----------|----------------|---------|------------------|
@@ -32,20 +32,20 @@ These results were computed directly from publicly available, peer-reviewed GPU 
 | Microsoft Philly 2017 | 0.502   | nvidia-smi     | 74,020  | Jeon et al., USENIX ATC 2019 |
 
 ACE reports two efficiency metrics for each dataset:
-- **GPU-hours weighted efficiency (GRADE primary)** — of all GPU-hours allocated, what fraction did useful work. This is the certification metric.
+- **GPU-hours weighted efficiency (GRADE primary)** — of all GPU-hours allocated, what fraction did useful work. This is the primary GRADE input.
 - **Per-job mean utilization** — average per-job GPU utilization, equal weight per job. This is what most facilities self-report internally.
 
-GRADE uses the GPU-hours weighted metric because it correctly reflects infrastructure efficiency in physical terms: wasted GPU-hours equal wasted energy. Both numbers are consistent with published EE HPC WG benchmarks for production GPU environments.
+GRADE uses the GPU-hours weighted metric because it reflects infrastructure efficiency in physical terms: wasted GPU-hours equal wasted energy. The public examples are comparable with published EE HPC WG benchmarks for GPU environments.
 
-Methodology worked examples using public datasets are available in [ptl-methodology/VALIDATION.md](https://github.com/plain-theory-labs/ptl-methodology/blob/main/VALIDATION.md) with full assumptions documented. These are illustrations of the methodology, not independent certifications of any facility.
+Methodology worked examples using public datasets are available in [ptl-methodology/VALIDATION.md](https://github.com/plain-theory-labs/ptl-methodology/blob/main/VALIDATION.md) with full assumptions documented. These are illustrations of the methodology, not independent endorsements of any facility.
 
-## Longitudinal certification
+## Longitudinal assessment
 
-A PTL certification is not a one-time audit. Year one is a baseline. Year three is a dataset. Organizations that improve from DEVELOPING to CAPABLE to OPTIMIZED across assessments have a record that regulators, funders, and procurement offices can evaluate. PTL maintains the certification record. You own the findings.
+A PTL assessment is designed to be repeatable. Year one is a baseline. Year three is a trend. Organizations that improve from DEVELOPING to CAPABLE to OPTIMIZED across assessments have a documented record of what changed and how the score moved. PTL maintains the assessment method. You own the findings.
 
 ## Get started
 
-Read [how certification works](/docs/certification/) or [start a pilot](/docs/pilot/).
+Read [how assessment works](/docs/certification/) or [start a pilot](/docs/pilot/).
 
 ## Repositories
 

@@ -1,9 +1,9 @@
 ---
-title: Certification Tiers
-description: The PTL certification tier system — FRONTIER through PENDING.
+title: Assessment Tiers
+description: The PTL assessment tier system — FRONTIER through PENDING.
 ---
 
-PTL certification tiers are shorthand for where a composite PTL Score lands. The score is primary. The tier is the communication label.
+PTL assessment tiers are shorthand for where a composite PTL Score lands. The score is primary. The tier is the communication label.
 
 ## Tier table
 
@@ -16,7 +16,7 @@ PTL certification tiers are shorthand for where a composite PTL Score lands. The
 | BASELINE | ACE only — first scored assessment | — |
 | PENDING | No engines complete | — |
 
-Scored engines are ACE, COOL, FLUX, PACE, and CORE. PROFILE is not scored. GRADE and ATLAS are not scored — they are the certification and recommendation layers.
+Scored engines are ACE, COOL, FLUX, PACE, and CORE. PROFILE is not scored. GRADE and ATLAS are not scored — they are the aggregation and recommendation layers.
 
 ## Why tiers require multiple engines
 
@@ -24,19 +24,19 @@ A single-engine score does not characterize an organization's infrastructure com
 
 BASELINE is the exception: it recognizes that the first assessment often begins with `sacct` data alone, before facility data is available. BASELINE is a meaningful starting point, not a penalty.
 
-## Partial certification
+## Partial assessments
 
-Organizations that have not yet provided data for all engines receive certification on the engines they have. A cluster assessed on ACE, PACE, and GRADE with a composite of 0.68 is CAPABLE, not penalized for missing COOL and FLUX. The certification report discloses which engines were included.
+Organizations that have not yet provided data for all engines receive a score for the engines they have. A cluster assessed on ACE, PACE, and GRADE with a composite of 0.68 is CAPABLE, not penalized for missing COOL and FLUX. The assessment report discloses which engines were included.
 
 This design rewards organizations that start the process rather than waiting until they can provide complete data.
 
-## Tier in certification records
+## Tier in assessment records
 
-The tier appears in the cert ID: `PTL-YYYYMMDD-ORGSLUG-TIER`. The cert ID is tamper-evident — paired with a SHA256 hash of all certification fields. PTL can verify any cert ID on request.
+The tier appears in the report ID: `PTL-YYYYMMDD-ORGSLUG-TIER`. The report ID is tamper-evident — paired with a SHA256 hash of assessment fields. PTL can review any report ID on request.
 
 ## The score is the truth
 
-Two FRONTIER organizations — one scoring 0.851, one scoring 0.973 — are both FRONTIER. They are not the same. Buyers, funders, and regulators who want precision should ask for the PTL Score, not the tier. PTL always reports both.
+Two FRONTIER assessments — one scoring 0.851, one scoring 0.973 — are both FRONTIER. They are not the same. Readers who want precision should ask for the PTL Score, not only the tier. PTL always reports both.
 
 ## Longitudinal record
 

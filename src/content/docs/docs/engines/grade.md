@@ -1,9 +1,9 @@
 ---
 title: GRADE — Granular Rating for AI Datacenter Efficiency
-description: GRADE aggregates engine scores into a composite PTL Score and produces the certification report.
+description: GRADE aggregates engine scores into a composite PTL Score and produces the assessment report.
 ---
 
-Granular Rating for AI Datacenter Efficiency (GRADE) is the aggregation and reporting engine. GRADE ingests all upstream engine outputs, applies published coefficients, computes the composite PTL Score, assigns a certification tier, and produces the full certification report.
+Granular Rating for AI Datacenter Efficiency (GRADE) is the aggregation and reporting engine. GRADE ingests all upstream engine outputs, applies published coefficients, computes the composite PTL Score, assigns an assessment tier, and produces the assessment report.
 
 :::note[Version]
 <span class="ptl-badge-row"><span class="ptl-badge ptl-badge--version">engine v0.1.0</span><span class="ptl-badge ptl-badge--release">public release 2026-05-11</span><span class="ptl-badge ptl-badge--license">MIT</span><span class="ptl-badge ptl-badge--checks">checks passing</span></span>
@@ -12,9 +12,9 @@ Granular Rating for AI Datacenter Efficiency (GRADE) is the aggregation and repo
 ## What GRADE produces
 
 - **PTL Score** — composite 0.0–1.0
-- **Certification tier** — FRONTIER, OPTIMIZED, CAPABLE, DEVELOPING, BASELINE, or PENDING
-- **HTML certification report** — score-first layout with engine findings, ATLAS recommendations
-- **Certification record** — tamper-evident cert ID with SHA256 hash
+- **Assessment tier** — FRONTIER, OPTIMIZED, CAPABLE, DEVELOPING, BASELINE, or PENDING
+- **HTML assessment report** — score-first layout with engine findings, ATLAS recommendations
+- **Assessment record** — tamper-evident report ID with SHA256 hash
 
 ## Composite formula
 
@@ -51,7 +51,7 @@ CORE normalized = 0.12 / 0.72 = 0.167
 
 ## Worked example
 
-**Input** (ACE only, MIT Supercloud — HPCA22 real data):
+**Input** (ACE only, MIT Supercloud — HPCA22 public dataset):
 
 | Engine | Score | Metric | Weight (rescaled) |
 |--------|-------|--------|------------------|
@@ -64,7 +64,7 @@ PTL_Score = 0.339 × 1.00 = 0.339
 Tier: BASELINE (ACE only, first measurement)
 ```
 
-**Result:** ACE Score 0.339 — BASELINE. 73,367 production Slurm jobs from the
+**Result:** ACE Score 0.339 — BASELINE. 73,367 Slurm jobs from the
 MIT Supercloud HPCA22 public dataset. 33.9% of allocated GPU-hours did useful
 work (GPU-hours weighted). Per-job mean utilization is 0.257 — also in the
 findings, but not the GRADE primary metric.
@@ -91,7 +91,7 @@ above are hypothetical inputs used to demonstrate the formula.
 
 ## Composite scoring
 
-GRADE weights engine scores using published coefficients and aggregates them into the composite. Engines for which data was not provided are excluded from the composite — they do not count as zero. Partial certification is real certification. A cluster certified on two engines has a legitimate score on those two dimensions.
+GRADE weights engine scores using published coefficients and aggregates them into the composite. Engines for which data was not provided are excluded from the composite — they do not count as zero. Partial assessments are labeled by the engines included, so a two-engine assessment has a legitimate score on those two dimensions.
 
 Engine weights are published in [Coefficients](/docs/methodology/coefficients/).
 
@@ -117,7 +117,7 @@ The composite confidence label:
 
 When ACE and PACE are both run, the composite confidence is MEDIUM at minimum — those two engines anchor the score in measured data. A five-engine score with all operator-reported inputs (COOL + CORE + FLUX only, no ACE or PACE) carries LOW confidence.
 
-This is displayed in the certification report and included in the certification record JSON.
+This is displayed in the assessment report and included in the assessment record JSON.
 
 ## Tier assignment
 
@@ -130,9 +130,9 @@ This is displayed in the certification report and included in the certification 
 | ACE only | BASELINE | First measurement |
 | None | PENDING | No engines complete |
 
-## Certification record
+## Assessment record
 
-Every GRADE run produces a certification record with a unique cert ID in the format:
+Every GRADE run produces an assessment record with a unique report ID in the format:
 
 ```
 PTL-YYYYMMDD-ORGSLUG-TIER
@@ -140,7 +140,7 @@ PTL-YYYYMMDD-ORGSLUG-TIER
 
 For example: `PTL-20260317-MITSUPERCLOUD-DEVELOPING`
 
-The cert ID is paired with a SHA256 hash of all certification fields. PTL can verify any cert ID against its record. Organizations can use the cert ID in reporting — funders, regulators, and procurement offices can request verification directly from PTL.
+The report ID is paired with a SHA256 hash of assessment fields. PTL can review a report ID against its record when an organization chooses to share it.
 
 ## Report structure
 
@@ -155,22 +155,22 @@ The GRADE report contains six sections:
 
 ## What GRADE does not do
 
-GRADE does not soften findings. If ACE scores 0.339, the report says 0.339 and describes what that means in operational terms. PTL's value is the specificity of the measurement. An independent certification that rounds up or adds qualitative adjustments for difficult circumstances is not a certification.
+GRADE does not soften findings. If ACE scores 0.339, the report says 0.339 and describes what that means in operational terms. PTL's value is the specificity of the measurement, not qualitative adjustments that obscure how the number was produced.
 
 ## CLI usage
 
 ```bash
-# Certify one organization from a grade_input JSON file
+# Generate one assessment report from a grade_input JSON file
 grade certify \
   --input grade_input.json \
   --output grade_output.json \
-  --report certification_report.html
+  --report assessment_report.html
 
 # With ATLAS recommendations section
 grade certify \
   --input grade_input.json \
   --output grade_output.json \
-  --report certification_report.html \
+  --report assessment_report.html \
   --atlas atlas_output.json
 
 # Run all synthetic organizations and print tiers
@@ -190,14 +190,11 @@ grade validate --input grade_output.json
   "pace_report": "pace_output.json",
   "cool_report": "cool_output.json",
   "core_report": "core_output.json",
-  "flux_report": "flux_output.json",
-  "prior_certifications": [
-    {"year": "2025", "tier": "CAPABLE", "composite": 0.631}
-  ]
+  "flux_report": "flux_output.json"
 }
 ```
 
-Engines are excluded simply by omitting their report path — absent paths are not counted as zero. Partial certification is real certification.
+Engines are excluded simply by omitting their report path — absent paths are not counted as zero. Partial assessments are labeled by the engines included.
 
 ## Source
 

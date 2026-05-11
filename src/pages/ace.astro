@@ -12,20 +12,19 @@ const description =
 
     <p class="thesis">
       The Adaptive Compute Efficiency Engine (ACE) is the first engine in the
-      Plain Theory Labs certification framework. It takes the raw output of an
+      Plain Theory Labs assessment framework. It takes the raw output of an
       HPC scheduler — job accounting records, GPU telemetry, runtime data — and
-      produces a graded efficiency analysis with traceable findings, disclosed
-      assumptions, and concrete recommendations. It is the first tool built to
-      turn HPC operational data into a defensible grade, not a dashboard.
+      produces a reproducible efficiency analysis with traceable findings,
+      disclosed assumptions, and concrete recommendations.
     </p>
 
     <hr class="rule" />
 
-    <h2>What ACE does that nothing else does</h2>
+    <h2>What ACE adds</h2>
 
     <p>
       The distinction matters. Monitoring tools show utilization. Reporting tools
-      show trends. ACE grades. It applies a scoring methodology to each job in a
+      show trends. ACE scores. It applies a scoring methodology to each job in a
       scheduler export, evaluates whether the GPU resources requested were
       proportionate to the GPU resources used, applies a safety overlay that blocks
       recommendations it cannot defend with the available data, and produces a
@@ -34,12 +33,9 @@ const description =
     </p>
 
     <p>
-      No tool like this existed. Researchers and engineers working in HPC
-      sustainability have had access to telemetry data for years with no systematic
-      way to convert it into efficiency grades that carry policy weight. ACE is the
-      first implementation of that conversion — built on a methodology that is open,
-      assumption-explicit, and designed from the start to be extended, audited,
-      and improved.
+      ACE is an early reference implementation of that conversion: telemetry and
+      scheduler records become scored findings, confidence labels, and
+      assumption-explicit reports that can be reviewed and improved in public.
     </p>
 
     <hr class="rule" />
@@ -65,12 +61,12 @@ const description =
     </p>
 
     <div class="findings">
-      <p>MIT Supercloud HPCA22 dataset — 73,367 production jobs</p>
+      <p>MIT Supercloud HPCA22 public dataset — 73,367 jobs</p>
       <p><strong>25.7%</strong>average GPU utilization</p>
       <p><strong>16%</strong>median GPU utilization</p>
       <p><strong>41%</strong>of jobs ran under one minute</p>
       <p><strong>33%</strong>of jobs showed near-zero GPU activity</p>
-      <p>These are not projections. This is what the engine found.</p>
+      <p>These are computed results from the public trace.</p>
     </div>
 
     <div class="visual-center" aria-hidden="true">
@@ -98,8 +94,8 @@ const description =
     <p>
       Every stage is deterministic. Run the same input twice and you get the same
       output. This is a design requirement, not an implementation detail — a
-      certification framework that produces different findings on the same data
-      is not a certification framework.
+      assessment method that produces different findings on the same data
+      is not reproducible.
     </p>
 
     <hr class="rule" />
@@ -107,18 +103,17 @@ const description =
     <h2>The start of something larger</h2>
 
     <p>
-      ACE is the first of five analytical engines in the PTL certification framework.
+      ACE is the first of five analytical engines in the PTL assessment framework.
       COOL grades cooling efficiency. FLUX grades carbon accounting methodology.
       PACE grades scheduler policy. CORE grades hardware fit and fleet age. GRADE
-      aggregates all five into a certification tier. ATLAS translates the
-      certification into a ranked action plan.
+      aggregates all five into an assessment tier. ATLAS translates the
+      assessment into a ranked action plan.
     </p>
 
     <p>
-      The goal is a certification standard that organizations can use before external
-      regulation defines one for them — built by engineers who have operated these
-      systems, validated on real datasets, open to scrutiny. ACE is the proof that
-      the approach works.
+      The goal is a reproducible assessment method for AI infrastructure — built
+      around public methodology, public examples, and findings that can be checked.
+      ACE is the first working engine in that approach.
     </p>
 
     <hr class="rule" />
@@ -146,10 +141,11 @@ const description =
     <h2>Status</h2>
 
     <p>
-      ACE v0.3.0 is complete. 118 tests passing. Validated on the MIT Supercloud
-      HPCA22 dataset — 73,367 production jobs.
+      ACE v0.3.0 is the current ACE package version. It has public dataset
+      converters and test coverage in ptl-engines. It has been evaluated on the
+      MIT Supercloud HPCA22 public dataset — 73,367 jobs.
     </p>
 
-    <a href="mailto:jesus@plaintheory.org" class="cta-link">Start a pilot</a>
+    <a href="mailto:research@plaintheory.org" class="cta-link">Start a pilot</a>
   </section>
 </BaseLayout>
